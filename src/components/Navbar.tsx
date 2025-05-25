@@ -1,17 +1,20 @@
-import { Box, Flex, Icon, Link, Text } from "@chakra-ui/react";
-import { FaEnvelope, FaHome, FaUser } from "react-icons/fa"; // Import icons for navigation
+import { Box, Button, Flex, Icon, Link, Text } from "@chakra-ui/react";
 
+import { FaMusic } from "react-icons/fa"; // Import a simple icon (you can change this later)
 import Hamburger from "hamburger-react"; // Import the Hamburger component
+import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
 import { useState } from "react";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false); // State to manage the hamburger menu
+  const location = useLocation(); // Get the current location from React Router
+  const activeLink = location.pathname; // Set active link based on current path
 
   return (
     <Box
-      bg="#2f2626" // Dark background color
+      bg="#000000" // Black background color
       color="#ffffff" // White text color
-      px={6}
+      px={10} // Added padding on the left and right
       py={4}
       shadow="lg"
       position="sticky"
@@ -19,14 +22,15 @@ const Navbar = () => {
       zIndex="1000"
     >
       <Flex justify="space-between" align="center">
-        <Text
-          fontSize="2xl"
-          fontWeight="bold"
-          letterSpacing="wide"
-          color="#d64a9b"
+        {/* Icon wrapped in a Link to redirect to home */}
+        <Link
+          href="/"
+          display="flex"
+          alignItems="center"
+          _hover={{ cursor: "pointer" }}
         >
-          Ivan Robles
-        </Text>
+          <Icon as={FaMusic} boxSize={8} color="#d64a9b" /> {/* Simple icon */}
+        </Link>
 
         {/* Hamburger Menu for Mobile */}
         <Box display={{ base: "block", md: "none" }}>
@@ -37,46 +41,55 @@ const Navbar = () => {
         <Flex gap={8} display={{ base: "none", md: "flex" }}>
           <Link
             href="/"
-            color="#d64a9b" // Brand color for the link
+            color="#ffffff" // White text color for the link
             display="flex"
             alignItems="center"
-            _hover={{
-              textDecoration: "none",
-              color: "#ff5e9c", // Lighter shade for hover effect
-              transform: "scale(1.1)",
-              transition: "0.3s",
-            }}
+            position="relative" // For the active link indicator
+            onClick={() => setOpen(false)} // Close the menu on link click
           >
-            <Icon as={FaHome} mr={2} /> Home
+            Home
+            {activeLink === "/" && (
+              <Box
+                position="absolute"
+                bottom="-2px"
+                left="0"
+                right="0"
+                height="2px"
+                bg="#ff5e9c" // Active link color
+              />
+            )}
           </Link>
           <Link
             href="/about"
-            color="#d64a9b" // Brand color for the link
+            color="#ffffff" // White text color for the link
             display="flex"
             alignItems="center"
-            _hover={{
-              textDecoration: "none",
-              color: "#ff5e9c", // Lighter shade for hover effect
-              transform: "scale(1.1)",
-              transition: "0.3s",
-            }}
+            position="relative" // For the active link indicator
+            onClick={() => setOpen(false)} // Close the menu on link click
           >
-            <Icon as={FaUser} mr={2} /> About Me
+            About Me
+            {activeLink === "/about" && (
+              <Box
+                position="absolute"
+                bottom="-2px"
+                left="0"
+                right="0"
+                height="2px"
+                bg="#ff5e9c" // Active link color
+              />
+            )}
           </Link>
-          <Link
-            href="/contact"
-            color="#d64a9b" // Brand color for the link
-            display="flex"
-            alignItems="center"
-            _hover={{
-              textDecoration: "none",
-              color: "#ff5e9c", // Lighter shade for hover effect
-              transform: "scale(1.1)",
-              transition: "0.3s",
-            }}
+          {/* Subscribe Button as CTA */}
+          <Button
+            as={Link}
+            href="/subscribe" // Link to the subscribe page
+            color="#ffffff" // White text color
+            bg="#d64a9b" // Brand color for the button
+            _hover={{ bg: "#ff5e9c" }} // Lighter shade for hover effect
+            onClick={() => setOpen(false)} // Close the menu on click
           >
-            <Icon as={FaEnvelope} mr={2} /> Contact
-          </Link>
+            Subscribe
+          </Button>
         </Flex>
       </Flex>
 
@@ -88,7 +101,7 @@ const Navbar = () => {
           top="60px" // Adjust based on your navbar height
           left="0"
           right="0"
-          bg="#4c3c3c" // Slightly lighter background for mobile
+          bg="#000000" // Black background for mobile
           color="#ffffff" // White text color
           p={4}
           shadow="md"
@@ -96,31 +109,38 @@ const Navbar = () => {
           <Flex direction="column" gap={4}>
             <Link
               href="/"
-              color="#d64a9b" // Brand color for the link
+              color="#ffffff" // White text color for the link
               display="flex"
               alignItems="center"
-              _hover={{ color: "#ff5e9c" }} // Lighter shade for hover effect
+              onClick={() => {
+                setOpen(false); // Close the menu on link click
+              }}
             >
-              <Icon as={FaHome} mr={2} /> Home
+              Home
             </Link>
             <Link
               href="/about"
-              color="#d64a9b" // Brand color for the link
+              color="#ffffff" // White text color for the link
               display="flex"
               alignItems="center"
-              _hover={{ color: "#ff5e9c" }} // Lighter shade for hover effect
+              onClick={() => {
+                setOpen(false); // Close the menu on link click
+              }}
             >
-              <Icon as={FaUser} mr={2} /> About Me
+              About Me
             </Link>
-            <Link
-              href="/contact"
-              color="#d64a9b" // Brand color for the link
-              display="flex"
-              alignItems="center"
-              _hover={{ color: "#ff5e9c" }} // Lighter shade for hover effect
+            <Button
+              as={Link}
+              href="/subscribe" // Link to the subscribe page
+              color="#ffffff" // White text color
+              bg="#d64a9b" // Brand color for the button
+              _hover={{ bg: "#ff5e9c" }} // Lighter shade for hover effect
+              onClick={() => {
+                setOpen(false); // Close the menu on click
+              }}
             >
-              <Icon as={FaEnvelope} mr={2} /> Contact
-            </Link>
+              Subscribe
+            </Button>
           </Flex>
         </Box>
       )}
