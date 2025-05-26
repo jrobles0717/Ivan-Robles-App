@@ -1,20 +1,19 @@
-import { Box, Button, Flex, Icon, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Link } from "@chakra-ui/react";
 
-import { FaMusic } from "react-icons/fa"; // Import a simple icon (you can change this later)
-import Hamburger from "hamburger-react"; // Import the Hamburger component
-import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
+import Hamburger from "hamburger-react";
+import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const Navbar = () => {
-  const [isOpen, setOpen] = useState(false); // State to manage the hamburger menu
-  const location = useLocation(); // Get the current location from React Router
-  const activeLink = location.pathname; // Set active link based on current path
+  const [isOpen, setOpen] = useState(false);
+  const location = useLocation();
+  const activeLink = location.pathname;
 
   return (
     <Box
-      bg="#000000" // Black background color
-      color="#ffffff" // White text color
-      px={10} // Added padding on the left and right
+      bg="#000000"
+      color="white"
+      px={10}
       py={4}
       shadow="lg"
       position="sticky"
@@ -22,30 +21,33 @@ const Navbar = () => {
       zIndex="1000"
     >
       <Flex justify="space-between" align="center">
-        {/* Icon wrapped in a Link to redirect to home */}
+        {/* Logo */}
         <Link
           href="/"
           display="flex"
           alignItems="center"
           _hover={{ cursor: "pointer" }}
         >
-          <Icon as={FaMusic} boxSize={8} color="#d64a9b" /> {/* Simple icon */}
+          <Image
+            src="/src/assets/irob-logo.jpeg"
+            alt="DJ Ivan Robles Logo"
+            boxSize="50px"
+            objectFit="contain"
+          />
         </Link>
 
-        {/* Hamburger Menu for Mobile */}
+        {/* Mobile Hamburger */}
         <Box display={{ base: "block", md: "none" }}>
           <Hamburger toggled={isOpen} toggle={setOpen} />
         </Box>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Links */}
         <Flex gap={8} display={{ base: "none", md: "flex" }}>
           <Link
             href="/"
-            color="#ffffff" // White text color for the link
-            display="flex"
-            alignItems="center"
-            position="relative" // For the active link indicator
-            onClick={() => setOpen(false)} // Close the menu on link click
+            color="white"
+            position="relative"
+            onClick={() => setOpen(false)}
           >
             Home
             {activeLink === "/" && (
@@ -55,17 +57,15 @@ const Navbar = () => {
                 left="0"
                 right="0"
                 height="2px"
-                bg="#ff5e9c" // Active link color
+                bg="#00aaff"
               />
             )}
           </Link>
           <Link
             href="/about"
-            color="#ffffff" // White text color for the link
-            display="flex"
-            alignItems="center"
-            position="relative" // For the active link indicator
-            onClick={() => setOpen(false)} // Close the menu on link click
+            color="white"
+            position="relative"
+            onClick={() => setOpen(false)}
           >
             About Me
             {activeLink === "/about" && (
@@ -75,69 +75,50 @@ const Navbar = () => {
                 left="0"
                 right="0"
                 height="2px"
-                bg="#ff5e9c" // Active link color
+                bg="#00aaff"
               />
             )}
           </Link>
-          {/* Subscribe Button as CTA */}
           <Button
             as={Link}
-            href="/subscribe" // Link to the subscribe page
-            color="#ffffff" // White text color
-            bg="#d64a9b" // Brand color for the button
-            _hover={{ bg: "#ff5e9c" }} // Lighter shade for hover effect
-            onClick={() => setOpen(false)} // Close the menu on click
+            href="/subscribe"
+            bg="#0026b9"
+            color="white"
+            _hover={{ bg: "#00aaff" }}
+            onClick={() => setOpen(false)}
           >
             Subscribe
           </Button>
         </Flex>
       </Flex>
 
-      {/* Mobile Navigation Links */}
+      {/* Mobile Menu */}
       {isOpen && (
         <Box
           display={{ base: "block", md: "none" }}
           position="absolute"
-          top="60px" // Adjust based on your navbar height
+          top="60px"
           left="0"
           right="0"
-          bg="#000000" // Black background for mobile
-          color="#ffffff" // White text color
+          bg="#000000"
+          color="white"
           p={4}
           shadow="md"
         >
           <Flex direction="column" gap={4}>
-            <Link
-              href="/"
-              color="#ffffff" // White text color for the link
-              display="flex"
-              alignItems="center"
-              onClick={() => {
-                setOpen(false); // Close the menu on link click
-              }}
-            >
+            <Link href="/" color="white" onClick={() => setOpen(false)}>
               Home
             </Link>
-            <Link
-              href="/about"
-              color="#ffffff" // White text color for the link
-              display="flex"
-              alignItems="center"
-              onClick={() => {
-                setOpen(false); // Close the menu on link click
-              }}
-            >
+            <Link href="/about" color="white" onClick={() => setOpen(false)}>
               About Me
             </Link>
             <Button
               as={Link}
-              href="/subscribe" // Link to the subscribe page
-              color="#ffffff" // White text color
-              bg="#d64a9b" // Brand color for the button
-              _hover={{ bg: "#ff5e9c" }} // Lighter shade for hover effect
-              onClick={() => {
-                setOpen(false); // Close the menu on click
-              }}
+              href="/subscribe"
+              bg="#0026b9"
+              color="white"
+              _hover={{ bg: "#00aaff" }}
+              onClick={() => setOpen(false)}
             >
               Subscribe
             </Button>
