@@ -84,7 +84,11 @@ const Navbar = () => {
             href="/subscribe"
             bg="#0026b9"
             color="white"
-            _hover={{ bg: "#00aaff" }}
+            transition="background-color 0.3s, color 0.3s"
+            _hover={{
+              bg: "#00aaff", // light blue
+              color: "#000", // pure black text for max contrast
+            }}
             onClick={() => setOpen(false)}
           >
             Subscribe
@@ -117,7 +121,11 @@ const Navbar = () => {
               href="/subscribe"
               bg="#0026b9"
               color="white"
-              _hover={{ bg: "#00aaff" }}
+              transition="background-color 0.3s, color 0.3s"
+              _hover={{
+                bg: "#00aaff",
+                color: "#000",
+              }}
               onClick={() => setOpen(false)}
             >
               Subscribe

@@ -98,11 +98,15 @@ const Home = () => {
 
           {/* Call-to-Action Button */}
           <Button
-            bg="#0026b9" // Branding dark blue
+            bg="#0026b9" // branding dark blue
             color="white"
             size="lg"
             px={8}
-            _hover={{ bg: "#00aaff" }} // Hover light blue
+            _hover={{
+              bg: "#00aaff", // light blue bg on hover
+              color: "#000000", // pure black text for max contrast
+            }}
+            transition="background-color 0.3s, color 0.3s"
             onClick={() => {
               window.open(
                 "https://www.youtube.com/@IvanRoblesmusic/videos",
@@ -178,6 +182,7 @@ const Home = () => {
           <YouTubeVideo videoId="bX023by-zig" />
           <YouTubeVideo videoId="zL6weacPPJU" />
           <YouTubeVideo videoId="E6rjYzunZII" />
+          <YouTubeVideo videoId="GckhNkkz9ik" />
         </SimpleGrid>
       </Box>
 

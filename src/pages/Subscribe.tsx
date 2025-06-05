@@ -1,139 +1,242 @@
+import { Box, Button, Heading, Input, Text, VStack } from "@chakra-ui/react";
 import {
-  Box,
-  Button,
-  Heading,
-  Input,
-  Text,
-  Textarea,
-  VStack,
-} from "@chakra-ui/react";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+} from "@chakra-ui/form-control";
+import React, { useEffect, useState } from "react";
+import {
+  countryOptions,
+  customSelectStyles,
+  referralOptions,
+} from "../util/helper";
+
+import Confetti from "react-confetti";
+import Select from "react-select";
 
 const Subscribe = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    country: null,
+    referral: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  // Track window size for confetti
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDropdownChange = (selectedOption, action) => {
+    setFormData((prev) => ({ ...prev, [action.name]: selectedOption }));
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name) newErrors.name = "Name is required.";
+    if (!formData.email) {
+      newErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid.";
+    }
+    if (!formData.country) newErrors.country = "Country is required.";
+    if (!formData.referral) newErrors.referral = "Please select an option.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      setSubmitted(true);
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        country: null,
+        referral: "",
+      });
+      setErrors({});
+    }
+  };
+
   return (
     <Box
       position="relative"
-      height="100vh" // Set height to full viewport height
-      backgroundImage="url('src/assets/dj-background-2.png')" // Set your background image here
-      backgroundSize="cover" // Ensure the background covers the entire area
-      backgroundPosition="center" // Center the background image
+      minH="100vh"
+      backgroundImage="url('src/assets/dj-background-2.png')"
+      backgroundSize="cover"
+      backgroundPosition="center"
       color="white"
-      overflow="hidden"
-      display="flex" // Use Flexbox for centering
-      alignItems="center" // Center vertically
-      justifyContent="center" // Center horizontally
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
       textAlign="center"
     >
-      {/* Overlay for better text visibility */}
+      {/* Confetti animation */}
+      {submitted && (
+        <Confetti
+          width={windowSize.width}
+          height={windowSize.height}
+          recycle={true}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: 2,
+          }}
+        />
+      )}
+
+      {/* Overlay */}
       <Box
         position="absolute"
-        top="0"
-        left="0"
+        top={0}
+        left={0}
         width="100%"
         height="100%"
-        bg="rgba(0, 0, 0, 0.5)" // Dark overlay
-        zIndex="1"
+        bg="rgba(0, 0, 0, 0.5)"
+        zIndex={1}
       />
 
-      {/* Main Content */}
+      {/* Form Container */}
       <VStack
-        maxW={{ base: "90%", md: "md" }} // Responsive width
+        as="form"
+        onSubmit={handleSubmit}
+        maxW={{ base: "90%", md: "md" }}
         mx="auto"
+        zIndex={3}
+        p={8}
+        bg="black"
+        borderRadius="md"
+        boxShadow="lg"
         gap={6}
-        zIndex="2"
-        position="relative"
-        p={8} // Padding for the card effect
-        borderRadius="md" // Rounded corners
-        boxShadow="lg" // Shadow for depth
-        bg="black" // Opaque background for the form container
       >
-        {/* Title with Underline */}
-        <Box mb={8} textAlign="center">
-          <Heading
-            as="h2"
-            size="4xl" // Same size as the main title
-            fontWeight="bold"
-            color="white" // Consistent white color
-            textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)" // Subtle text shadow for depth
-          >
-            Get in Touch
-          </Heading>
-          <Box
-            height="4px" // Thickness of the underline
-            width="80%" // Set to 80% to match the title width
-            bg="#00aaff" // Underline color changed to branding blue
-            display="inline-block" // Make the underline fit the title width
-            mx="auto" // Center the underline
-            mt={2} // Margin top for spacing
-            borderRadius="md" // Rounded edges for a modern look
-          />
-        </Box>
+        <Heading as="h2" size="2xl" color="white" mb={4}>
+          Get in Touch
+        </Heading>
 
-        <Text fontSize="lg" mb={6}>
-          We’d love to hear from you! Please fill out the form below to reach
-          out.
-        </Text>
+        {!submitted && (
+          <>
+            <Text fontSize="lg" mb={4}>
+              Subscribe now to get notified about upcoming events, new music
+              drops, exclusive parties, and more!
+            </Text>
 
-        {/* Form Fields */}
-        <FormControl>
-          <FormLabel mb={2}>Name</FormLabel> {/* Added margin-bottom */}
-          <Input
-            placeholder="Your Name"
-            borderColor="gray.600"
-            borderRadius="md" // Rounded corners
-            _hover={{ borderColor: "#00aaff" }} // Hover effect
-            _focus={{
-              borderColor: "#00aaff", // Focus effect
-              boxShadow: "0 0 0 1px #00aaff", // Focus shadow
-            }}
-            transition="border-color 0.3s, box-shadow 0.3s" // Smooth transition
-            size="lg" // Larger input size
-            mt={2} // Added margin-top
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel mb={2}>Email</FormLabel> {/* Added margin-bottom */}
-          <Input
-            type="email"
-            placeholder="Your Email"
-            borderColor="gray.600"
-            borderRadius="md" // Rounded corners
-            _hover={{ borderColor: "#00aaff" }} // Hover effect
-            _focus={{
-              borderColor: "#00aaff", // Focus effect
-              boxShadow: "0 0 0 1px #00aaff", // Focus shadow
-            }}
-            transition="border-color 0.3s, box-shadow 0.3s" // Smooth transition
-            size="lg" // Larger input size
-            mt={2} // Added margin-top
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel mb={2}>Message</FormLabel> {/* Added margin-bottom */}
-          <Textarea
-            placeholder="Your Message"
-            borderColor="gray.600"
-            borderRadius="md" // Rounded corners
-            _hover={{ borderColor: "#00aaff" }} // Hover effect
-            _focus={{
-              borderColor: "#00aaff", // Focus effect
-              boxShadow: "0 0 0 1px #00aaff", // Focus shadow
-            }}
-            transition="border-color 0.3s, box-shadow 0.3s" // Smooth transition
-            size="lg" // Larger textarea size
-            mt={2} // Added margin-top
-          />
-        </FormControl>
-        <Button
-          colorScheme="teal"
-          size="lg"
-          width="full" // Full width
-          bg="#0026b9" // Button background color changed to branding blue
-          _hover={{ bg: "#00aaff", color: "white" }} // Button hover effect
-          transition="background-color 0.3s, color 0.3s" // Smooth transition
-        >
-          Send Message
-        </Button>
+            {/* Name Field */}
+            <FormControl isInvalid={errors.name}>
+              <FormLabel>Full Name</FormLabel>
+              <Input
+                name="name"
+                placeholder="John Doe"
+                value={formData.name}
+                onChange={handleChange}
+                borderColor="gray.600"
+                borderRadius="md"
+                _hover={{ borderColor: "#00aaff" }}
+                _focus={{
+                  borderColor: "#00aaff",
+                  boxShadow: "0 0 0 1px #00aaff",
+                }}
+              />
+              <FormErrorMessage color="#FF0000">{errors.name}</FormErrorMessage>
+            </FormControl>
+
+            {/* Email Field */}
+            <FormControl isInvalid={errors.email}>
+              <FormLabel>Email Address</FormLabel>
+              <Input
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                value={formData.email}
+                onChange={handleChange}
+                borderColor="gray.600"
+                borderRadius="md"
+                _hover={{ borderColor: "#00aaff" }}
+                _focus={{
+                  borderColor: "#00aaff",
+                  boxShadow: "0 0 0 1px #00aaff",
+                }}
+              />
+              <FormErrorMessage color="#FF0000">
+                {errors.email}
+              </FormErrorMessage>
+            </FormControl>
+
+            {/* Country Dropdown */}
+            <FormControl isInvalid={errors.country}>
+              <FormLabel>Country / Region</FormLabel>
+              <Select
+                name="country"
+                options={countryOptions}
+                placeholder="Select your country"
+                value={formData.country}
+                onChange={handleDropdownChange}
+                styles={customSelectStyles}
+              />
+              <FormErrorMessage color="#FF0000">
+                {errors.country}
+              </FormErrorMessage>
+            </FormControl>
+
+            {/* Referral Dropdown */}
+            <FormControl isInvalid={errors.referral}>
+              <FormLabel>How did you hear about us?</FormLabel>
+              <Select
+                name="referral"
+                options={referralOptions}
+                placeholder="Select an option"
+                value={formData.referral}
+                onChange={handleDropdownChange}
+                styles={customSelectStyles}
+              />
+              <FormErrorMessage color="#FF0000">
+                {errors.referral}
+              </FormErrorMessage>
+            </FormControl>
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              bg="#0026b9"
+              color="white"
+              size="lg"
+              width="full"
+              _hover={{
+                bg: "#00aaff", // light blue background
+                color: "#000000", // pure black text for max contrast
+              }}
+              transition="background-color 0.3s, color 0.3s"
+            >
+              Subscribe
+            </Button>
+          </>
+        )}
+
+        {submitted && (
+          <>
+            <Heading as="h3" size="lg" color="white">
+              Thank you for subscribing!
+            </Heading>
+            <Text>You’ll now receive updates on all things Ivan Robles.</Text>
+          </>
+        )}
       </VStack>
     </Box>
   );
