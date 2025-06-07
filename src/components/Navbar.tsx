@@ -1,98 +1,106 @@
-import { Box, Button, Flex, Image, Link } from "@chakra-ui/react";
+import { Box, Flex, Image } from "@chakra-ui/react";
+// src/components/Navbar/Navbar.tsx
+import React, { useEffect, useState } from "react";
 
+import { ChakraRouterLink } from "../components/common/ChakraRouterLink"; // Import the Chakra-wrapped RouterLink
 import Hamburger from "hamburger-react";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
-  const location = useLocation();
-  const activeLink = location.pathname;
+  const { pathname } = useLocation();
+
+  // Close mobile menu whenever route changes
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Underline for active link
+  const ActiveBar = (
+    <Box
+      position="absolute"
+      bottom="-2px"
+      left={0}
+      right={0}
+      height="2px"
+      bg="#00aaff"
+    />
+  );
 
   return (
     <Box
-      bg="#000000"
+      as="nav"
+      bg="#000"
       color="white"
-      px={10}
+      px={6}
       py={4}
       shadow="lg"
       position="sticky"
       top="0"
       zIndex="1000"
     >
-      <Flex justify="space-between" align="center">
+      <Flex align="center" justify="space-between">
         {/* Logo */}
-        <Link
-          href="/"
+        <ChakraRouterLink
+          to="/"
           display="flex"
           alignItems="center"
-          _hover={{ cursor: "pointer" }}
+          _hover={{ opacity: 0.8, textDecoration: "none" }}
+          _focus={{ outline: "none" }}
         >
           <Image
             src="/src/assets/irob-logo.jpeg"
-            alt="DJ Ivan Robles Logo"
+            alt="Ivan Robles Logo"
             boxSize="50px"
             objectFit="contain"
           />
-        </Link>
+        </ChakraRouterLink>
 
-        {/* Mobile Hamburger */}
+        {/* Hamburger (mobile only) */}
         <Box display={{ base: "block", md: "none" }}>
           <Hamburger toggled={isOpen} toggle={setOpen} />
         </Box>
 
         {/* Desktop Links */}
-        <Flex gap={8} display={{ base: "none", md: "flex" }}>
-          <Link
-            href="/"
-            color="white"
+        <Flex display={{ base: "none", md: "flex" }} gap={8} align="center">
+          <ChakraRouterLink
+            to="/"
             position="relative"
-            onClick={() => setOpen(false)}
+            px={2}
+            py={1}
+            _hover={{ color: "#00aaff", textDecoration: "none" }}
+            _focus={{ outline: "none" }}
           >
             Home
-            {activeLink === "/" && (
-              <Box
-                position="absolute"
-                bottom="-2px"
-                left="0"
-                right="0"
-                height="2px"
-                bg="#00aaff"
-              />
-            )}
-          </Link>
-          <Link
-            href="/about"
-            color="white"
+            {pathname === "/" && ActiveBar}
+          </ChakraRouterLink>
+
+          <ChakraRouterLink
+            to="/about"
             position="relative"
-            onClick={() => setOpen(false)}
+            px={2}
+            py={1}
+            _hover={{ color: "#00aaff", textDecoration: "none" }}
+            _focus={{ outline: "none" }}
           >
             About Me
-            {activeLink === "/about" && (
-              <Box
-                position="absolute"
-                bottom="-2px"
-                left="0"
-                right="0"
-                height="2px"
-                bg="#00aaff"
-              />
-            )}
-          </Link>
-          <Button
-            as={Link}
-            href="/subscribe"
+            {pathname === "/about" && ActiveBar}
+          </ChakraRouterLink>
+
+          <ChakraRouterLink
+            to="/subscribe"
+            px={4}
+            py={2}
             bg="#0026b9"
             color="white"
+            borderRadius="5px"
+            textAlign="center"
+            _hover={{ bg: "#00aaff", color: "#000" }}
+            _focus={{ outline: "none" }}
             transition="background-color 0.3s, color 0.3s"
-            _hover={{
-              bg: "#00aaff", // light blue
-              color: "#000", // pure black text for max contrast
-            }}
-            onClick={() => setOpen(false)}
           >
             Subscribe
-          </Button>
+          </ChakraRouterLink>
         </Flex>
       </Flex>
 
@@ -100,36 +108,43 @@ const Navbar = () => {
       {isOpen && (
         <Box
           display={{ base: "block", md: "none" }}
-          position="absolute"
-          top="60px"
-          left="0"
-          right="0"
-          bg="#000000"
-          color="white"
+          mt={4}
+          bg="#000"
           p={4}
           shadow="md"
         >
           <Flex direction="column" gap={4}>
-            <Link href="/" color="white" onClick={() => setOpen(false)}>
+            <ChakraRouterLink
+              to="/"
+              py={2}
+              _hover={{ color: "#00aaff", textDecoration: "none" }}
+              _focus={{ outline: "none" }}
+            >
               Home
-            </Link>
-            <Link href="/about" color="white" onClick={() => setOpen(false)}>
+            </ChakraRouterLink>
+            <ChakraRouterLink
+              to="/about"
+              py={2}
+              _hover={{ color: "#00aaff", textDecoration: "none" }}
+              _focus={{ outline: "none" }}
+            >
               About Me
-            </Link>
-            <Button
-              as={Link}
-              href="/subscribe"
+            </ChakraRouterLink>
+            <ChakraRouterLink
+              to="/subscribe"
+              display="block"
+              w="full"
+              py={2}
               bg="#0026b9"
               color="white"
+              borderRadius="5px"
+              textAlign="center"
+              _hover={{ bg: "#00aaff", color: "#000" }}
+              _focus={{ outline: "none" }}
               transition="background-color 0.3s, color 0.3s"
-              _hover={{
-                bg: "#00aaff",
-                color: "#000",
-              }}
-              onClick={() => setOpen(false)}
             >
               Subscribe
-            </Button>
+            </ChakraRouterLink>
           </Flex>
         </Box>
       )}

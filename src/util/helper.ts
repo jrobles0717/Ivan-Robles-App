@@ -1,5 +1,6 @@
-// util/helper.ts
-export const customSelectStyles = {
+import type { OptionType } from "./types";
+import type { StylesConfig } from "react-select";
+export const customSelectStyles: StylesConfig<OptionType, false> = {
   // Force the control + menu to be full‐width of its parent
   container: (base) => ({
     ...base,
@@ -175,6 +176,7 @@ export const countryOptions = [
 export const referralOptions = [
   { value: "instagram", label: "Instagram" },
   { value: "facebook", label: "Facebook" },
+  { value: "tiktok", label: "TikTok" },
   { value: "youtube", label: "Youtube" },
   { value: "twitch", label: "Twitch" },
   { value: "mixcloud", label: "Mixcloud" },

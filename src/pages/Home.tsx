@@ -10,8 +10,16 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FaEnvelope, FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa"; // Import social media icons
+import {
+  FaEnvelope,
+  FaFacebook,
+  FaInstagram,
+  FaTiktok,
+  FaYoutube,
+} from "react-icons/fa";
 import { FaMixcloud, FaTwitch } from "react-icons/fa"; // Import Twitch and Mixcloud icons
+
+import ChakraAnchor from "../components/common/ChakraAnchor"; // Import the ChakraAnchor component
 
 const Home = () => {
   return (
@@ -19,11 +27,11 @@ const Home = () => {
       {/* Hero Section with Background Image */}
       <Box
         position="relative"
-        minHeight="100vh" // Use min-height to allow growth
-        backgroundImage="url('src/assets/hero-background.jpg')" // Use the image from the assets folder
-        backgroundSize="cover" // Ensure the background covers the entire area
-        backgroundPosition="center" // Center the background image
-        backgroundRepeat="no-repeat" // Ensure the background does not repeat
+        minHeight="100vh" // Full viewport height
+        backgroundImage="url('src/assets/hero-background.jpg')" // Background image
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
         color="white"
       >
         {/* Overlay for a darkened effect */}
@@ -50,7 +58,7 @@ const Home = () => {
         >
           {/* DJ Logo or Image */}
           <Image
-            src="/src/assets/ivan-robles-hero-pic.jpg" // Replace with your DJ's logo
+            src="/src/assets/ivan-robles-hero-pic.jpg" // DJ's logo
             alt="DJ Logo"
             boxSize="150px"
             mb={6}
@@ -59,7 +67,7 @@ const Home = () => {
           />
 
           {/* Main Heading with Underline */}
-          <Box mb={8}>
+          <Box mb={4}>
             <Heading
               as="h1"
               size="4xl"
@@ -78,11 +86,11 @@ const Home = () => {
               mt={2}
               borderRadius="md"
             />
-            {/* --- Logo Below Heading --- */}
+            {/* Logo Below Heading */}
             <Image
               src="/src/assets/irob-logo.jpeg"
               alt="Ivan Robles Logo"
-              width="150px" // wider than tall
+              width="150px"
               height="80px"
               objectFit="contain"
               mt={4}
@@ -98,13 +106,13 @@ const Home = () => {
 
           {/* Call-to-Action Button */}
           <Button
-            bg="#0026b9" // branding dark blue
+            bg="#0026b9" // Branding dark blue
             color="white"
             size="lg"
             px={8}
             _hover={{
-              bg: "#00aaff", // light blue bg on hover
-              color: "#000000", // pure black text for max contrast
+              bg: "#00aaff", // Light blue bg on hover
+              color: "#000000", // Pure black text for max contrast
             }}
             transition="background-color 0.3s, color 0.3s"
             onClick={() => {
@@ -130,9 +138,9 @@ const Home = () => {
               label="Instagram"
             />
             <SocialLink
-              icon={FaEnvelope}
-              href="mailto:Ivanroblesmusic@gmail.com"
-              label="Email"
+              icon={FaTiktok}
+              href="https://www.tiktok.com/@ivanroblesmusic"
+              label="TikTok"
             />
             <SocialLink
               icon={FaYoutube}
@@ -149,8 +157,63 @@ const Home = () => {
               href="https://www.mixcloud.com/ivanrobles"
               label="Mixcloud"
             />
+            <SocialLink
+              icon={FaEnvelope}
+              href="mailto:Ivanroblesmusic@gmail.com"
+              label="Email"
+            />
           </HStack>
         </Flex>
+
+        {/* Sponsor Section */}
+        <Box
+          bg="linear-gradient(135deg, #1a1a1a, #333333)" // Dark gradient background
+          py={16}
+          px={6}
+          textAlign="center"
+        >
+          {/* Title */}
+          <Box mb={6}>
+            <Text
+              fontSize="3xl"
+              fontWeight="bold"
+              color="#ffffff" // White text for contrast
+              textTransform="uppercase"
+              letterSpacing="wide"
+              textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)" // Subtle shadow for depth
+            >
+              Sponsored By
+            </Text>
+            <Box
+              height="4px"
+              width="80px"
+              bg="#00aaff" // Branding light blue
+              mx="auto"
+              mt={2}
+              borderRadius="md"
+            />
+          </Box>
+
+          {/* Sponsor Logo */}
+          <Box
+            bg="white"
+            display="inline-block"
+            p={6}
+            borderRadius="lg"
+            shadow="2xl"
+            _hover={{
+              transform: "scale(1.1)",
+              transition: "all 0.3s ease-in-out",
+            }}
+          >
+            <Image
+              src="/src/assets/PioneerDJ.jpeg"
+              alt="Pioneer DJ"
+              objectFit="contain"
+              height="100px"
+            />
+          </Box>
+        </Box>
       </Box>
 
       {/* The Ivan Robles Show Section */}
@@ -166,12 +229,11 @@ const Home = () => {
           {/* Left Side: Image */}
           <Box flex="1" textAlign="center">
             <Image
-              src="/src/assets/house-boutique-logo-2.jpeg"
-              // src="/src/assets/house-boutique-logo-1.jpeg"
+              src="/src/assets/house-boutique-logo-1.jpeg"
               alt="House Boutique Logo"
               objectFit="contain"
               mx="auto"
-              maxW="400px"
+              maxW={{ base: "90%", sm: "80%", md: "400px" }} // Responsive max width
               borderRadius="md"
               shadow="lg"
               _hover={{
@@ -194,10 +256,10 @@ const Home = () => {
               The Ivan Robles Show
             </Heading>
             <Text fontSize="lg" color="#555" mb={6}>
-              Experience the electrifying beats of Ivan Robles at **House
-              Boutique**. Tune in to the ultimate mix show featuring the best of
-              house music, live from San Juan, Puerto Rico. Don’t miss the
-              energy and rhythm that will keep you moving!
+              Experience the electrifying beats of Ivan Robles at{" "}
+              <strong>House Boutique</strong>. Tune in to the ultimate mix show
+              featuring the best of house music, live from San Juan, Puerto
+              Rico. Don’t miss the energy and rhythm that will keep you moving!
             </Text>
             <Button
               bg="#0026b9"
@@ -257,109 +319,6 @@ const Home = () => {
         </SimpleGrid>
       </Box>
 
-      {/* Sponsors Section */}
-      <Box bg="#f5f5f5" py={20} px={6}>
-        <Box mb={8} textAlign="center">
-          <Heading
-            as="h2"
-            size="4xl"
-            fontWeight="bold"
-            color="#333" // Dark text for contrast
-            textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
-          >
-            Proudly Sponsored By
-          </Heading>
-          <Box
-            height="4px"
-            width="80%"
-            bg="#00aaff"
-            display="inline-block"
-            mt={2}
-            borderRadius="md"
-          />
-        </Box>
-
-        {/* Sponsor Logos Grid */}
-        <SimpleGrid columns={{ base: 2, md: 4 }} gap={8} alignItems="center">
-          <Box
-            bg="white"
-            p={4}
-            borderRadius="md"
-            shadow="md"
-            _hover={{
-              transform: "scale(1.1)",
-              transition: "all 0.3s ease-in-out",
-              shadow: "lg",
-            }}
-          >
-            <Image
-              src="/src/assets/TikTok.jpeg"
-              alt="TikTok"
-              objectFit="contain"
-              mx="auto"
-              height="80px"
-            />
-          </Box>
-          <Box
-            bg="white"
-            p={4}
-            borderRadius="md"
-            shadow="md"
-            _hover={{
-              transform: "scale(1.1)",
-              transition: "all 0.3s ease-in-out",
-              shadow: "lg",
-            }}
-          >
-            <Image
-              src="/src/assets/mixcloud.jpeg"
-              alt="Mixcloud"
-              objectFit="contain"
-              mx="auto"
-              height="80px"
-            />
-          </Box>
-          <Box
-            bg="white"
-            p={4}
-            borderRadius="md"
-            shadow="md"
-            _hover={{
-              transform: "scale(1.1)",
-              transition: "all 0.3s ease-in-out",
-              shadow: "lg",
-            }}
-          >
-            <Image
-              src="/src/assets/PioneerDJ.jpeg"
-              alt="Pioneer DJ"
-              objectFit="contain"
-              mx="auto"
-              height="80px"
-            />
-          </Box>
-          <Box
-            bg="white"
-            p={4}
-            borderRadius="md"
-            shadow="md"
-            _hover={{
-              transform: "scale(1.1)",
-              transition: "all 0.3s ease-in-out",
-              shadow: "lg",
-            }}
-          >
-            <Image
-              src="/src/assets/4-street-music-logo.jpeg"
-              alt="4 Street Music"
-              objectFit="contain"
-              mx="auto"
-              height="80px"
-            />
-          </Box>
-        </SimpleGrid>
-      </Box>
-
       {/* Upcoming Events Section */}
       <Box bg="#2f2626" py={20} px={6}>
         <Box mb={8} textAlign="center">
@@ -414,8 +373,7 @@ const SocialLink = ({
   label: string;
 }) => {
   return (
-    <Box
-      as="a"
+    <ChakraAnchor
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -423,13 +381,13 @@ const SocialLink = ({
       fontSize="2xl"
       color="white"
       _hover={{
-        color: "#00aaff", // branding light blue
+        color: "#00aaff", // Branding light blue
         transform: "scale(1.2)",
         transition: "all 0.3s ease-in-out",
       }}
     >
       <Icon as={icon} />
-    </Box>
+    </ChakraAnchor>
   );
 };
 
