@@ -28,7 +28,7 @@ const Home = () => {
       <Box
         position="relative"
         minHeight="100vh" // Full viewport height
-        backgroundImage="url('public/assets/hero-background.jpg')" // Background image
+        backgroundImage="url('/assets/hero-background.jpg')" // Background image
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
