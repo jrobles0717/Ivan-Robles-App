@@ -21,7 +21,7 @@ const About = () => {
     >
       {/* Background Image */}
       <Image
-        src="/src/assets/dj-background.jpg" // Replace with your background image
+        src="/assets/dj-background.jpg" // Replace with your background image
         alt="DJ Performance"
         position="absolute"
         top="0"
@@ -104,7 +104,7 @@ const About = () => {
         >
           <GridItem>
             <Image
-              src="/src/assets/ivan-robles-about-1.jpg" // Replace with an image of him performing
+              src="/assets/ivan-robles-about-1.jpg" // Replace with an image of him performing
               alt="Ivan Performing"
               borderRadius="md"
               boxShadow="lg"
@@ -120,7 +120,7 @@ const About = () => {
           </GridItem>
           <GridItem>
             <Image
-              src="/src/assets/ivan-robles-about-2.jpg" // Replace with an image of him at a radio show
+              src="/assets/ivan-robles-about-2.jpg" // Replace with an image of him at a radio show
               alt="Ivan at Radio Show"
               borderRadius="md"
               boxShadow="lg"
@@ -136,7 +136,7 @@ const About = () => {
           </GridItem>
           <GridItem>
             <Image
-              src="/src/assets/ivan-robles-about-3.jpg" // Replace with an image of him with the crowd
+              src="/assets/ivan-robles-about-3.jpg" // Replace with an image of him with the crowd
               alt="Ivan with the Crowd"
               borderRadius="md"
               boxShadow="lg"

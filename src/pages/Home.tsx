@@ -28,7 +28,7 @@ const Home = () => {
       <Box
         position="relative"
         minHeight="100vh" // Full viewport height
-        backgroundImage="url('src/assets/hero-background.jpg')" // Background image
+        backgroundImage="url('public/assets/hero-background.jpg')" // Background image
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
@@ -58,7 +58,7 @@ const Home = () => {
         >
           {/* DJ Logo or Image */}
           <Image
-            src="/src/assets/ivan-robles-hero-pic.jpg" // DJ's logo
+            src="/assets/ivan-robles-hero-pic.jpg" // DJ's logo
             alt="DJ Logo"
             boxSize="150px"
             mb={6}
@@ -88,7 +88,7 @@ const Home = () => {
             />
             {/* Logo Below Heading */}
             <Image
-              src="/src/assets/irob-logo.jpeg"
+              src="/assets/irob-logo.jpeg"
               alt="Ivan Robles Logo"
               width="150px"
               height="80px"
@@ -207,7 +207,7 @@ const Home = () => {
             }}
           >
             <Image
-              src="/src/assets/PioneerDJ.jpeg"
+              src="/assets/PioneerDJ.jpeg"
               alt="Pioneer DJ"
               objectFit="contain"
               height="100px"
@@ -229,7 +229,7 @@ const Home = () => {
           {/* Left Side: Image */}
           <Box flex="1" textAlign="center">
             <Image
-              src="/src/assets/house-boutique-logo-1.jpeg"
+              src="/assets/house-boutique-logo-1.jpeg"
               alt="House Boutique Logo"
               objectFit="contain"
               mx="auto"

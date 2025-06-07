@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
           _focus={{ outline: "none" }}
         >
           <Image
-            src="/src/assets/irob-logo.jpeg"
+            src="/assets/irob-logo.jpeg"
             alt="Ivan Robles Logo"
             boxSize="50px"
             objectFit="contain"

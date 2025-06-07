@@ -97,7 +97,7 @@ const Subscribe = () => {
     <Box
       position="relative"
       minH="100vh"
-      backgroundImage="url('src/assets/dj-background-2.png')"
+      backgroundImage="url('/assets/dj-background-2.png')"
       backgroundSize="cover"
       backgroundPosition="center"
       color="white"
