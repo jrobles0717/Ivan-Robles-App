@@ -153,6 +153,75 @@ const Home = () => {
         </Flex>
       </Box>
 
+      {/* The Ivan Robles Show Section */}
+      <Box bg="#f5f5f5" py={20} px={6}>
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align="center"
+          justify="space-between"
+          gap={8}
+          maxW="1200px"
+          mx="auto"
+        >
+          {/* Left Side: Image */}
+          <Box flex="1" textAlign="center">
+            <Image
+              src="/src/assets/house-boutique-logo-2.jpeg"
+              // src="/src/assets/house-boutique-logo-1.jpeg"
+              alt="House Boutique Logo"
+              objectFit="contain"
+              mx="auto"
+              maxW="400px"
+              borderRadius="md"
+              shadow="lg"
+              _hover={{
+                transform: "scale(1.05)",
+                transition: "all 0.3s ease-in-out",
+              }}
+            />
+          </Box>
+
+          {/* Right Side: Text and CTA */}
+          <Box flex="1" textAlign={{ base: "center", md: "left" }}>
+            <Heading
+              as="h2"
+              size="3xl"
+              fontWeight="bold"
+              color="#333"
+              mb={4}
+              textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
+            >
+              The Ivan Robles Show
+            </Heading>
+            <Text fontSize="lg" color="#555" mb={6}>
+              Experience the electrifying beats of Ivan Robles at **House
+              Boutique**. Tune in to the ultimate mix show featuring the best of
+              house music, live from San Juan, Puerto Rico. Don’t miss the
+              energy and rhythm that will keep you moving!
+            </Text>
+            <Button
+              bg="#0026b9"
+              color="white"
+              size="lg"
+              px={8}
+              _hover={{
+                bg: "#00aaff",
+                color: "#000000",
+              }}
+              transition="background-color 0.3s, color 0.3s"
+              onClick={() => {
+                window.open(
+                  "https://www.youtube.com/@IvanRoblesmusic/videos", // Replace with the actual link
+                  "_blank"
+                );
+              }}
+            >
+              Watch Now
+            </Button>
+          </Box>
+        </Flex>
+      </Box>
+
       {/* Featured Music Section */}
       <Box bg="#1a1a1a" py={20} px={6}>
         <Box mb={8} textAlign="center">
@@ -176,6 +245,8 @@ const Home = () => {
         </Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
           {/* YouTube Video Embeds */}
+          <YouTubeVideo videoId="VD1bnxRvLjM" />
+          <YouTubeVideo videoId="Ey59V0IVNfg" />
           <YouTubeVideo videoId="Xx2RksffUtg" />
           <YouTubeVideo videoId="PWzr9guQQuQ" />
           <YouTubeVideo videoId="SFFXDiZWbJ0" />
@@ -183,6 +254,109 @@ const Home = () => {
           <YouTubeVideo videoId="zL6weacPPJU" />
           <YouTubeVideo videoId="E6rjYzunZII" />
           <YouTubeVideo videoId="GckhNkkz9ik" />
+        </SimpleGrid>
+      </Box>
+
+      {/* Sponsors Section */}
+      <Box bg="#f5f5f5" py={20} px={6}>
+        <Box mb={8} textAlign="center">
+          <Heading
+            as="h2"
+            size="4xl"
+            fontWeight="bold"
+            color="#333" // Dark text for contrast
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
+          >
+            Proudly Sponsored By
+          </Heading>
+          <Box
+            height="4px"
+            width="80%"
+            bg="#00aaff"
+            display="inline-block"
+            mt={2}
+            borderRadius="md"
+          />
+        </Box>
+
+        {/* Sponsor Logos Grid */}
+        <SimpleGrid columns={{ base: 2, md: 4 }} gap={8} alignItems="center">
+          <Box
+            bg="white"
+            p={4}
+            borderRadius="md"
+            shadow="md"
+            _hover={{
+              transform: "scale(1.1)",
+              transition: "all 0.3s ease-in-out",
+              shadow: "lg",
+            }}
+          >
+            <Image
+              src="/src/assets/TikTok.jpeg"
+              alt="TikTok"
+              objectFit="contain"
+              mx="auto"
+              height="80px"
+            />
+          </Box>
+          <Box
+            bg="white"
+            p={4}
+            borderRadius="md"
+            shadow="md"
+            _hover={{
+              transform: "scale(1.1)",
+              transition: "all 0.3s ease-in-out",
+              shadow: "lg",
+            }}
+          >
+            <Image
+              src="/src/assets/mixcloud.jpeg"
+              alt="Mixcloud"
+              objectFit="contain"
+              mx="auto"
+              height="80px"
+            />
+          </Box>
+          <Box
+            bg="white"
+            p={4}
+            borderRadius="md"
+            shadow="md"
+            _hover={{
+              transform: "scale(1.1)",
+              transition: "all 0.3s ease-in-out",
+              shadow: "lg",
+            }}
+          >
+            <Image
+              src="/src/assets/PioneerDJ.jpeg"
+              alt="Pioneer DJ"
+              objectFit="contain"
+              mx="auto"
+              height="80px"
+            />
+          </Box>
+          <Box
+            bg="white"
+            p={4}
+            borderRadius="md"
+            shadow="md"
+            _hover={{
+              transform: "scale(1.1)",
+              transition: "all 0.3s ease-in-out",
+              shadow: "lg",
+            }}
+          >
+            <Image
+              src="/src/assets/4-street-music-logo.jpeg"
+              alt="4 Street Music"
+              objectFit="contain"
+              mx="auto"
+              height="80px"
+            />
+          </Box>
         </SimpleGrid>
       </Box>
 
