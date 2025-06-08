@@ -273,7 +273,7 @@ const Home = () => {
               transition="background-color 0.3s, color 0.3s"
               onClick={() => {
                 window.open(
-                  "https://www.youtube.com/@IvanRoblesmusic/videos", // Replace with the actual link
+                  "https://www.youtube.com/@IvanRoblesmusic", // Replace with the actual link
                   "_blank"
                 );
               }}
