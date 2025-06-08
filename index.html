@@ -2,12 +2,103 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/irob-logo.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+
+    <!-- Primary Meta Tags -->
+    <title>DJ Ivan Robles | Official DJ & Music Producer</title>
+    <meta
+      name="description"
+      content="Experience electrifying beats with DJ Ivan Robles. Subscribe for event updates, new music releases, exclusive parties, and more!"
+    />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.djivanrobles.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.djivanrobles.com/" />
+    <meta
+      property="og:title"
+      content="DJ Ivan Robles | Official DJ & Music Producer"
+    />
+    <meta
+      property="og:description"
+      content="Experience electrifying beats with DJ Ivan Robles. Subscribe for event updates, new music releases, exclusive parties, and more!"
+    />
+    <meta
+      property="og:image"
+      content="https://www.djivanrobles.com/assets/hero-image.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@IvanRoblesMusic" />
+    <meta
+      name="twitter:title"
+      content="DJ Ivan Robles | Official DJ & Music Producer"
+    />
+    <meta
+      name="twitter:description"
+      content="Experience electrifying beats with DJ Ivan Robles. Subscribe for event updates, new music releases, exclusive parties, and more!"
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.djivanrobles.com/assets/hero-image.jpg"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/irob-logo.jpeg" />
+
+    <!-- PWA / Theme & Manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MusicGroup",
+        "name": "DJ Ivan Robles",
+        "url": "https://www.djivanrobles.com/",
+        "logo": "https://www.djivanrobles.com/assets/irob-logo.jpeg",
+        "sameAs": [
+          "https://www.facebook.com/IROBMUSIC",
+          "https://instagram.com/djivanrobles",
+          "https://www.tiktok.com/@ivanroblesmusic",
+          "https://youtube.com/c/ivanroblesmusic",
+          "https://www.twitch.com/djivanrobles",
+          "https://www.mixcloud.com/ivanrobles"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Netlify Form Detection Helper -->
+    <form
+      name="subscribe-form"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <!-- Honeypot field for spam protection -->
+      <p class="hidden">
+        <label>
+          Don’t fill this out if you’re human:
+          <input name="bot-field" type="text" />
+        </label>
+      </p>
+
+      <!-- Real form fields -->
+      <input type="hidden" name="form-name" value="subscribe-form" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="country" />
+      <input type="text" name="referral" />
+    </form>
   </body>
 </html>
