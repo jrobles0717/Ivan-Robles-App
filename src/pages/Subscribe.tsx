@@ -57,7 +57,6 @@ const Subscribe = () => {
     selectedOption: SingleValue<OptionType>,
     action: ActionMeta<OptionType>
   ): void => {
-    // react‐select passes action.name if you set `name="country"` on the <Select>
     const key = action.name as keyof FormData;
     setFormData((prev) => ({ ...prev, [key]: selectedOption }));
   };
@@ -135,6 +134,8 @@ const Subscribe = () => {
       {/* Form Container */}
       <ChakraForm
         onSubmit={handleSubmit}
+        data-netlify="true" // Netlify attribute
+        name="subscribe-form" // Unique form name
         maxW={{ base: "90%", md: "md" }}
         mx="auto"
         zIndex={3}
@@ -143,6 +144,9 @@ const Subscribe = () => {
         borderRadius="md"
         boxShadow="lg"
       >
+        {/* Hidden input for Netlify */}
+        <input type="hidden" name="form-name" value="subscribe-form" />
+
         <VStack gap={6}>
           <Heading as="h2" size="2xl" color="white" mb={4}>
             Get in Touch

@@ -129,7 +129,7 @@ const Home = () => {
           <HStack gap={6} mt={8}>
             <SocialLink
               icon={FaFacebook}
-              href="https://www.facebook.com/DJIvanRobles"
+              href="https://www.facebook.com/IROBMUSIC"
               label="Facebook"
             />
             <SocialLink
