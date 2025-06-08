@@ -26,7 +26,7 @@ import Confetti from "react-confetti";
 import Select, { type ActionMeta, type SingleValue } from "react-select";
 
 const Subscribe = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     country: null,
@@ -77,11 +77,29 @@ const Subscribe = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    if (validate()) {
+
+    if (!validate()) return;
+
+    // Build URL-encoded form body
+    const payload = new URLSearchParams();
+    payload.append("form-name", "subscribe-form");
+    payload.append("name", formData.name);
+    payload.append("email", formData.email);
+    if (formData.country) payload.append("country", formData.country.value);
+    if (formData.referral) payload.append("referral", formData.referral.value);
+
+    try {
+      // Submit the form to Netlify
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: payload.toString(),
+      });
+
+      // Show success message and reset form
       setSubmitted(true);
-      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -89,6 +107,8 @@ const Subscribe = () => {
         referral: null,
       });
       setErrors({});
+    } catch (err) {
+      console.error("Form submission error:", err);
     }
   };
 
@@ -133,9 +153,10 @@ const Subscribe = () => {
 
       {/* Form Container */}
       <ChakraForm
+        name="subscribe-form"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
-        data-netlify="true" // Netlify attribute
-        name="subscribe-form" // Unique form name
         maxW={{ base: "90%", md: "md" }}
         mx="auto"
         zIndex={3}
@@ -146,6 +167,11 @@ const Subscribe = () => {
       >
         {/* Hidden input for Netlify */}
         <input type="hidden" name="form-name" value="subscribe-form" />
+        <p style={{ display: "none" }}>
+          <label>
+            Don’t fill this out if you’re human: <input name="bot-field" />
+          </label>
+        </p>
 
         <VStack gap={6}>
           <Heading as="h2" size="2xl" color="white" mb={4}>
@@ -242,8 +268,8 @@ const Subscribe = () => {
                 size="lg"
                 width="full"
                 _hover={{
-                  bg: "#00aaff", // light blue background
-                  color: "#000000", // pure black text for max contrast
+                  bg: "#00aaff",
+                  color: "#000000",
                 }}
                 transition="background-color 0.3s, color 0.3s"
               >
