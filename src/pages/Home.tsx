@@ -20,6 +20,7 @@ import {
 import { FaMixcloud, FaTwitch } from "react-icons/fa"; // Import Twitch and Mixcloud icons
 
 import ChakraAnchor from "../components/common/ChakraAnchor"; // Import the ChakraAnchor component
+import PremiereSection from "../components/PremiereSection";
 
 const Home = () => {
   return (
@@ -283,6 +284,9 @@ const Home = () => {
           </Box>
         </Flex>
       </Box>
+
+      {/* Premiere Video Section */}
+      <PremiereSection />
 
       {/* Featured Music Section */}
       <Box bg="#1a1a1a" py={20} px={6}>
