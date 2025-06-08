@@ -88,7 +88,7 @@ const Home = () => {
             />
             {/* Logo Below Heading */}
             <Image
-              src="/assets/irob-logo.jpeg"
+              src="/assets/irob-logo.png"
               alt="Ivan Robles Logo"
               width="150px"
               height="80px"

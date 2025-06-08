@@ -4,11 +4,13 @@ import About from "./pages/About";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
+import ScrollToTop from "./components/common/ScrollToTop";
 import Subscribe from "./pages/Subscribe";
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
