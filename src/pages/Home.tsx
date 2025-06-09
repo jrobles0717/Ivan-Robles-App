@@ -4,7 +4,6 @@ import {
   Flex,
   HStack,
   Heading,
-  Icon,
   Image,
   SimpleGrid,
   Text,
@@ -17,10 +16,12 @@ import {
   FaTiktok,
   FaYoutube,
 } from "react-icons/fa";
-import { FaMixcloud, FaTwitch } from "react-icons/fa"; // Import Twitch and Mixcloud icons
+import { FaMixcloud, FaTwitch } from "react-icons/fa"; // Import Twitch and Mixcloud icons component
 
-import ChakraAnchor from "../components/common/ChakraAnchor"; // Import the ChakraAnchor component
+import EventCard from "../components/EventCard";
 import PremiereSection from "../components/PremiereSection";
+import SocialLink from "../components/SocialLink";
+import YouTubeVideo from "../components/YouTubeVideo";
 
 const Home = () => {
   return (
@@ -160,62 +161,15 @@ const Home = () => {
             />
             <SocialLink
               icon={FaEnvelope}
-              href="mailto:Ivanroblesmusic@gmail.com"
+              href="mailto:ivan@ivanroblesmusic.com"
               label="Email"
             />
           </HStack>
         </Flex>
-
-        {/* Sponsor Section */}
-        <Box
-          bg="linear-gradient(135deg, #1a1a1a, #333333)" // Dark gradient background
-          py={16}
-          px={6}
-          textAlign="center"
-        >
-          {/* Title */}
-          <Box mb={6}>
-            <Text
-              fontSize="3xl"
-              fontWeight="bold"
-              color="#ffffff" // White text for contrast
-              textTransform="uppercase"
-              letterSpacing="wide"
-              textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)" // Subtle shadow for depth
-            >
-              Sponsored By
-            </Text>
-            <Box
-              height="4px"
-              width="80px"
-              bg="#00aaff" // Branding light blue
-              mx="auto"
-              mt={2}
-              borderRadius="md"
-            />
-          </Box>
-
-          {/* Sponsor Logo */}
-          <Box
-            bg="white"
-            display="inline-block"
-            p={6}
-            borderRadius="lg"
-            shadow="2xl"
-            _hover={{
-              transform: "scale(1.1)",
-              transition: "all 0.3s ease-in-out",
-            }}
-          >
-            <Image
-              src="/assets/PioneerDJ.jpeg"
-              alt="Pioneer DJ"
-              objectFit="contain"
-              height="100px"
-            />
-          </Box>
-        </Box>
       </Box>
+
+      {/* Premiere Video Section */}
+      <PremiereSection />
 
       {/* The Ivan Robles Show Section */}
       <Box bg="#f5f5f5" py={20} px={6}>
@@ -284,9 +238,6 @@ const Home = () => {
           </Box>
         </Flex>
       </Box>
-
-      {/* Premiere Video Section */}
-      <PremiereSection />
 
       {/* Featured Music Section */}
       <Box bg="#1a1a1a" py={20} px={6}>
@@ -362,81 +313,56 @@ const Home = () => {
           />
         </VStack>
       </Box>
-    </Box>
-  );
-};
 
-// Social Link Component with hover animation
-const SocialLink = ({
-  icon,
-  href,
-  label,
-}: {
-  icon: any;
-  href: string;
-  label: string;
-}) => {
-  return (
-    <ChakraAnchor
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      fontSize="2xl"
-      color="white"
-      _hover={{
-        color: "#00aaff", // Branding light blue
-        transform: "scale(1.2)",
-        transition: "all 0.3s ease-in-out",
-      }}
-    >
-      <Icon as={icon} />
-    </ChakraAnchor>
-  );
-};
+      {/* Sponsor Section */}
+      <Box
+        bg="linear-gradient(135deg, #1a1a1a, #333333)" // Dark gradient background
+        py={16}
+        px={6}
+        textAlign="center"
+      >
+        {/* Title */}
+        <Box mb={6}>
+          <Text
+            fontSize="3xl"
+            fontWeight="bold"
+            color="#ffffff" // White text for contrast
+            textTransform="uppercase"
+            letterSpacing="wide"
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)" // Subtle shadow for depth
+          >
+            Sponsored By
+          </Text>
+          <Box
+            height="4px"
+            width="80%"
+            bg="#00aaff" // Branding light blue
+            display="inline-block"
+            mt={2}
+            borderRadius="md"
+          />
+        </Box>
 
-// YouTube Video Component
-const YouTubeVideo = ({ videoId }: { videoId: string }) => {
-  return (
-    <Box textAlign="center">
-      <iframe
-        width="100%"
-        height="315"
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </Box>
-  );
-};
-
-// Event Card Component
-const EventCard = ({
-  date,
-  location,
-  description,
-}: {
-  date: string;
-  location: string;
-  description: string;
-}) => {
-  return (
-    <Box
-      bg="rgba(255, 255, 255, 0.1)"
-      borderRadius="md"
-      p={6}
-      shadow="md"
-      width="100%"
-    >
-      <Heading as="h3" size="md" mb={2} color="#00aaff">
-        {date}
-      </Heading>
-      <Text fontWeight="bold" mb={2} color="white">
-        {location}
-      </Text>
-      <Text color="white">{description}</Text>
+        {/* Sponsor Logo */}
+        <Box
+          bg="white"
+          display="inline-block"
+          p={6}
+          borderRadius="lg"
+          shadow="2xl"
+          _hover={{
+            transform: "scale(1.1)",
+            transition: "all 0.3s ease-in-out",
+          }}
+        >
+          <Image
+            src="/assets/PioneerDJ.jpeg"
+            alt="Pioneer DJ"
+            objectFit="contain"
+            height="100px"
+          />
+        </Box>
+      </Box>
     </Box>
   );
 };

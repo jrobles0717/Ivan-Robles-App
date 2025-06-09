@@ -1,26 +1,11 @@
+import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
+
 import React from "react";
-import { Box, Heading, Text, VStack, Button } from "@chakra-ui/react";
-import YouTube, { type YouTubeProps } from "react-youtube";
-
-const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
-  const onPlayerReady: NonNullable<YouTubeProps["onReady"]> = ({ target }) => {
-    console.log("YouTube Player is ready!", target);
-  };
-
-  const opts: YouTubeProps["opts"] = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: 0, // Disable autoplay for better user experience
-      controls: 1, // Show player controls
-      rel: 0, // Disable related videos at the end
-    },
-  };
-
-  return <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} />;
-};
+import YouTubePlayer from "./YouTubePlayer";
 
 const PremiereSection: React.FC = () => {
+  const premiereVideoId = import.meta.env.VITE_PREMIERE_VIDEO_ID || "";
+
   return (
     <Box
       as="section"
@@ -32,15 +17,25 @@ const PremiereSection: React.FC = () => {
     >
       <VStack gap={8} maxW="800px" mx="auto">
         {/* Section Heading */}
-        <Heading
-          as="h2"
-          size="2xl"
-          fontWeight="bold"
-          textTransform="uppercase"
-          textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)"
-        >
-          Watch the Premiere
-        </Heading>
+        <Box>
+          <Heading
+            as="h2"
+            size="3xl"
+            fontWeight="bold"
+            textTransform="uppercase"
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)"
+          >
+            Watch the Premiere
+          </Heading>
+          <Box
+            height="4px"
+            width="80%"
+            bg="#00aaff" // Branding light blue
+            display="inline-block"
+            mt={2}
+            borderRadius="md"
+          />
+        </Box>
 
         {/* Subtitle */}
         <Text fontSize="lg" color="gray.300" maxW="600px">
@@ -49,14 +44,7 @@ const PremiereSection: React.FC = () => {
         </Text>
 
         {/* YouTube Player */}
-        <Box
-          borderRadius="lg"
-          overflow="hidden"
-          boxShadow="0 4px 20px rgba(0, 0, 0, 0.5)"
-          maxW="100%"
-        >
-          <YouTubePlayer videoId="ytxKtmE-pqc" />
-        </Box>
+        <YouTubePlayer videoId={premiereVideoId} />
 
         {/* Call-to-Action */}
         <Button
