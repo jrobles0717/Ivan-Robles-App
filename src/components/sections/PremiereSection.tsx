@@ -1,7 +1,7 @@
 import { Box, Button, Heading, Text, VStack } from "@chakra-ui/react";
 
 import React from "react";
-import YouTubePlayer from "./YouTubePlayer";
+import YouTubePlayer from "../YouTubePlayer";
 
 const PremiereSection: React.FC = () => {
   const premiereVideoId = import.meta.env.VITE_PREMIERE_VIDEO_ID || "";

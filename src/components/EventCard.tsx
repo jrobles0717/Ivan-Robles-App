@@ -1,30 +1,75 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import { FaCalendarAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
 
-// Event Card Component
-const EventCard = ({
-  date,
-  location,
-  description,
-}: {
+import { useColorModeValue } from "@chakra-ui/system";
+
+interface EventCardProps {
   date: string;
   location: string;
-  description: string;
+  time?: string; // Optional time
+  description?: string; // Optional description
+}
+
+const EventCard: React.FC<EventCardProps> = ({
+  date,
+  location,
+  time,
+  description,
 }) => {
+  // Dynamically set the card background and text color based on the theme
+  const cardBg = useColorModeValue("white", "gray.800"); // Light for dark backgrounds, dark for light backgrounds
+  const cardTextColor = useColorModeValue("black", "white"); // Text color to contrast with the background
+  const cardDescription = useColorModeValue("gray.600", "gray.400");
+
   return (
     <Box
-      bg="rgba(255, 255, 255, 0.1)"
-      borderRadius="md"
+      bg={cardBg}
+      color={cardTextColor}
       p={6}
-      shadow="md"
-      width="100%"
+      borderRadius="lg"
+      boxShadow="0 8px 20px rgba(0, 0, 0, 0.2)"
+      w="100%"
+      maxW="600px"
+      transition="transform 0.3s ease, box-shadow 0.3s ease"
+      _hover={{
+        transform: "translateY(-5px)",
+        boxShadow: "0 12px 25px rgba(0, 0, 0, 0.3)",
+      }}
     >
-      <Heading as="h3" size="md" mb={2} color="#00aaff">
-        {date}
-      </Heading>
-      <Text fontWeight="bold" mb={2} color="white">
-        {location}
-      </Text>
-      <Text color="white">{description}</Text>
+      <VStack align="start" gap={4}>
+        {/* Date */}
+        <HStack gap={3}>
+          <Icon as={FaCalendarAlt} boxSize={5} />
+          <Text fontSize="lg" fontWeight="bold">
+            {date}
+          </Text>
+        </HStack>
+
+        {/* Location */}
+        <HStack gap={3}>
+          <Icon as={FaMapMarkerAlt} boxSize={5} />
+          <Text fontSize="md" fontWeight="semibold">
+            {location}
+          </Text>
+        </HStack>
+
+        {/* Time (optional) */}
+        {time && (
+          <HStack gap={3}>
+            <Icon as={FaClock} boxSize={5} />
+            <Text fontSize="sm" fontWeight="medium">
+              {time}
+            </Text>
+          </HStack>
+        )}
+
+        {/* Description (optional) */}
+        {description && (
+          <Text fontSize="sm" color={cardDescription}>
+            {description}
+          </Text>
+        )}
+      </VStack>
     </Box>
   );
 };
