@@ -1,8 +1,29 @@
-import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, Heading, SimpleGrid } from "@chakra-ui/react";
 
 import YouTubeVideo from "../YouTubeVideo";
+import { useState } from "react";
 
 const FeaturedMusic = () => {
+  // List of YouTube video IDs
+  const videos = [
+    "VD1bnxRvLjM",
+    "Ey59V0IVNfg",
+    "Xx2RksffUtg",
+    "PWzr9guQQuQ",
+    "SFFXDiZWbJ0",
+    "bX023by-zig",
+    "zL6weacPPJU",
+    "GckhNkkz9ik",
+  ];
+
+  // State to manage how many videos to show
+  const [visibleVideos, setVisibleVideos] = useState(4);
+
+  // Function to show more videos
+  const showMoreVideos = () => {
+    setVisibleVideos((prev) => prev + 4); // Show 4 more videos each time
+  };
+
   return (
     <Box bg="#1a1a1a" py={20} px={6}>
       <Box mb={8} textAlign="center">
@@ -24,17 +45,28 @@ const FeaturedMusic = () => {
           borderRadius="md"
         />
       </Box>
+
+      {/* Grid Layout for Videos */}
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
-        {/* YouTube Video Embeds */}
-        <YouTubeVideo videoId="VD1bnxRvLjM" />
-        <YouTubeVideo videoId="Ey59V0IVNfg" />
-        <YouTubeVideo videoId="Xx2RksffUtg" />
-        <YouTubeVideo videoId="PWzr9guQQuQ" />
-        <YouTubeVideo videoId="SFFXDiZWbJ0" />
-        <YouTubeVideo videoId="bX023by-zig" />
-        <YouTubeVideo videoId="zL6weacPPJU" />
-        <YouTubeVideo videoId="GckhNkkz9ik" />
+        {videos.slice(0, visibleVideos).map((videoId, index) => (
+          <YouTubeVideo key={index} videoId={videoId} />
+        ))}
       </SimpleGrid>
+
+      {/* Show More Button */}
+      {visibleVideos < videos.length && (
+        <Box textAlign="center" mt={8}>
+          <Button
+            onClick={showMoreVideos}
+            bg="#00aaff"
+            color="white"
+            size="lg"
+            _hover={{ bg: "#0077cc" }}
+          >
+            Show More
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };
