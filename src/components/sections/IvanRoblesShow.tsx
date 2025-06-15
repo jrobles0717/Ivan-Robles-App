@@ -25,6 +25,7 @@ const IvanRoblesShow = () => {
               transform: "scale(1.05)",
               transition: "all 0.3s ease-in-out",
             }}
+            data-aos="fade-up" // AOS animation for the image
           />
         </Box>
 
@@ -37,10 +38,17 @@ const IvanRoblesShow = () => {
             color="#333"
             mb={4}
             textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
+            data-aos="fade-up" // AOS animation for the heading
           >
             The Ivan Robles Show
           </Heading>
-          <Text fontSize="lg" color="#555" mb={6}>
+          <Text
+            fontSize="lg"
+            color="#555"
+            mb={6}
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             Experience the electrifying beats of Ivan Robles at{" "}
             <strong>House Boutique</strong>. Tune in to the ultimate mix show
             featuring the best of house music, live from San Juan, Puerto Rico.
@@ -62,6 +70,9 @@ const IvanRoblesShow = () => {
                 "_blank"
               );
             }}
+            data-aos="fade-up" // AOS animation for the button
+            data-aos-delay="400" // Delay for the button animation
+            data-aos-offset="50" // Trigger animation sooner
           >
             Watch Now
           </Button>

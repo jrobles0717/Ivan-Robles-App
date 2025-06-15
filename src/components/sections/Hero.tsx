@@ -60,10 +60,11 @@ const Hero = () => {
           mb={6}
           borderRadius="full"
           border="2px solid white"
+          data-aos="zoom-in" // Zoom-in animation for the logo
         />
 
         {/* Main Heading with Underline */}
-        <Box mb={4}>
+        <Box mb={4} data-aos="fade-down" data-aos-delay="200">
           <Heading
             as="h1"
             size="4xl"
@@ -91,11 +92,20 @@ const Hero = () => {
             objectFit="contain"
             mt={4}
             mx="auto"
+            data-aos="fade-up" // Fade-up animation for secondary logo
+            data-aos-delay="400"
           />
         </Box>
 
         {/* Subheading */}
-        <Text fontSize="xl" mb={6} maxW="600px" color="white">
+        <Text
+          fontSize="xl"
+          mb={6}
+          maxW="600px"
+          color="white"
+          data-aos="fade-up"
+          data-aos-delay="600"
+        >
           Bringing the beats to Puerto Rico and beyond. Experience the ultimate
           sound and energy at every event.
         </Text>
@@ -117,12 +127,20 @@ const Hero = () => {
               "_blank"
             );
           }}
+          data-aos="zoom-in"
+          data-aos-delay="800" // Delayed zoom-in animation for the button
         >
           Check Out Remixes
         </Button>
 
         {/* Social Links */}
-        <HStack gap={6} mt={8}>
+        <HStack
+          gap={6}
+          mt={8}
+          data-aos="fade-up" // Fade-up animation for social links
+          data-aos-delay="1000" // Delayed animation for smooth appearance
+          data-aos-offset="0" // Trigger animation immediately
+        >
           <SocialLink
             icon={FaFacebook}
             href="https://www.facebook.com/IROBMUSIC"

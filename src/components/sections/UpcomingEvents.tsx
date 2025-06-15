@@ -60,6 +60,7 @@ const UpcomingEvents = () => {
 
   return (
     <Box bg="#2f2626" py={20} px={6}>
+      {/* Title Section */}
       <Box mb={8} textAlign="center">
         <Heading
           as="h2"
@@ -67,6 +68,8 @@ const UpcomingEvents = () => {
           fontWeight="bold"
           color="white"
           textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)"
+          data-aos="fade-up" // AOS animation for the title
+          data-aos-duration="800" // Animation duration
         >
           Upcoming Events
         </Heading>
@@ -77,6 +80,9 @@ const UpcomingEvents = () => {
           display="inline-block"
           mt={2}
           borderRadius="md"
+          data-aos="fade-up" // AOS animation for the underline
+          data-aos-delay="100" // Reduced delay for the underline animation
+          data-aos-duration="800"
         />
       </Box>
 
@@ -88,13 +94,19 @@ const UpcomingEvents = () => {
         maxW="1200px" // Limit the grid width
       >
         {events.slice(0, visibleEvents).map((event, index) => (
-          <EventCard
+          <Box
             key={index}
-            date={event.date}
-            location={event.location}
-            time={event.time}
-            description={event.description}
-          />
+            data-aos="fade-up" // AOS animation for each card
+            data-aos-delay={`${index * 50}`} // Reduced staggered delay for faster rendering
+            data-aos-duration="600" // Reduced animation duration for faster appearance
+          >
+            <EventCard
+              date={event.date}
+              location={event.location}
+              time={event.time}
+              description={event.description}
+            />
+          </Box>
         ))}
       </SimpleGrid>
 
@@ -107,6 +119,9 @@ const UpcomingEvents = () => {
             color="white"
             size="lg"
             _hover={{ bg: "#0077cc" }}
+            data-aos="zoom-in" // AOS animation for the button
+            data-aos-delay="100" // Reduced delay for the button animation
+            data-aos-duration="600" // Reduced animation duration for faster appearance
           >
             Show More
           </Button>

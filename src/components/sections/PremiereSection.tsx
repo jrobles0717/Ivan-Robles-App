@@ -17,7 +17,7 @@ const PremiereSection: React.FC = () => {
     >
       <VStack gap={8} maxW="800px" mx="auto">
         {/* Section Heading */}
-        <Box>
+        <Box data-aos="fade-up" data-aos-duration="800" data-aos-offset="100">
           <Heading
             as="h2"
             size="3xl"
@@ -38,7 +38,15 @@ const PremiereSection: React.FC = () => {
         </Box>
 
         {/* Subtitle */}
-        <Text fontSize="lg" color="gray.300" maxW="600px">
+        <Text
+          fontSize="lg"
+          color="gray.300"
+          maxW="600px"
+          data-aos="fade-up"
+          data-aos-delay="100" // Reduced delay for faster appearance
+          data-aos-duration="800"
+          data-aos-offset="100"
+        >
           Join us for the exclusive premiere of DJ Ivan Robles' latest music
           video. Experience the electrifying beats and visuals live!
         </Text>
@@ -59,11 +67,12 @@ const PremiereSection: React.FC = () => {
           }}
           transition="background-color 0.3s, color 0.3s"
           onClick={() => {
-            window.open(
-              "https://www.youtube.com/@IvanRoblesmusic", // Replace with the actual link
-              "_blank"
-            );
+            window.open("https://www.youtube.com/@IvanRoblesmusic", "_blank");
           }}
+          data-aos="fade-up"
+          data-aos-delay="200" // Reduced delay for faster appearance
+          data-aos-duration="800"
+          data-aos-offset="100"
         >
           Subscribe on YouTube
         </Button>

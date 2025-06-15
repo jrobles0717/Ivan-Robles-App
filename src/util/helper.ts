@@ -1,7 +1,6 @@
 import type { OptionType } from "./types";
 import type { StylesConfig } from "react-select";
 export const customSelectStyles: StylesConfig<OptionType, false> = {
-  // Force the control + menu to be full‐width of its parent
   container: (base) => ({
     ...base,
     width: "100%",

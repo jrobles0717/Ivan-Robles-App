@@ -1,5 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import AOSInitializer from "./components/AOSInitializer";
 import About from "./pages/About";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -11,6 +12,7 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
+      <AOSInitializer />
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >

@@ -164,6 +164,9 @@ const Subscribe = () => {
         bg="black"
         borderRadius="md"
         boxShadow="lg"
+        data-aos="fade-up" // Minimal AOS animation applied to the entire form
+        data-aos-duration="1000" // Animation duration
+        data-aos-once="true" // Ensure the animation runs only once
       >
         {/* Hidden input for Netlify */}
         <input type="hidden" name="form-name" value="subscribe-form" />

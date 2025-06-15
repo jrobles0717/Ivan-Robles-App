@@ -56,7 +56,12 @@ const About = () => {
         mx="auto"
       >
         {/* Heading with Underline */}
-        <Box mb={12}>
+        <Box
+          mb={12}
+          data-aos="fade-up"
+          data-aos-duration="800" // Faster animation
+          data-aos-offset="100" // Trigger earlier
+        >
           <Heading
             as="h1"
             size="3xl"
@@ -84,6 +89,10 @@ const About = () => {
           maxW="800px"
           lineHeight="1.8"
           px={4}
+          data-aos="fade-up"
+          data-aos-duration="800" // Faster animation
+          data-aos-delay="100" // Minimal delay
+          data-aos-offset="100" // Trigger earlier
         >
           Ivan Robles is one of Puerto Rico's most celebrated DJs and producers,
           known for his electrifying performances and passion for house music.
@@ -102,7 +111,12 @@ const About = () => {
           gap={8} // Increased gap for better spacing
           mb={16} // Added margin for spacing
         >
-          <GridItem>
+          <GridItem
+            data-aos="fade-up"
+            data-aos-duration="800" // Faster animation
+            data-aos-delay="200" // Minimal delay
+            data-aos-offset="100" // Trigger earlier
+          >
             <Image
               src="/assets/ivan-robles-about-1.jpg" // Replace with an image of him performing
               alt="Ivan Performing"
@@ -118,7 +132,12 @@ const About = () => {
               }}
             />
           </GridItem>
-          <GridItem>
+          <GridItem
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="300"
+            data-aos-offset="100"
+          >
             <Image
               src="/assets/ivan-robles-about-2.jpg" // Replace with an image of him at a radio show
               alt="Ivan at Radio Show"
@@ -134,7 +153,12 @@ const About = () => {
               }}
             />
           </GridItem>
-          <GridItem>
+          <GridItem
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="400"
+            data-aos-offset="100"
+          >
             <Image
               src="/assets/ivan-robles-about-3.jpg" // Replace with an image of him with the crowd
               alt="Ivan with the Crowd"
@@ -160,11 +184,24 @@ const About = () => {
             textAlign="center"
             px={4}
             lineHeight="1.8"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="500" // Faster delay
+            data-aos-offset="100" // Trigger earlier
           >
             "Music is not just sound; it's an emotion, a connection, and a way
             to bring people together."
           </Text>
-          <Text fontSize="lg" textAlign="center" px={4} lineHeight="1.8">
+          <Text
+            fontSize="lg"
+            textAlign="center"
+            px={4}
+            lineHeight="1.8"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="600" // Faster delay
+            data-aos-offset="100" // Trigger earlier
+          >
             Whether he's performing at a packed club, hosting a radio show, or
             producing his next hit track, Ivan Robles continues to push the
             boundaries of electronic music and inspire the next generation of

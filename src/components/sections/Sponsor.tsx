@@ -9,7 +9,11 @@ const Sponsor = () => {
       textAlign="center"
     >
       {/* Title */}
-      <Box mb={6}>
+      <Box
+        mb={6}
+        data-aos="fade-up" // AOS animation for fade-up effect
+        data-aos-duration="1000" // Duration of the animation
+      >
         <Text
           fontSize="3xl"
           fontWeight="bold"
@@ -37,13 +41,16 @@ const Sponsor = () => {
         p={6}
         borderRadius="lg"
         shadow="2xl"
+        transition="transform 0.3s ease-in-out" // Smooth transition for hover effect
         _hover={{
-          transform: "scale(1.1)",
-          transition: "all 0.3s ease-in-out",
+          transform: "scale(1.1)", // Scale up on hover
         }}
+        data-aos="fade-up" // AOS animation for fade-up effect
+        data-aos-duration="1000" // Duration of the animation
+        data-aos-delay="200" // Delay for the animation
       >
         <Image
-          src="/assets/PioneerDJ.jpeg"
+          src="/assets/PioneerDJ.jpeg" // Example sponsor logo
           alt="Pioneer DJ"
           objectFit="contain"
           height="100px"

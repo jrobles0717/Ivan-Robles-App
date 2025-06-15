@@ -1,6 +1,6 @@
 import { Box, Button, Heading, SimpleGrid } from "@chakra-ui/react";
 
-import YouTubeVideo from "../YouTubeVideo";
+import YouTubeVideo from "../YouTubeVideo"; // Updated YouTubeVideo component
 import { useState } from "react";
 
 const FeaturedMusic = () => {
@@ -21,7 +21,7 @@ const FeaturedMusic = () => {
 
   // Function to show more videos
   const showMoreVideos = () => {
-    setVisibleVideos((prev) => prev + 4); // Show 4 more videos each time
+    setVisibleVideos((prev) => Math.min(prev + 4, videos.length)); // Show 4 more videos each time
   };
 
   return (
@@ -33,6 +33,8 @@ const FeaturedMusic = () => {
           fontWeight="bold"
           color="white"
           textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)"
+          data-aos="fade-up" // AOS animation for fade-up effect
+          data-aos-duration="500" // Duration of the animation
         >
           Featured Music
         </Heading>
@@ -49,7 +51,14 @@ const FeaturedMusic = () => {
       {/* Grid Layout for Videos */}
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
         {videos.slice(0, visibleVideos).map((videoId, index) => (
-          <YouTubeVideo key={index} videoId={videoId} />
+          <Box
+            key={videoId}
+            data-aos="fade-up" // AOS animation for fade-up effect
+            data-aos-delay={`${index * 100}`} // Delay based on index
+            data-aos-duration="500" // Duration of the animation
+          >
+            <YouTubeVideo videoId={videoId} />
+          </Box>
         ))}
       </SimpleGrid>
 
