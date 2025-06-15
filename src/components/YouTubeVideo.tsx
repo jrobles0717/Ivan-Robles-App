@@ -1,6 +1,6 @@
 import { Box, Spinner } from "@chakra-ui/react";
-import React, { useState } from "react";
 
+import React from "react";
 import { useInView } from "react-intersection-observer";
 
 interface YouTubeVideoProps {
@@ -8,7 +8,6 @@ interface YouTubeVideoProps {
 }
 
 const YouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoId }) => {
-  const [isLoaded, setIsLoaded] = useState(false); // Track if the iframe is loaded
   const { ref, inView } = useInView({
     triggerOnce: true, // Trigger only once when the video comes into view
     threshold: 0.1, // Trigger when 10% of the video is visible
@@ -35,7 +34,6 @@ const YouTubeVideo: React.FC<YouTubeVideoProps> = ({ videoId }) => {
           style={{
             border: 0,
           }}
-          onLoad={() => setIsLoaded(true)} // Set iframe as loaded
         />
       ) : (
         <Box
