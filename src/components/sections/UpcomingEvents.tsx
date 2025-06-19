@@ -6,16 +6,6 @@ import { useState } from "react";
 const UpcomingEvents = () => {
   // Event data
   const events = [
-    {
-      date: "June 13, 2025",
-      location: "Ocean Lab @ San Patricio",
-      time: "9 PM",
-    },
-    {
-      date: "June 14, 2025",
-      location: "Gala Museo de Arte de PR @ Sheraton Convention Center",
-    },
-    { date: "June 14, 2025", location: "Vivo Beach Club" },
     { date: "June 20 & 21, 2025", location: "Mida Convention" },
     { date: "June 21, 2025", location: "FOK Cervecera", time: "8 PM" },
     {
