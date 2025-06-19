@@ -6,7 +6,12 @@ import { useState } from "react";
 const UpcomingEvents = () => {
   // Event data
   const events = [
-    { date: "June 20 & 21, 2025", location: "Mida Convention" },
+    {
+      date: "June 20 & 21, 2025",
+      location: "Convention Center",
+      time: "12 PM - 4 PM",
+      description: "B-Media booth",
+    },
     { date: "June 21, 2025", location: "FOK Cervecera", time: "8 PM" },
     {
       date: "June 21, 2025",
