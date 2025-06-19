@@ -5,12 +5,16 @@ import IvanRoblesShow from "../components/sections/IvanRoblesShow";
 import PremiereSection from "../components/sections/PremiereSection";
 import Sponsor from "../components/sections/Sponsor";
 import UpcomingEvents from "../components/sections/UpcomingEvents";
+import VideoSection from "../components/sections/VideoSection";
 
 const Home = () => {
   return (
     <Box>
       {/* Hero Section with Background Image */}
       <Hero />
+
+      {/* Video Section */}
+      <VideoSection />
 
       {/* Premiere Video Section */}
       <PremiereSection />
