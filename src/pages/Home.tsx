@@ -2,10 +2,10 @@ import { Box } from "@chakra-ui/react";
 import FeaturedMusic from "../components/sections/FeaturedMusic";
 import Hero from "../components/sections/Hero";
 import IvanRoblesShow from "../components/sections/IvanRoblesShow";
+import PartyHighlights from "../components/sections/PartyHighlights";
 import PremiereSection from "../components/sections/PremiereSection";
 import Sponsor from "../components/sections/Sponsor";
 import UpcomingEvents from "../components/sections/UpcomingEvents";
-import VideoSection from "../components/sections/VideoSection";
 
 const Home = () => {
   return (
@@ -13,8 +13,8 @@ const Home = () => {
       {/* Hero Section with Background Image */}
       <Hero />
 
-      {/* Video Section */}
-      <VideoSection />
+      {/* Event Videos Section */}
+      <PartyHighlights />
 
       {/* Premiere Video Section */}
       <PremiereSection />

@@ -7,20 +7,6 @@ const UpcomingEvents = () => {
   // Event data
   const events = [
     {
-      date: "June 20 & 21, 2025",
-      location: "Convention Center",
-      time: "12 PM - 4 PM",
-      description: "B-Media booth",
-    },
-    { date: "June 21, 2025", location: "FOK Cervecera", time: "8 PM" },
-    {
-      date: "June 21, 2025",
-      location: "Ocean Lab @ San Patricio",
-      time: "9 PM",
-    },
-    { date: "June 21, 2025", location: "San Juan Hotel", time: "10 PM" },
-    { date: "June 22, 2025", location: "Tryst Hotel" },
-    {
       date: "June 27, 2025",
       location: "Ocean Lab @ San Patricio",
       time: "9 PM",
