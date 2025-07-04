@@ -7,13 +7,6 @@ const UpcomingEvents = () => {
   // Event data
   const events = [
     {
-      date: "June 27, 2025",
-      location: "Ocean Lab @ San Patricio",
-      time: "9 PM",
-    },
-    { date: "June 28, 2025", location: "Tamboo Rincon", time: "6 PM" },
-    { date: "June 29, 2025", location: "El San Juan Beach Club", time: "1 PM" },
-    {
       date: "Every Friday, July 2025",
       location: "Ocean Lab @ San Patricio",
       time: "9 PM",
