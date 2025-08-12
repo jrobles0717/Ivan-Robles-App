@@ -132,7 +132,7 @@ const Hero = () => {
           data-aos="zoom-in"
           data-aos-delay="800"
         >
-          New Music
+          New Releases
         </Button>
 
         {/* Social Links */}
