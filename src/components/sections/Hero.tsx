@@ -6,12 +6,15 @@ import {
   Heading,
   Image,
   Text,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import {
   FaEnvelope,
   FaFacebook,
   FaInstagram,
   FaMixcloud,
+  FaSpotify,
   FaTiktok,
   FaTwitch,
   FaYoutube,
@@ -112,71 +115,93 @@ const Hero = () => {
 
         {/* Call-to-Action Button */}
         <Button
-          bg="#0026b9" // Branding dark blue
+          bg="#0026b9"
           color="white"
           size="lg"
           px={8}
           _hover={{
-            bg: "#00aaff", // Light blue bg on hover
-            color: "#000000", // Pure black text for max contrast
+            bg: "#00aaff",
+            color: "#000000",
           }}
           transition="background-color 0.3s, color 0.3s"
           onClick={() => {
             window.open(
-              "https://www.youtube.com/@IvanRoblesmusic/videos",
+              "https://open.spotify.com/track/3DwK3o3gbPrCCLuyAaRsT1?si=IdTam0YATdiEAC8sqonIMQ",
               "_blank"
             );
           }}
           data-aos="zoom-in"
-          data-aos-delay="800" // Delayed zoom-in animation for the button
+          data-aos-delay="800"
         >
-          Check Out Remixes
+          New Music
         </Button>
 
         {/* Social Links */}
-        <HStack
+        <Wrap
           gap={6}
           mt={8}
-          data-aos="fade-up" // Fade-up animation for social links
-          data-aos-delay="1000" // Delayed animation for smooth appearance
-          data-aos-offset="0" // Trigger animation immediately
+          justify="center"
+          data-aos="fade-up"
+          data-aos-delay="1000"
+          data-aos-offset="0"
         >
-          <SocialLink
-            icon={FaFacebook}
-            href="https://www.facebook.com/IROBMUSIC"
-            label="Facebook"
-          />
-          <SocialLink
-            icon={FaInstagram}
-            href="https://instagram.com/djivanrobles"
-            label="Instagram"
-          />
-          <SocialLink
-            icon={FaTiktok}
-            href="https://www.tiktok.com/@ivanroblesmusic"
-            label="TikTok"
-          />
-          <SocialLink
-            icon={FaYoutube}
-            href="https://youtube.com/c/ivanroblesmusic"
-            label="YouTube"
-          />
-          <SocialLink
-            icon={FaTwitch}
-            href="https://www.twitch.com/djivanrobles"
-            label="Twitch"
-          />
-          <SocialLink
-            icon={FaMixcloud}
-            href="https://www.mixcloud.com/ivanrobles"
-            label="Mixcloud"
-          />
-          <SocialLink
-            icon={FaEnvelope}
-            href="mailto:ivan@ivanroblesmusic.com"
-            label="Email"
-          />
-        </HStack>
+          <WrapItem>
+            <SocialLink
+              icon={FaFacebook}
+              href="https://www.facebook.com/IROBMUSIC"
+              label="Facebook"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaInstagram}
+              href="https://instagram.com/djivanrobles"
+              label="Instagram"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaTiktok}
+              href="https://www.tiktok.com/@ivanroblesmusic"
+              label="TikTok"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaYoutube}
+              href="https://youtube.com/c/ivanroblesmusic"
+              label="YouTube"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaTwitch}
+              href="https://www.twitch.com/djivanrobles"
+              label="Twitch"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaMixcloud}
+              href="https://www.mixcloud.com/ivanrobles"
+              label="Mixcloud"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaSpotify}
+              href="https://open.spotify.com/artist/08J3Z1fG0FL98AkVqiRBMn"
+              label="Spotify"
+            />
+          </WrapItem>
+          <WrapItem>
+            <SocialLink
+              icon={FaEnvelope}
+              href="mailto:ivan@ivanroblesmusic.com"
+              label="Email"
+            />
+          </WrapItem>
+        </Wrap>
       </Flex>
     </Box>
   );
