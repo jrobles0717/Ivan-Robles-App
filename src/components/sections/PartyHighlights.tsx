@@ -6,9 +6,9 @@ const PartyHighlights = () => {
   // List of local video files with thumbnails
   const videos = [
     {
-      src: "/assets/irob-playa-video.mp4",
+      src: "/assets/Fiesta-en-la-playa-II-2025.mp4",
       title: "Fiesta En La Playa II",
-      thumbnail: "/assets/irob-playa-2-thumbnail.jpeg", // Add your thumbnail image path
+      thumbnail: "/assets/irob-playa-2-thumbnail.jpeg",
     },
     {
       title: "Fiesta En La Playa I",

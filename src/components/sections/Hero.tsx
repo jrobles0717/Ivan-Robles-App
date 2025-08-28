@@ -125,7 +125,7 @@ const Hero = () => {
           transition="background-color 0.3s, color 0.3s"
           onClick={() => {
             window.open(
-              "https://open.spotify.com/track/3DwK3o3gbPrCCLuyAaRsT1?si=IdTam0YATdiEAC8sqonIMQ",
+              "https://open.spotify.com/track/5Ke7hKpBo4IEsGYIz3MQ6T?si=7UKNg6ATQAaHF-DwDhJqdQ&context=spotify%3Aalbum%3A6wu3gVIIDQnCIgCiFKPh4K",
               "_blank"
             );
           }}
