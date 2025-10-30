@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import FeaturedMusic from "../components/sections/FeaturedMusic";
 import Hero from "../components/sections/Hero";
 import IvanRoblesShow from "../components/sections/IvanRoblesShow";
+// import NewSongs from "../components/sections/newSongs";
 import PartyHighlights from "../components/sections/PartyHighlights";
 import PremiereSection from "../components/sections/PremiereSection";
 import Sponsor from "../components/sections/Sponsor";
@@ -12,6 +13,9 @@ const Home = () => {
     <Box>
       {/* Hero Section with Background Image */}
       <Hero />
+
+      {/* New Songs Section */}
+      {/* <NewSongs /> */}
 
       {/* Event Videos Section */}
       <PartyHighlights />

@@ -7,21 +7,22 @@ const UpcomingEvents = () => {
   // Event data
   const events = [
     {
-      date: "Every Friday, July 2025",
+      date: "Every Friday 2025",
       location: "Ocean Lab @ San Patricio",
       time: "9 PM",
     },
     {
-      date: "July 25, 2025",
-      location: "La Parguera",
-      description: "Class Reunion",
+      date: "November 25, 2025",
+      location: "Thanksgiving Party @ Caribe Hilton",
+      description: "First Christmas Event 2025 - Free entrance",
+      time: "8 PM",
     },
     {
-      date: "August 24, 2025",
-      location: "Fiesta en La Playa @ Caribe Hilton",
-      time: "1 PM",
+      date: "Every Friday 2025",
+      location: "Beach Party @ Vivo Beach Club",
+      description: "Members Only",
+      time: "12 - 5 PM",
     },
-    { date: "September 2025", location: "Ibiza, Spain" },
   ];
 
   // State to manage how many events to show
