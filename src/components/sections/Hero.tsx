@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa";
 
 import SocialLink from "../SocialLink";
-import irobLogo from "/assets/IROB-Logo-white.MP4";
+import irobLogo from "/assets/IROB-Logo-white.mp4";
 
 // import irobLogo from "/assets/IROB-Logo-Dynamic.GIF";
 
@@ -99,21 +99,24 @@ const Hero = () => {
             data-aos="fade-up"
             data-aos-delay="400"
           /> */}
-          <Box
-            as="video"
+          <video
             autoPlay
             loop
             muted
             playsInline
-            width="250px"
-            objectFit="contain"
-            mt={4}
-            mx="auto"
+            style={{
+              width: "250px",
+              objectFit: "contain",
+              marginTop: "1rem",
+              marginLeft: "auto",
+              marginRight: "auto",
+              display: "block",
+            }}
             data-aos="fade-up"
             data-aos-delay="400"
           >
             <source src={irobLogo} type="video/mp4" />
-          </Box>
+          </video>
         </Box>
 
         {/* Subheading */}
