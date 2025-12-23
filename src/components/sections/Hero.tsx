@@ -20,9 +20,6 @@ import {
 } from "react-icons/fa";
 
 import SocialLink from "../SocialLink";
-import irobLogo from "/assets/IROB-Logo-white.mp4";
-
-// import irobLogo from "/assets/IROB-Logo-Dynamic.GIF";
 
 const Hero = () => {
   return (
@@ -89,16 +86,6 @@ const Hero = () => {
             borderRadius="md"
           />
           {/* Logo Below Heading */}
-          {/* <Image
-            src={irobLogo}
-            alt="Ivan Robles Logo"
-            width="250px"
-            objectFit="contain"
-            mt={4}
-            mx="auto"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          /> */}
           <video
             autoPlay
             loop
@@ -115,7 +102,7 @@ const Hero = () => {
             data-aos="fade-up"
             data-aos-delay="400"
           >
-            <source src={irobLogo} type="video/mp4" />
+            <source src="/assets/IROB-Logo-white.mp4" type="video/mp4" />
           </video>
         </Box>
 
