@@ -6,9 +6,9 @@ const PartyHighlights = () => {
   // List of local video files with thumbnails
   const videos = [
     {
-      src: "/assets/thanksgiving-party-video-2025.mp4",
-      title: "Thanksgiving Party 2025",
-      thumbnail: "/assets/thanksgiving-party-2025.JPEG",
+      src: "/assets/Recap-2025.MOV",
+      title: "Recap 2025",
+      thumbnail: "/assets/Recap-2025-thumbnail.png",
     },
     {
       src: "/assets/Fiesta-en-la-playa-II-2025.mp4",
