@@ -102,7 +102,7 @@ const Hero = () => {
             data-aos="fade-up"
             data-aos-delay="400"
           >
-            <source src="/assets/IROB-Logo-white.mp4" type="video/mp4" />
+            <source src="/assets/IROB-Logo.mp4" type="video/mp4" />
           </video>
         </Box>
 
