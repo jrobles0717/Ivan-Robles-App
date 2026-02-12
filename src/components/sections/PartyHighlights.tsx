@@ -6,6 +6,11 @@ const PartyHighlights = () => {
   // List of local video files with thumbnails
   const videos = [
     {
+      src: "/assets/Love-beats-trailer-2026.mp4",
+      title: "Love Beats 2026",
+      thumbnail: "/assets/Love-beats-trailer-2026-thumbnail.jpeg",
+    },
+    {
       src: "/assets/Recap-2025.MOV",
       title: "Recap 2025",
       thumbnail: "/assets/Recap-2025-thumbnail.png",
