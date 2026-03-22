@@ -13,9 +13,9 @@ import { useState } from "react";
 const PartyHighlights = () => {
   const videos = [
     {
-      src: "/assets/April-18-2026-party-video.mp4",
+      src: "/assets/April-18-2026-party-video.MOV",
       title: "The Return 2026",
-      thumbnail: "/assets/April-18-2026-party.jpeg",
+      thumbnail: "/assets/April-18-2026-party.JPG",
     },
     {
       src: "/assets/Love-beats-trailer-2026.mp4",

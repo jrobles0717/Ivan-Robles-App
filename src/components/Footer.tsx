@@ -178,7 +178,7 @@ const Footer = () => {
                 }}
                 transition="all 0.3s ease"
               >
-                <Icon as={HiOutlineBell} />
+                <Icon as={HiOutlineBell} boxSize={5} flexShrink={0} />
                 Subscribe
               </ChakraRouterLink>
 
