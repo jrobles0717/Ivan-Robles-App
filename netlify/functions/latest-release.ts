@@ -64,10 +64,11 @@ function redirect(location: string): NetlifyResponse {
 
 export const handler = async (): Promise<NetlifyResponse> => {
   try {
-    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID || "";
-    const clientSecret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET || "";
+    const clientId = process.env.SPOTIFY_CLIENT_ID || "";
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET || "";
 
     if (!clientId || !clientSecret) {
+      console.error("Missing Spotify environment variables.");
       return {
         statusCode: 500,
         body: "Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET.",
@@ -89,6 +90,8 @@ export const handler = async (): Promise<NetlifyResponse> => {
     });
 
     if (!tokenRes.ok) {
+      const errorText = await tokenRes.text();
+      console.error("Spotify token request failed:", errorText);
       return redirect(ARTIST_FALLBACK_URL);
     }
 
@@ -99,6 +102,7 @@ export const handler = async (): Promise<NetlifyResponse> => {
     const accessToken = tokenData?.access_token;
 
     if (!accessToken) {
+      console.error("No Spotify access token returned.");
       return redirect(ARTIST_FALLBACK_URL);
     }
 
@@ -113,6 +117,8 @@ export const handler = async (): Promise<NetlifyResponse> => {
     );
 
     if (!releasesRes.ok) {
+      const errorText = await releasesRes.text();
+      console.error("Spotify releases request failed:", errorText);
       return redirect(ARTIST_FALLBACK_URL);
     }
 
@@ -128,6 +134,7 @@ export const handler = async (): Promise<NetlifyResponse> => {
     );
 
     if (!uniqueReleases.length) {
+      console.error("No releases found for artist.");
       return redirect(ARTIST_FALLBACK_URL);
     }
 
@@ -140,6 +147,14 @@ export const handler = async (): Promise<NetlifyResponse> => {
     });
 
     const latestRelease = uniqueReleases[0];
+
+    console.log("Latest Spotify release found:", {
+      id: latestRelease.id,
+      name: latestRelease.name,
+      album_type: latestRelease.album_type,
+      release_date: latestRelease.release_date,
+      total_tracks: latestRelease.total_tracks,
+    });
 
     // 4) Default: go to album
     let redirectUrl = `https://open.spotify.com/album/${latestRelease.id}`;
@@ -168,8 +183,13 @@ export const handler = async (): Promise<NetlifyResponse> => {
         if (firstTrackId) {
           redirectUrl = `https://open.spotify.com/track/${firstTrackId}`;
         }
+      } else {
+        const errorText = await albumRes.text();
+        console.error("Spotify album details request failed:", errorText);
       }
     }
+
+    console.log("Redirecting to:", redirectUrl);
 
     return redirect(redirectUrl);
   } catch (error) {
