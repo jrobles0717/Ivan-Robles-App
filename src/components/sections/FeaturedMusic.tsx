@@ -1,81 +1,319 @@
-import { Box, Button, Heading, SimpleGrid } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  HStack,
+  Heading,
+  SimpleGrid,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 
-import YouTubeVideo from "../YouTubeVideo"; // Updated YouTubeVideo component
+import YouTubeVideo from "../YouTubeVideo";
 import { useState } from "react";
 
 const FeaturedMusic = () => {
-  // List of YouTube video IDs
   const videos = [
-    "VD1bnxRvLjM",
-    "Ey59V0IVNfg",
-    "Xx2RksffUtg",
-    "PWzr9guQQuQ",
-    "SFFXDiZWbJ0",
-    "bX023by-zig",
-    "zL6weacPPJU",
-    "GckhNkkz9ik",
+    {
+      id: "VD1bnxRvLjM",
+      title: "HOUSE MUSIC TO THE WORLD 24/7",
+      type: "Official Video",
+    },
+    {
+      id: "Ey59V0IVNfg",
+      title: "FIESTA EN LA PLAYA @ CARIBE HILTON HOTEL",
+      type: "Music Release",
+    },
+    {
+      id: "Xx2RksffUtg",
+      title: "SPANISH HOUSE",
+      type: "YouTube Exclusive",
+    },
+    {
+      id: "PWzr9guQQuQ",
+      title: "PURE IBIZA RADIO DEEP TECH HOUSE LIVE SET/IBIZA 2024",
+      type: "Official Video",
+    },
+    {
+      id: "SFFXDiZWbJ0",
+      title: "DEEP SEXY/MINIMAL HOUSE/PROGRESSIVE HOUSE",
+      type: "Music Release",
+    },
+    {
+      id: "bX023by-zig",
+      title: "OVERDRIVE 08",
+      type: "YouTube Exclusive",
+    },
+    {
+      id: "zL6weacPPJU",
+      title: "BRAZILLIAN & AFRO HOUSE @ ARUBA CARIBBEAN ISLAND",
+      type: "Official Video",
+    },
+    {
+      id: "GckhNkkz9ik",
+      title: "ES VEDRA - IBIZA-SPAIN",
+      type: "Music Release",
+    },
   ];
 
-  // State to manage how many videos to show
   const [visibleVideos, setVisibleVideos] = useState(4);
 
-  // Function to show more videos
   const showMoreVideos = () => {
-    setVisibleVideos((prev) => Math.min(prev + 4, videos.length)); // Show 4 more videos each time
+    setVisibleVideos((prev) => Math.min(prev + 4, videos.length));
   };
 
   return (
-    <Box bg="#1a1a1a" py={20} px={6}>
-      <Box mb={8} textAlign="center">
-        <Heading
-          as="h2"
-          size="4xl" // Same size as main title
-          fontWeight="bold"
-          color="white"
-          textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)"
-          data-aos="fade-up" // AOS animation for fade-up effect
-          data-aos-duration="500" // Duration of the animation
+    <Box
+      as="section"
+      position="relative"
+      overflow="hidden"
+      bg="linear-gradient(180deg, #09111a 0%, #0c1520 42%, #101214 100%)"
+      py={{ base: 16, md: 20 }}
+      px={{ base: 5, md: 8 }}
+      color="white"
+    >
+      {/* Decorative glows */}
+      <Box
+        position="absolute"
+        top="-100px"
+        left="-80px"
+        width={{ base: "220px", md: "320px" }}
+        height={{ base: "220px", md: "320px" }}
+        borderRadius="full"
+        bg="rgba(0, 170, 255, 0.12)"
+        filter="blur(90px)"
+        pointerEvents="none"
+      />
+      <Box
+        position="absolute"
+        bottom="-120px"
+        right="-100px"
+        width={{ base: "240px", md: "360px" }}
+        height={{ base: "240px", md: "360px" }}
+        borderRadius="full"
+        bg="rgba(0, 38, 185, 0.10)"
+        filter="blur(100px)"
+        pointerEvents="none"
+      />
+
+      <Box maxW="1380px" mx="auto" position="relative" zIndex={1}>
+        {/* Header */}
+        <Stack
+          gap={6}
+          align="center"
+          textAlign="center"
+          mb={{ base: 10, md: 12 }}
         >
-          Featured Music
-        </Heading>
-        <Box
-          height="4px"
-          width="80%"
-          bg="#00aaff" // Branding light blue
-          display="inline-block"
-          mt={2}
-          borderRadius="md"
-        />
-      </Box>
-
-      {/* Grid Layout for Videos */}
-      <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
-        {videos.slice(0, visibleVideos).map((videoId, index) => (
-          <Box
-            key={videoId}
-            data-aos="fade-up" // AOS animation for fade-up effect
-            data-aos-delay={`${index * 100}`} // Delay based on index
-            data-aos-duration="500" // Duration of the animation
+          <Badge
+            px={4}
+            py={1.5}
+            borderRadius="full"
+            bg="rgba(255,255,255,0.06)"
+            color="#66d9ff"
+            border="1px solid rgba(102, 217, 255, 0.24)"
+            backdropFilter="blur(8px)"
+            fontSize="0.78rem"
+            letterSpacing="0.08em"
+            textTransform="uppercase"
+            data-aos="fade-up"
           >
-            <YouTubeVideo videoId={videoId} />
+            Featured Releases
+          </Badge>
+
+          <Box data-aos="fade-up" data-aos-delay="100">
+            <Heading
+              as="h2"
+              fontWeight="extrabold"
+              lineHeight={{ base: "1.08", md: "1.02" }}
+              fontSize={{ base: "2.5rem", md: "3.7rem", xl: "4.2rem" }}
+              textShadow="2px 4px 18px rgba(0, 0, 0, 0.35)"
+            >
+              Featured Music
+            </Heading>
+
+            <Box
+              mt={3}
+              height="4px"
+              width={{ base: "190px", md: "250px" }}
+              borderRadius="full"
+              bg="linear-gradient(90deg, #00aaff 0%, #66d9ff 100%)"
+              mx="auto"
+            />
           </Box>
-        ))}
-      </SimpleGrid>
 
-      {/* Show More Button */}
-      {visibleVideos < videos.length && (
-        <Box textAlign="center" mt={8}>
-          <Button
-            onClick={showMoreVideos}
-            bg="#00aaff"
-            color="white"
-            size="lg"
-            _hover={{ bg: "#0077cc" }}
+          <Text
+            fontSize={{ base: "md", md: "lg" }}
+            color="gray.300"
+            maxW="760px"
+            lineHeight="1.85"
+            data-aos="fade-up"
+            data-aos-delay="180"
           >
-            Show More
-          </Button>
-        </Box>
-      )}
+            Explore a selection of official videos, featured releases, and
+            standout tracks from Ivan Robles. A curated collection of music,
+            rhythm, and signature sound designed to keep the energy alive.
+          </Text>
+
+          <HStack
+            gap={3}
+            flexWrap="wrap"
+            justify="center"
+            data-aos="fade-up"
+            data-aos-delay="260"
+          >
+            <Badge
+              px={3}
+              py={1.5}
+              borderRadius="full"
+              bg="whiteAlpha.100"
+              color="white"
+              fontWeight="medium"
+            >
+              Official Videos
+            </Badge>
+            <Badge
+              px={3}
+              py={1.5}
+              borderRadius="full"
+              bg="whiteAlpha.100"
+              color="white"
+              fontWeight="medium"
+            >
+              Featured Tracks
+            </Badge>
+            <Badge
+              px={3}
+              py={1.5}
+              borderRadius="full"
+              bg="whiteAlpha.100"
+              color="white"
+              fontWeight="medium"
+            >
+              YouTube Music
+            </Badge>
+          </HStack>
+        </Stack>
+
+        {/* Featured music grid */}
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
+          {videos.slice(0, visibleVideos).map((video, index) => (
+            <Box
+              key={video.id}
+              data-aos="fade-up"
+              data-aos-delay={`${index * 100}`}
+              data-aos-duration="500"
+            >
+              <Box
+                position="relative"
+                borderRadius="28px"
+                overflow="hidden"
+                bg="rgba(255,255,255,0.05)"
+                border="1px solid rgba(255,255,255,0.10)"
+                backdropFilter="blur(14px)"
+                boxShadow="0 20px 60px rgba(0,0,0,0.35)"
+                transition="all 0.3s ease"
+                _hover={{
+                  transform: "translateY(-6px)",
+                  borderColor: "rgba(102, 217, 255, 0.20)",
+                  boxShadow: "0 24px 60px rgba(0, 170, 255, 0.12)",
+                }}
+              >
+                {/* Top bar */}
+                <Box
+                  px={{ base: 4, md: 5 }}
+                  py={4}
+                  borderBottom="1px solid rgba(255,255,255,0.08)"
+                  bg="rgba(255,255,255,0.03)"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  flexWrap="wrap"
+                  gap={3}
+                >
+                  <HStack gap={3}>
+                    <Box
+                      width="10px"
+                      height="10px"
+                      borderRadius="full"
+                      bg="#00aaff"
+                      boxShadow="0 0 14px rgba(0,170,255,0.8)"
+                    />
+                    <Text
+                      fontSize="sm"
+                      color="#66d9ff"
+                      fontWeight="bold"
+                      letterSpacing="0.08em"
+                      textTransform="uppercase"
+                    >
+                      Release {String(index + 1).padStart(2, "0")}
+                    </Text>
+                  </HStack>
+
+                  <Badge
+                    px={3}
+                    py={1}
+                    borderRadius="full"
+                    bg="rgba(0,170,255,0.14)"
+                    color="#66d9ff"
+                    border="1px solid rgba(102,217,255,0.24)"
+                  >
+                    {video.type}
+                  </Badge>
+                </Box>
+
+                {/* Video */}
+                <Box p={{ base: 4, md: 5 }}>
+                  <Box
+                    borderRadius="20px"
+                    overflow="hidden"
+                    boxShadow="0 12px 30px rgba(0,0,0,0.28)"
+                  >
+                    <YouTubeVideo videoId={video.id} />
+                  </Box>
+
+                  <Stack gap={2} mt={4}>
+                    <Text
+                      color="white"
+                      fontWeight="bold"
+                      fontSize={{ base: "lg", md: "xl" }}
+                    >
+                      {video.title}
+                    </Text>
+                    <Text color="gray.400" fontSize="sm" lineHeight="1.7">
+                      A featured selection from the Ivan Robles catalog,
+                      showcasing sound, rhythm, and visual identity across the
+                      latest releases.
+                    </Text>
+                  </Stack>
+                </Box>
+              </Box>
+            </Box>
+          ))}
+        </SimpleGrid>
+
+        {/* Bottom CTA */}
+        {visibleVideos < videos.length && (
+          <Box textAlign="center" mt={{ base: 10, md: 12 }}>
+            <Button
+              onClick={showMoreVideos}
+              bg="#00aaff"
+              color="white"
+              size="lg"
+              px={8}
+              borderRadius="full"
+              boxShadow="0 10px 28px rgba(0, 170, 255, 0.28)"
+              _hover={{
+                bg: "#008ecc",
+                transform: "translateY(-2px)",
+                boxShadow: "0 14px 34px rgba(0, 170, 255, 0.35)",
+              }}
+              transition="all 0.3s ease"
+            >
+              Show More Music
+            </Button>
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };

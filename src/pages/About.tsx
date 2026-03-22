@@ -1,214 +1,656 @@
 import {
+  Badge,
   Box,
-  Flex,
   Grid,
   GridItem,
+  HStack,
   Heading,
   Image,
+  SimpleGrid,
+  Stack,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 
 const About = () => {
+  const milestones = [
+    {
+      year: "2009",
+      title: "The Beginning",
+      description:
+        "Ivan Robles began shaping his identity in the local scene, developing a sound rooted in groove, movement, and crowd connection.",
+    },
+    {
+      year: "2015",
+      title: "Growing Presence",
+      description:
+        "From clubs and radio to larger venues, his performances earned recognition for their consistency, energy, and atmosphere.",
+    },
+    {
+      year: "Today",
+      title: "Signature Experience",
+      description:
+        "Known for high-impact sets, house-driven rhythm, and unforgettable nights that connect music, emotion, and live performance.",
+    },
+  ];
+
+  const stats = [
+    { label: "Experience", value: "15+ Years" },
+    { label: "Base", value: "Puerto Rico" },
+    { label: "Focus", value: "House Music" },
+    { label: "Energy", value: "Live Experience" },
+  ];
+
   return (
     <Box
+      as="section"
       position="relative"
-      py={16} // Increased padding for breathing room
-      px={8}
-      bg="#1a1a1a" // Dark background for contrast
-      color="white"
       overflow="hidden"
+      bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f1012 100%)"
+      color="white"
+      py={{ base: 16, md: 20 }}
+      px={{ base: 5, md: 8 }}
     >
-      {/* Background Image */}
-      <Image
-        src="/assets/dj-background.jpg" // Replace with your background image
-        alt="DJ Performance"
-        position="absolute"
-        top="0"
-        left="0"
-        width="100%"
-        height="100%"
-        objectFit="cover"
-        zIndex="0"
-        opacity="0.2" // Slightly transparent for overlay effect
-      />
-
-      {/* Overlay for better text visibility */}
+      {/* Background image */}
       <Box
         position="absolute"
-        top="0"
-        left="0"
-        width="100%"
-        height="100%"
-        bg="rgba(0, 0, 0, 0.6)" // Dark overlay
-        zIndex="1"
+        inset={0}
+        backgroundImage="url('/assets/dj-background.jpg')"
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        opacity={0.1}
       />
 
-      {/* Main Content */}
-      <Flex
-        direction="column"
-        justify="center"
-        align="center"
-        zIndex="2"
-        position="relative"
-        textAlign="center"
-        maxW="1200px"
-        mx="auto"
-      >
-        {/* Heading with Underline */}
-        <Box
-          mb={12}
-          data-aos="fade-up"
-          data-aos-duration="800" // Faster animation
-          data-aos-offset="100" // Trigger earlier
+      {/* Overlay */}
+      <Box
+        position="absolute"
+        inset={0}
+        bg="linear-gradient(180deg, rgba(7,13,22,0.90) 0%, rgba(8,14,24,0.95) 50%, rgba(10,10,12,0.97) 100%)"
+        zIndex={1}
+      />
+
+      {/* Decorative glows */}
+      <Box
+        position="absolute"
+        top="-100px"
+        left="-80px"
+        width={{ base: "220px", md: "320px" }}
+        height={{ base: "220px", md: "320px" }}
+        borderRadius="full"
+        bg="rgba(0, 170, 255, 0.12)"
+        filter="blur(90px)"
+        zIndex={1}
+        pointerEvents="none"
+      />
+      <Box
+        position="absolute"
+        bottom="-120px"
+        right="-100px"
+        width={{ base: "240px", md: "360px" }}
+        height={{ base: "240px", md: "360px" }}
+        borderRadius="full"
+        bg="rgba(0, 38, 185, 0.12)"
+        filter="blur(100px)"
+        zIndex={1}
+        pointerEvents="none"
+      />
+
+      <Box maxW="1380px" mx="auto" position="relative" zIndex={2}>
+        {/* Header */}
+        <Stack
+          gap={6}
+          align="center"
+          textAlign="center"
+          mb={{ base: 10, md: 14 }}
         >
-          <Heading
-            as="h1"
-            size="3xl"
-            fontWeight="bold"
+          <Badge
+            px={4}
+            py={1.5}
+            borderRadius="full"
+            bg="rgba(255,255,255,0.06)"
+            color="#66d9ff"
+            border="1px solid rgba(102, 217, 255, 0.24)"
+            fontSize="0.78rem"
+            letterSpacing="0.08em"
             textTransform="uppercase"
-            color="white" // Consistent white color
-            textShadow="2px 2px 4px rgba(0, 0, 0, 0.7)" // Subtle text shadow for depth
+            data-aos="fade-up"
           >
-            About Me
-          </Heading>
-          <Box
-            height="4px" // Thickness of the underline
-            width="80px" // Fixed width for the underline
-            bg="#00aaff" // Underline color updated to branding blue
-            mx="auto" // Center the underline
-            mt={2} // Margin top for spacing
-            borderRadius="md" // Rounded edges for a modern look
-          />
+            Artist Profile
+          </Badge>
+
+          <Box data-aos="fade-up" data-aos-delay="100">
+            <Heading
+              as="h1"
+              fontWeight="extrabold"
+              lineHeight={{ base: "1.08", md: "1.02" }}
+              fontSize={{ base: "2.7rem", md: "4rem", xl: "4.6rem" }}
+              textShadow="2px 4px 18px rgba(0, 0, 0, 0.35)"
+            >
+              About Ivan Robles
+            </Heading>
+
+            <Box
+              mt={3}
+              height="4px"
+              width={{ base: "180px", md: "240px" }}
+              borderRadius="full"
+              bg="linear-gradient(90deg, #00aaff 0%, #66d9ff 100%)"
+              mx="auto"
+            />
+          </Box>
+
+          <Text
+            fontSize={{ base: "md", md: "lg" }}
+            color="gray.300"
+            maxW="860px"
+            lineHeight="1.85"
+            data-aos="fade-up"
+            data-aos-delay="180"
+          >
+            DJ, producer, and live performer from Puerto Rico, recognized for
+            high-energy sets, a strong connection with the crowd, and a sound
+            that transforms every night into a memorable experience.
+          </Text>
+        </Stack>
+
+        {/* Editorial main block */}
+        <SimpleGrid
+          columns={{ base: 1, lg: 2 }}
+          gap={{ base: 10, lg: 12 }}
+          alignItems="center"
+          mb={{ base: 10, md: 14 }}
+        >
+          {/* Left content */}
+          <Stack
+            gap={6}
+            align={{ base: "center", lg: "flex-start" }}
+            textAlign={{ base: "center", lg: "left" }}
+          >
+            <Box data-aos="fade-right">
+              <Text
+                color="#66d9ff"
+                fontSize="sm"
+                textTransform="uppercase"
+                letterSpacing="0.1em"
+                fontWeight="bold"
+                mb={3}
+              >
+                The Energy Behind the Brand
+              </Text>
+
+              <Heading as="h2" size="xl" mb={4} lineHeight="1.2">
+                More than music — a live atmosphere built through rhythm,
+                identity, and presence
+              </Heading>
+
+              <Text color="gray.300" lineHeight="1.9" mb={5}>
+                Ivan Robles has spent more than 15 years building a sound and
+                presence that goes beyond performance. His sets are shaped by
+                timing, emotion, and the ability to move a crowd from the first
+                track to the final moment of the night.
+              </Text>
+
+              <Text color="gray.300" lineHeight="1.9">
+                From clubs and radio to larger stages and branded events, his
+                work reflects consistency, professionalism, and a commitment to
+                creating premium nightlife experiences rooted in house music and
+                connection.
+              </Text>
+            </Box>
+
+            <Box
+              w="100%"
+              p={{ base: 6, md: 7 }}
+              borderRadius="28px"
+              bg="rgba(255,255,255,0.05)"
+              border="1px solid rgba(255,255,255,0.10)"
+              backdropFilter="blur(14px)"
+              boxShadow="0 20px 60px rgba(0,0,0,0.30)"
+              data-aos="fade-up"
+              data-aos-delay="120"
+            >
+              <Text
+                color="#66d9ff"
+                fontSize="sm"
+                textTransform="uppercase"
+                letterSpacing="0.1em"
+                fontWeight="bold"
+                mb={3}
+              >
+                Signature Vision
+              </Text>
+
+              <Text
+                fontSize={{ base: "lg", md: "xl" }}
+                fontWeight="bold"
+                color="white"
+                lineHeight="1.7"
+                mb={3}
+              >
+                “Music is not just sound — it is movement, emotion, and a way to
+                bring people together.”
+              </Text>
+
+              <Text color="gray.400" lineHeight="1.8" fontSize="sm">
+                Every performance is built to create atmosphere, elevate the
+                room, and leave a lasting memory beyond the moment itself.
+              </Text>
+            </Box>
+          </Stack>
+
+          {/* Right image */}
+          <Box data-aos="fade-left">
+            <Box
+              position="relative"
+              maxW="560px"
+              mx="auto"
+              borderRadius="30px"
+              overflow="hidden"
+              bg="rgba(255,255,255,0.05)"
+              border="1px solid rgba(255,255,255,0.10)"
+              backdropFilter="blur(14px)"
+              boxShadow="0 20px 60px rgba(0,0,0,0.35)"
+            >
+              <Box
+                px={{ base: 4, md: 5 }}
+                py={4}
+                borderBottom="1px solid rgba(255,255,255,0.08)"
+                bg="rgba(255,255,255,0.03)"
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                flexWrap="wrap"
+                gap={3}
+              >
+                <HStack gap={3}>
+                  <Box
+                    width="10px"
+                    height="10px"
+                    borderRadius="full"
+                    bg="#00aaff"
+                    boxShadow="0 0 14px rgba(0,170,255,0.8)"
+                  />
+                  <Text
+                    fontSize="sm"
+                    color="#66d9ff"
+                    fontWeight="bold"
+                    letterSpacing="0.08em"
+                    textTransform="uppercase"
+                  >
+                    Live Performance
+                  </Text>
+                </HStack>
+
+                <Badge
+                  px={3}
+                  py={1}
+                  borderRadius="full"
+                  bg="rgba(0,170,255,0.14)"
+                  color="#66d9ff"
+                  border="1px solid rgba(102,217,255,0.24)"
+                >
+                  Ivan Robles
+                </Badge>
+              </Box>
+
+              <Box p={{ base: 4, md: 5 }}>
+                <Image
+                  src="/assets/ivan-robles-about-1.jpg"
+                  alt="Ivan Robles performing live"
+                  borderRadius="24px"
+                  width="100%"
+                  height={{ base: "340px", md: "540px" }}
+                  objectFit="cover"
+                  transition="transform 0.35s ease"
+                  _hover={{ transform: "scale(1.03)" }}
+                />
+              </Box>
+            </Box>
+          </Box>
+        </SimpleGrid>
+
+        {/* Stats strip */}
+        <Box mb={{ base: 12, md: 16 }}>
+          <SimpleGrid columns={{ base: 2, lg: 4 }} gap={4}>
+            {stats.map((stat, index) => (
+              <Box
+                key={stat.label}
+                p={{ base: 5, md: 6 }}
+                borderRadius="24px"
+                bg="rgba(255,255,255,0.05)"
+                border="1px solid rgba(255,255,255,0.08)"
+                textAlign="center"
+                backdropFilter="blur(12px)"
+                boxShadow="0 18px 40px rgba(0,0,0,0.20)"
+                data-aos="fade-up"
+                data-aos-delay={`${index * 80}`}
+              >
+                <Text
+                  color="#66d9ff"
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  letterSpacing="0.08em"
+                  mb={2}
+                >
+                  {stat.label}
+                </Text>
+                <Heading as="p" size="md" color="white">
+                  {stat.value}
+                </Heading>
+              </Box>
+            ))}
+          </SimpleGrid>
         </Box>
 
-        {/* Bio Section */}
-        <Text
-          fontSize="lg"
-          mb={16} // Increased margin for spacing
-          maxW="800px"
-          lineHeight="1.8"
-          px={4}
+        {/* Timeline + philosophy */}
+        <SimpleGrid
+          columns={{ base: 1, xl: 2 }}
+          gap={{ base: 10, xl: 8 }}
+          mb={{ base: 12, md: 16 }}
+          alignItems="start"
+        >
+          {/* Timeline */}
+          <Box>
+            <Stack gap={4} mb={8}>
+              <Text
+                color="#66d9ff"
+                fontSize="sm"
+                textTransform="uppercase"
+                letterSpacing="0.1em"
+                fontWeight="bold"
+                data-aos="fade-up"
+              >
+                Journey Timeline
+              </Text>
+
+              <Heading
+                as="h2"
+                size="lg"
+                color="white"
+                data-aos="fade-up"
+                data-aos-delay="80"
+              >
+                Milestones through the years
+              </Heading>
+            </Stack>
+
+            <Stack gap={5}>
+              {milestones.map((item, index) => (
+                <Box
+                  key={item.year}
+                  p={{ base: 6, md: 7 }}
+                  borderRadius="28px"
+                  bg="rgba(255,255,255,0.05)"
+                  border="1px solid rgba(255,255,255,0.10)"
+                  backdropFilter="blur(14px)"
+                  boxShadow="0 20px 60px rgba(0,0,0,0.28)"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    transform: "translateY(-4px)",
+                    borderColor: "rgba(102, 217, 255, 0.20)",
+                    boxShadow: "0 24px 60px rgba(0, 170, 255, 0.10)",
+                  }}
+                  data-aos="fade-up"
+                  data-aos-delay={`${index * 100}`}
+                >
+                  <Text
+                    color="#66d9ff"
+                    fontSize="sm"
+                    textTransform="uppercase"
+                    letterSpacing="0.1em"
+                    fontWeight="bold"
+                    mb={3}
+                  >
+                    {item.year}
+                  </Text>
+
+                  <Heading as="h3" size="md" mb={3}>
+                    {item.title}
+                  </Heading>
+
+                  <Text color="gray.400" lineHeight="1.8" fontSize="sm">
+                    {item.description}
+                  </Text>
+                </Box>
+              ))}
+            </Stack>
+          </Box>
+
+          {/* Philosophy / profile card */}
+          <Box
+            p={{ base: 6, md: 8 }}
+            borderRadius="30px"
+            bg="rgba(255,255,255,0.05)"
+            border="1px solid rgba(255,255,255,0.10)"
+            backdropFilter="blur(14px)"
+            boxShadow="0 20px 60px rgba(0,0,0,0.30)"
+            h="100%"
+            data-aos="fade-left"
+          >
+            <Text
+              color="#66d9ff"
+              fontSize="sm"
+              textTransform="uppercase"
+              letterSpacing="0.1em"
+              fontWeight="bold"
+              mb={4}
+            >
+              Artist Philosophy
+            </Text>
+
+            <Heading as="h2" size="lg" mb={5} lineHeight="1.25">
+              Built for movement, atmosphere, and unforgettable nights
+            </Heading>
+
+            <Stack gap={5}>
+              <Box>
+                <Text color="white" fontWeight="bold" fontSize="lg" mb={2}>
+                  House-Driven Identity
+                </Text>
+                <Text color="gray.400" lineHeight="1.8" fontSize="sm">
+                  A musical direction centered on groove, rhythm, and emotional
+                  momentum designed to create lasting energy on the dance floor.
+                </Text>
+              </Box>
+
+              <Box>
+                <Text color="white" fontWeight="bold" fontSize="lg" mb={2}>
+                  Crowd Connection
+                </Text>
+                <Text color="gray.400" lineHeight="1.8" fontSize="sm">
+                  Every set is shaped around timing, reading the room, and
+                  building a shared experience that feels authentic and alive.
+                </Text>
+              </Box>
+
+              <Box>
+                <Text color="white" fontWeight="bold" fontSize="lg" mb={2}>
+                  Premium Event Presence
+                </Text>
+                <Text color="gray.400" lineHeight="1.8" fontSize="sm">
+                  More than performance, the Ivan Robles brand represents a
+                  polished nightlife identity where sound, visual atmosphere,
+                  and energy come together.
+                </Text>
+              </Box>
+            </Stack>
+          </Box>
+        </SimpleGrid>
+
+        {/* Gallery / no repeated image */}
+        <Box mb={{ base: 12, md: 16 }}>
+          <Stack gap={4} align="center" textAlign="center" mb={8}>
+            <Text
+              color="#66d9ff"
+              fontSize="sm"
+              textTransform="uppercase"
+              letterSpacing="0.1em"
+              fontWeight="bold"
+              data-aos="fade-up"
+            >
+              Moments & Presence
+            </Text>
+
+            <Heading
+              as="h2"
+              size="lg"
+              color="white"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              The atmosphere behind the artist
+            </Heading>
+          </Stack>
+
+          <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={8}>
+            <GridItem data-aos="fade-up" data-aos-delay="0">
+              <Box
+                borderRadius="28px"
+                overflow="hidden"
+                bg="rgba(255,255,255,0.05)"
+                border="1px solid rgba(255,255,255,0.10)"
+                boxShadow="0 20px 60px rgba(0,0,0,0.25)"
+                transition="all 0.3s ease"
+                _hover={{
+                  transform: "translateY(-6px)",
+                  boxShadow: "0 20px 50px rgba(0,170,255,0.12)",
+                  borderColor: "rgba(102, 217, 255, 0.20)",
+                }}
+              >
+                <Image
+                  src="/assets/ivan-robles-about-2.jpg"
+                  alt="Ivan at radio show"
+                  objectFit="cover"
+                  height="320px"
+                  width="100%"
+                  transition="transform 0.35s ease"
+                  _hover={{ transform: "scale(1.05)" }}
+                />
+              </Box>
+            </GridItem>
+
+            <GridItem data-aos="fade-up" data-aos-delay="100">
+              <Box
+                borderRadius="28px"
+                overflow="hidden"
+                bg="rgba(255,255,255,0.05)"
+                border="1px solid rgba(255,255,255,0.10)"
+                boxShadow="0 20px 60px rgba(0,0,0,0.25)"
+                transition="all 0.3s ease"
+                _hover={{
+                  transform: "translateY(-6px)",
+                  boxShadow: "0 20px 50px rgba(0,170,255,0.12)",
+                  borderColor: "rgba(102, 217, 255, 0.20)",
+                }}
+              >
+                <Image
+                  src="/assets/ivan-robles-about-3.jpg"
+                  alt="Ivan with the crowd"
+                  objectFit="cover"
+                  height="320px"
+                  width="100%"
+                  transition="transform 0.35s ease"
+                  _hover={{ transform: "scale(1.05)" }}
+                />
+              </Box>
+            </GridItem>
+
+            <GridItem data-aos="fade-up" data-aos-delay="200">
+              <Box
+                h="100%"
+                minH="320px"
+                p={{ base: 6, md: 7 }}
+                borderRadius="28px"
+                bg="rgba(255,255,255,0.05)"
+                border="1px solid rgba(255,255,255,0.10)"
+                backdropFilter="blur(14px)"
+                boxShadow="0 20px 60px rgba(0,0,0,0.30)"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+              >
+                <Text
+                  color="#66d9ff"
+                  fontSize="sm"
+                  textTransform="uppercase"
+                  letterSpacing="0.1em"
+                  fontWeight="bold"
+                  mb={4}
+                >
+                  Artist Profile
+                </Text>
+
+                <Stack gap={4}>
+                  <Box>
+                    <Text color="white" fontWeight="bold" fontSize="lg">
+                      Sound
+                    </Text>
+                    <Text color="gray.400" fontSize="sm" lineHeight="1.8">
+                      House-centered, emotionally driven, and built to create
+                      momentum from start to finish.
+                    </Text>
+                  </Box>
+
+                  <Box>
+                    <Text color="white" fontWeight="bold" fontSize="lg">
+                      Presence
+                    </Text>
+                    <Text color="gray.400" fontSize="sm" lineHeight="1.8">
+                      Confident, polished, and focused on turning every set into
+                      an immersive crowd experience.
+                    </Text>
+                  </Box>
+
+                  <Box>
+                    <Text color="white" fontWeight="bold" fontSize="lg">
+                      Mission
+                    </Text>
+                    <Text color="gray.400" fontSize="sm" lineHeight="1.8">
+                      To keep pushing the nightlife culture forward through
+                      music, identity, and unforgettable energy.
+                    </Text>
+                  </Box>
+                </Stack>
+              </Box>
+            </GridItem>
+          </Grid>
+        </Box>
+
+        {/* Final quote */}
+        <Box
+          maxW="920px"
+          mx="auto"
+          p={{ base: 6, md: 8 }}
+          borderRadius="30px"
+          bg="rgba(255,255,255,0.05)"
+          border="1px solid rgba(255,255,255,0.10)"
+          backdropFilter="blur(14px)"
+          boxShadow="0 20px 60px rgba(0,0,0,0.30)"
+          textAlign="center"
           data-aos="fade-up"
-          data-aos-duration="800" // Faster animation
-          data-aos-delay="100" // Minimal delay
-          data-aos-offset="100" // Trigger earlier
         >
-          Ivan Robles is one of Puerto Rico's most celebrated DJs and producers,
-          known for his electrifying performances and passion for house music.
-          With over 15 years of experience, Ivan has become a household name in
-          the music industry, captivating audiences with his unique sound and
-          energy. From hosting top-rated radio shows to performing on
-          international stages, Ivan has built a reputation as a pioneer in the
-          electronic music scene. His ability to connect with the crowd and
-          create unforgettable experiences has earned him a loyal following and
-          recognition as a top DJ in the Caribbean and beyond.
-        </Text>
-
-        {/* Images Section */}
-        <Grid
-          templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
-          gap={8} // Increased gap for better spacing
-          mb={16} // Added margin for spacing
-        >
-          <GridItem
-            data-aos="fade-up"
-            data-aos-duration="800" // Faster animation
-            data-aos-delay="200" // Minimal delay
-            data-aos-offset="100" // Trigger earlier
-          >
-            <Image
-              src="/assets/ivan-robles-about-1.jpg" // Replace with an image of him performing
-              alt="Ivan Performing"
-              borderRadius="md"
-              boxShadow="lg"
-              objectFit="cover"
-              height="300px"
-              width="100%"
-              transition="transform 0.3s, box-shadow 0.3s" // Transition for hover effect
-              _hover={{
-                transform: "scale(1.05)", // Scale up on hover
-                boxShadow: "0 0 15px #00aaff", // Updated hover shadow color
-              }}
-            />
-          </GridItem>
-          <GridItem
-            data-aos="fade-up"
-            data-aos-duration="800"
-            data-aos-delay="300"
-            data-aos-offset="100"
-          >
-            <Image
-              src="/assets/ivan-robles-about-2.jpg" // Replace with an image of him at a radio show
-              alt="Ivan at Radio Show"
-              borderRadius="md"
-              boxShadow="lg"
-              objectFit="cover"
-              height="300px"
-              width="100%"
-              transition="transform 0.3s, box-shadow 0.3s" // Transition for hover effect
-              _hover={{
-                transform: "scale(1.05)", // Scale up on hover
-                boxShadow: "0 0 15px #00aaff", // Updated hover shadow color
-              }}
-            />
-          </GridItem>
-          <GridItem
-            data-aos="fade-up"
-            data-aos-duration="800"
-            data-aos-delay="400"
-            data-aos-offset="100"
-          >
-            <Image
-              src="/assets/ivan-robles-about-3.jpg" // Replace with an image of him with the crowd
-              alt="Ivan with the Crowd"
-              borderRadius="md"
-              boxShadow="lg"
-              objectFit="cover"
-              height="300px"
-              width="100%"
-              transition="transform 0.3s, box-shadow 0.3s" // Transition for hover effect
-              _hover={{
-                transform: "scale(1.05)", // Scale up on hover
-                boxShadow: "0 0 15px #00aaff", // Updated hover shadow color
-              }}
-            />
-          </GridItem>
-        </Grid>
-
-        {/* Closing Statement */}
-        <VStack gap={6} maxW="800px">
           <Text
-            fontSize="lg"
+            fontSize={{ base: "xl", md: "2xl" }}
             fontWeight="bold"
-            textAlign="center"
-            px={4}
-            lineHeight="1.8"
-            data-aos="fade-up"
-            data-aos-duration="800"
-            data-aos-delay="500" // Faster delay
-            data-aos-offset="100" // Trigger earlier
+            lineHeight="1.7"
+            color="white"
+            mb={4}
           >
-            "Music is not just sound; it's an emotion, a connection, and a way
-            to bring people together."
+            “The goal is never just to play music — it&apos;s to create a
+            feeling people remember.”
           </Text>
+
           <Text
-            fontSize="lg"
-            textAlign="center"
-            px={4}
-            lineHeight="1.8"
-            data-aos="fade-up"
-            data-aos-duration="800"
-            data-aos-delay="600" // Faster delay
-            data-aos-offset="100" // Trigger earlier
+            fontSize={{ base: "md", md: "lg" }}
+            color="gray.300"
+            lineHeight="1.9"
           >
-            Whether he's performing at a packed club, hosting a radio show, or
-            producing his next hit track, Ivan Robles continues to push the
-            boundaries of electronic music and inspire the next generation of
-            DJs.
+            Through sound, atmosphere, and connection, Ivan Robles continues to
+            shape nights that feel powerful in the moment and unforgettable
+            after they end.
           </Text>
-        </VStack>
-      </Flex>
+        </Box>
+      </Box>
     </Box>
   );
 };

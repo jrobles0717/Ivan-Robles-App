@@ -1,10 +1,13 @@
 import {
+  Badge,
   Box,
   Button,
   Heading,
+  HStack,
   Input,
+  SimpleGrid,
+  Stack,
   Text,
-  VStack,
   chakra,
 } from "@chakra-ui/react";
 import {
@@ -20,10 +23,12 @@ import {
 } from "../util/helper";
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 
-const ChakraForm = chakra("form");
-
 import Confetti from "react-confetti";
 import Select, { type ActionMeta, type SingleValue } from "react-select";
+
+import { HiPaperAirplane } from "react-icons/hi";
+
+const ChakraForm = chakra("form");
 
 const Subscribe = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -32,18 +37,23 @@ const Subscribe = () => {
     country: null,
     referral: null,
   });
+
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: typeof window !== "undefined" ? window.innerWidth : 1200,
+    height: typeof window !== "undefined" ? window.innerHeight : 800,
   });
 
-  // Track window size for confetti
   useEffect(() => {
     const handleResize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
     };
+
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -82,23 +92,21 @@ const Subscribe = () => {
 
     if (!validate()) return;
 
-    // Build URL-encoded form body
     const payload = new URLSearchParams();
     payload.append("form-name", "subscribe-form");
     payload.append("name", formData.name);
     payload.append("email", formData.email);
+
     if (formData.country) payload.append("country", formData.country.value);
     if (formData.referral) payload.append("referral", formData.referral.value);
 
     try {
-      // Submit the form to Netlify
       await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: payload.toString(),
       });
 
-      // Show success message and reset form
       setSubmitted(true);
       setFormData({
         name: "",
@@ -115,183 +123,402 @@ const Subscribe = () => {
   return (
     <Box
       position="relative"
-      minH="100vh"
-      backgroundImage="url('/assets/dj-background-2.png')"
-      backgroundSize="cover"
-      backgroundPosition="center"
+      overflow="hidden"
+      bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f1012 100%)"
       color="white"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      textAlign="center"
+      py={{ base: 16, md: 20 }}
+      px={{ base: 5, md: 8 }}
+      minH="100vh"
     >
-      {/* Confetti animation */}
+      {/* Background image */}
+      <Box
+        position="absolute"
+        inset={0}
+        backgroundImage="url('/assets/dj-background-2.png')"
+        backgroundSize="cover"
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
+        opacity={0.14}
+      />
+
+      {/* Overlay */}
+      <Box
+        position="absolute"
+        inset={0}
+        bg="linear-gradient(180deg, rgba(7,13,22,0.88) 0%, rgba(8,14,24,0.94) 50%, rgba(10,10,12,0.96) 100%)"
+        zIndex={1}
+      />
+
+      {/* Decorative glows */}
+      <Box
+        position="absolute"
+        top="-100px"
+        left="-80px"
+        width={{ base: "220px", md: "320px" }}
+        height={{ base: "220px", md: "320px" }}
+        borderRadius="full"
+        bg="rgba(0, 170, 255, 0.12)"
+        filter="blur(90px)"
+        zIndex={1}
+        pointerEvents="none"
+      />
+      <Box
+        position="absolute"
+        bottom="-120px"
+        right="-100px"
+        width={{ base: "240px", md: "360px" }}
+        height={{ base: "240px", md: "360px" }}
+        borderRadius="full"
+        bg="rgba(0, 38, 185, 0.12)"
+        filter="blur(100px)"
+        zIndex={1}
+        pointerEvents="none"
+      />
+
+      {/* Confetti */}
       {submitted && (
         <Confetti
           width={windowSize.width}
           height={windowSize.height}
           recycle={true}
           style={{
-            position: "absolute",
+            position: "fixed",
             top: 0,
             left: 0,
-            zIndex: 2,
+            zIndex: 20,
+            pointerEvents: "none",
           }}
         />
       )}
 
-      {/* Overlay */}
-      <Box
-        position="absolute"
-        top={0}
-        left={0}
-        width="100%"
-        height="100%"
-        bg="rgba(0, 0, 0, 0.5)"
-        zIndex={1}
-      />
+      <Box maxW="1380px" mx="auto" position="relative" zIndex={2}>
+        <SimpleGrid
+          columns={{ base: 1, lg: 2 }}
+          gap={{ base: 10, lg: 12 }}
+          alignItems="center"
+        >
+          {/* Left Side */}
+          <Stack
+            gap={6}
+            textAlign={{ base: "center", lg: "left" }}
+            align={{ base: "center", lg: "flex-start" }}
+          >
+            <Badge
+              px={4}
+              py={1.5}
+              borderRadius="full"
+              bg="rgba(255,255,255,0.06)"
+              color="#66d9ff"
+              border="1px solid rgba(102, 217, 255, 0.24)"
+              fontSize="0.78rem"
+              letterSpacing="0.08em"
+              textTransform="uppercase"
+              data-aos="fade-up"
+            >
+              Join the Guest List
+            </Badge>
 
-      {/* Form Container */}
-      <ChakraForm
-        name="subscribe-form"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        onSubmit={handleSubmit}
-        maxW={{ base: "90%", md: "md" }}
-        mx="auto"
-        zIndex={3}
-        p={8}
-        bg="black"
-        borderRadius="md"
-        boxShadow="lg"
-        data-aos="fade-up" // Minimal AOS animation applied to the entire form
-        data-aos-duration="1000" // Animation duration
-        data-aos-once="true" // Ensure the animation runs only once
-      >
-        {/* Hidden input for Netlify */}
-        <input type="hidden" name="form-name" value="subscribe-form" />
-        <p style={{ display: "none" }}>
-          <label>
-            Don’t fill this out if you’re human: <input name="bot-field" />
-          </label>
-        </p>
-
-        <VStack gap={6}>
-          <Heading as="h2" size="2xl" color="white" mb={4}>
-            Get in Touch
-          </Heading>
-
-          {!submitted && (
-            <>
-              <Text fontSize="lg" mb={4}>
-                Subscribe now to get notified about upcoming events, new music
-                drops, exclusive parties, and more!
-              </Text>
-
-              {/* Name Field */}
-              <FormControl isInvalid={!!errors.name}>
-                <FormLabel>Full Name</FormLabel>
-                <Input
-                  name="name"
-                  placeholder="John Doe"
-                  value={formData.name}
-                  onChange={handleChange}
-                  borderColor="gray.600"
-                  borderRadius="md"
-                  _hover={{ borderColor: "#00aaff" }}
-                  _focus={{
-                    borderColor: "#00aaff",
-                    boxShadow: "0 0 0 1px #00aaff",
-                  }}
-                />
-                <FormErrorMessage color="#FF0000">
-                  {errors.name}
-                </FormErrorMessage>
-              </FormControl>
-
-              {/* Email Field */}
-              <FormControl isInvalid={!!errors.email}>
-                <FormLabel>Email Address</FormLabel>
-                <Input
-                  name="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  borderColor="gray.600"
-                  borderRadius="md"
-                  _hover={{ borderColor: "#00aaff" }}
-                  _focus={{
-                    borderColor: "#00aaff",
-                    boxShadow: "0 0 0 1px #00aaff",
-                  }}
-                />
-                <FormErrorMessage color="#FF0000">
-                  {errors.email}
-                </FormErrorMessage>
-              </FormControl>
-
-              {/* Country Dropdown */}
-              <FormControl isInvalid={!!errors.country}>
-                <FormLabel>Country / Region</FormLabel>
-                <Select
-                  name="country"
-                  options={countryOptions}
-                  placeholder="Select your country"
-                  value={formData.country}
-                  onChange={handleDropdownChange}
-                  styles={customSelectStyles}
-                />
-                <FormErrorMessage color="#FF0000">
-                  {errors.country}
-                </FormErrorMessage>
-              </FormControl>
-
-              {/* Referral Dropdown */}
-              <FormControl isInvalid={!!errors.referral}>
-                <FormLabel>How did you hear about me?</FormLabel>
-                <Select
-                  name="referral"
-                  options={referralOptions}
-                  placeholder="Select an option"
-                  value={formData.referral}
-                  onChange={handleDropdownChange}
-                  styles={customSelectStyles}
-                />
-                <FormErrorMessage color="#FF0000">
-                  {errors.referral}
-                </FormErrorMessage>
-              </FormControl>
-
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                bg="#0026b9"
-                color="white"
-                size="lg"
-                width="full"
-                _hover={{
-                  bg: "#00aaff",
-                  color: "#000000",
-                }}
-                transition="background-color 0.3s, color 0.3s"
+            <Box data-aos="fade-up" data-aos-delay="100">
+              <Heading
+                as="h1"
+                fontWeight="extrabold"
+                lineHeight={{ base: "1.08", md: "1.02" }}
+                fontSize={{ base: "2.5rem", md: "4rem", xl: "4.4rem" }}
+                textShadow="2px 4px 18px rgba(0, 0, 0, 0.35)"
               >
                 Subscribe
-              </Button>
-            </>
-          )}
-
-          {submitted && (
-            <>
-              <Heading as="h3" size="lg" color="white">
-                Thank you for subscribing!
               </Heading>
-              <Text>You’ll now receive updates on all things Ivan Robles.</Text>
-            </>
-          )}
-        </VStack>
-      </ChakraForm>
+
+              <Box
+                mt={3}
+                height="4px"
+                width={{ base: "170px", md: "220px" }}
+                borderRadius="full"
+                bg="linear-gradient(90deg, #00aaff 0%, #66d9ff 100%)"
+                mx={{ base: "auto", lg: "0" }}
+              />
+            </Box>
+
+            <Text
+              fontSize={{ base: "md", md: "lg" }}
+              color="gray.300"
+              maxW="620px"
+              lineHeight="1.85"
+              data-aos="fade-up"
+              data-aos-delay="180"
+            >
+              Subscribe now to get notified about upcoming events, new music
+              drops, exclusive parties, premieres, and special Ivan Robles
+              updates.
+            </Text>
+
+            <HStack
+              gap={3}
+              flexWrap="wrap"
+              justify={{ base: "center", lg: "flex-start" }}
+              data-aos="fade-up"
+              data-aos-delay="260"
+            >
+              <Badge
+                px={3}
+                py={1.5}
+                borderRadius="full"
+                bg="whiteAlpha.100"
+                color="white"
+              >
+                Event Updates
+              </Badge>
+              <Badge
+                px={3}
+                py={1.5}
+                borderRadius="full"
+                bg="whiteAlpha.100"
+                color="white"
+              >
+                New Music Drops
+              </Badge>
+              <Badge
+                px={3}
+                py={1.5}
+                borderRadius="full"
+                bg="whiteAlpha.100"
+                color="white"
+              >
+                Exclusive Parties
+              </Badge>
+            </HStack>
+
+            <Box
+              w="100%"
+              maxW="620px"
+              p={{ base: 5, md: 6 }}
+              borderRadius="28px"
+              bg="rgba(255,255,255,0.05)"
+              border="1px solid rgba(255,255,255,0.10)"
+              backdropFilter="blur(14px)"
+              boxShadow="0 20px 60px rgba(0,0,0,0.30)"
+              data-aos="fade-up"
+              data-aos-delay="340"
+            >
+              <Text
+                color="#66d9ff"
+                fontSize="sm"
+                textTransform="uppercase"
+                letterSpacing="0.1em"
+                fontWeight="bold"
+                mb={3}
+              >
+                Why subscribe?
+              </Text>
+
+              <Stack gap={3}>
+                <Text color="gray.300">
+                  • Get priority updates on upcoming Ivan Robles events
+                </Text>
+                <Text color="gray.300">
+                  • Be the first to know about new music and premieres
+                </Text>
+                <Text color="gray.300">
+                  • Receive exclusive announcements and special invites
+                </Text>
+              </Stack>
+            </Box>
+          </Stack>
+
+          {/* Right Side / Form */}
+          <Box
+            data-aos="fade-left"
+            borderRadius="30px"
+            bg="rgba(255,255,255,0.05)"
+            border="1px solid rgba(255,255,255,0.10)"
+            backdropFilter="blur(14px)"
+            boxShadow="0 20px 60px rgba(0,0,0,0.35)"
+            overflow="hidden"
+          >
+            <Box
+              px={{ base: 5, md: 6 }}
+              py={4}
+              borderBottom="1px solid rgba(255,255,255,0.08)"
+              bg="rgba(255,255,255,0.03)"
+            >
+              <Text
+                fontSize="sm"
+                color="#66d9ff"
+                fontWeight="bold"
+                letterSpacing="0.08em"
+                textTransform="uppercase"
+              >
+                Subscription Form
+              </Text>
+            </Box>
+
+            <ChakraForm
+              name="subscribe-form"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+              p={{ base: 5, md: 6 }}
+            >
+              <input type="hidden" name="form-name" value="subscribe-form" />
+              <p style={{ display: "none" }}>
+                <label>
+                  Don’t fill this out if you’re human:{" "}
+                  <input name="bot-field" />
+                </label>
+              </p>
+
+              <Stack gap={5}>
+                {!submitted ? (
+                  <>
+                    <FormControl isInvalid={!!errors.name}>
+                      <FormLabel color="white">Full Name</FormLabel>
+                      <Input
+                        name="name"
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={handleChange}
+                        bg="rgba(255,255,255,0.05)"
+                        border="1px solid rgba(255,255,255,0.12)"
+                        color="white"
+                        _placeholder={{ color: "gray.500" }}
+                        _hover={{ borderColor: "rgba(102,217,255,0.24)" }}
+                        _focus={{
+                          borderColor: "#66d9ff",
+                          boxShadow: "0 0 0 1px #66d9ff",
+                        }}
+                        height="52px"
+                      />
+                      <FormErrorMessage color="#ff6b6b">
+                        {errors.name}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl isInvalid={!!errors.email}>
+                      <FormLabel color="white">Email Address</FormLabel>
+                      <Input
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        bg="rgba(255,255,255,0.05)"
+                        border="1px solid rgba(255,255,255,0.12)"
+                        color="white"
+                        _placeholder={{ color: "gray.500" }}
+                        _hover={{ borderColor: "rgba(102,217,255,0.24)" }}
+                        _focus={{
+                          borderColor: "#66d9ff",
+                          boxShadow: "0 0 0 1px #66d9ff",
+                        }}
+                        height="52px"
+                      />
+                      <FormErrorMessage color="#ff6b6b">
+                        {errors.email}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl isInvalid={!!errors.country}>
+                      <FormLabel color="white">Country / Region</FormLabel>
+                      <Select
+                        name="country"
+                        options={countryOptions}
+                        placeholder="Select your country"
+                        value={formData.country}
+                        onChange={handleDropdownChange}
+                        styles={customSelectStyles}
+                        menuPortalTarget={
+                          typeof document !== "undefined"
+                            ? document.body
+                            : undefined
+                        }
+                        menuPosition="fixed"
+                      />
+
+                      <FormErrorMessage color="#ff6b6b">
+                        {errors.country}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <FormControl isInvalid={!!errors.referral}>
+                      <FormLabel color="white">
+                        How did you hear about me?
+                      </FormLabel>
+                      <Select
+                        name="referral"
+                        options={referralOptions}
+                        placeholder="Select an option"
+                        value={formData.referral}
+                        onChange={handleDropdownChange}
+                        styles={customSelectStyles}
+                        menuPortalTarget={
+                          typeof document !== "undefined"
+                            ? document.body
+                            : undefined
+                        }
+                        menuPosition="fixed"
+                      />
+
+                      <FormErrorMessage color="#ff6b6b">
+                        {errors.referral}
+                      </FormErrorMessage>
+                    </FormControl>
+
+                    <Button
+                      type="submit"
+                      bg="#00aaff"
+                      color="white"
+                      size="lg"
+                      width="full"
+                      borderRadius="full"
+                      boxShadow="0 10px 28px rgba(0, 170, 255, 0.28)"
+                      _hover={{
+                        bg: "#008ecc",
+                        transform: "translateY(-2px)",
+                        boxShadow: "0 14px 34px rgba(0, 170, 255, 0.35)",
+                      }}
+                      transition="all 0.3s ease"
+                    >
+                      <HiPaperAirplane />
+                      Subscribe
+                    </Button>
+                  </>
+                ) : (
+                  <Box textAlign="center" py={{ base: 8, md: 10 }}>
+                    <VStackCustom />
+                  </Box>
+                )}
+              </Stack>
+            </ChakraForm>
+          </Box>
+        </SimpleGrid>
+      </Box>
     </Box>
+  );
+};
+
+const VStackCustom = () => {
+  return (
+    <Stack gap={4} align="center">
+      <Badge
+        px={4}
+        py={1.5}
+        borderRadius="full"
+        bg="rgba(0,170,255,0.14)"
+        color="#66d9ff"
+        border="1px solid rgba(102,217,255,0.24)"
+      >
+        Subscription Confirmed
+      </Badge>
+
+      <Heading as="h3" size="lg" color="white">
+        Thank you for subscribing!
+      </Heading>
+
+      <Text color="gray.300" maxW="420px" lineHeight="1.8">
+        You&apos;ll now receive updates on upcoming events, new music, exclusive
+        content, and all things Ivan Robles.
+      </Text>
+    </Stack>
   );
 };
 

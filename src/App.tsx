@@ -1,3 +1,5 @@
+import "./App.css";
+
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import AOSInitializer from "./components/AOSInitializer";
@@ -30,11 +32,9 @@ const App = () => {
     <Router>
       <ScrollToTop />
       <AOSInitializer />
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-      >
+      <div className="app-shell">
         <Navbar />
-        <main style={{ flex: "1", display: "flex", flexDirection: "column" }}>
+        <main className="app-main">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

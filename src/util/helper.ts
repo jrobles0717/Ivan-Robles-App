@@ -1,49 +1,119 @@
 import type { OptionType } from "./types";
 import type { StylesConfig } from "react-select";
+
 export const customSelectStyles: StylesConfig<OptionType, false> = {
   container: (base) => ({
     ...base,
     width: "100%",
   }),
-  control: (base) => ({
-    ...base,
-    backgroundColor: "#000",
-    borderColor: "gray.600",
-    boxShadow: "none",
-    minHeight: "56px",
-    "&:hover": { borderColor: "#00aaff" },
-  }),
-  singleValue: (base) => ({
-    ...base,
-    color: "white",
-  }),
-  placeholder: (base) => ({
-    ...base,
-    color: "gray.400",
-  }),
-  menu: (base) => ({
+
+  control: (base, state) => ({
     ...base,
     width: "100%",
-    backgroundColor: "#1a1a1a",
-  }),
-  option: (base, { isFocused }) => ({
-    ...base,
-    backgroundColor: isFocused ? "#0026b9" : "transparent",
-    color: "white",
+    minHeight: "52px",
+    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
+    borderColor: state.isFocused ? "#66d9ff" : "rgba(255, 255, 255, 0.12)",
+    borderRadius: "16px",
+    boxShadow: state.isFocused ? "0 0 0 1px #66d9ff" : "none",
+    backdropFilter: "blur(10px)",
+    transition: "all 0.2s ease",
     cursor: "pointer",
+    "&:hover": {
+      borderColor: "#66d9ff",
+    },
   }),
-  dropdownIndicator: (base) => ({
+
+  valueContainer: (base) => ({
     ...base,
-    color: "gray.600",
-    "&:hover": { color: "#00aaff" },
+    padding: "0 14px",
   }),
+
+  input: (base) => ({
+    ...base,
+    color: "#ffffff",
+  }),
+
+  singleValue: (base) => ({
+    ...base,
+    color: "#ffffff",
+  }),
+
+  placeholder: (base) => ({
+    ...base,
+    color: "#718096",
+  }),
+
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 2000,
+  }),
+
+  menu: (base) => ({
+    ...base,
+    marginTop: "10px",
+    borderRadius: "18px",
+    overflow: "hidden",
+    backgroundColor: "rgba(10, 17, 27, 0.98)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.35)",
+    backdropFilter: "blur(14px)",
+    zIndex: 1600,
+  }),
+
+  menuList: (base) => ({
+    ...base,
+    padding: "8px",
+  }),
+
+  option: (base, state) => ({
+    ...base,
+    borderRadius: "12px",
+    padding: "12px 14px",
+    marginBottom: "4px",
+    backgroundColor: state.isSelected
+      ? "rgba(0, 170, 255, 0.22)"
+      : state.isFocused
+      ? "rgba(255, 255, 255, 0.06)"
+      : "transparent",
+    color: "#ffffff",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    ":active": {
+      backgroundColor: "rgba(0, 170, 255, 0.24)",
+    },
+  }),
+
+  dropdownIndicator: (base, state) => ({
+    ...base,
+    color: state.isFocused ? "#66d9ff" : "#718096",
+    transition: "color 0.2s ease",
+    "&:hover": {
+      color: "#66d9ff",
+    },
+  }),
+
+  clearIndicator: (base) => ({
+    ...base,
+    color: "#718096",
+    "&:hover": {
+      color: "#66d9ff",
+    },
+  }),
+
   indicatorSeparator: (base) => ({
     ...base,
-    backgroundColor: "gray.600",
+    backgroundColor: "rgba(255, 255, 255, 0.12)",
+  }),
+
+  noOptionsMessage: (base) => ({
+    ...base,
+    color: "#a0aec0",
+    padding: "12px",
   }),
 };
 
-export const countryOptions = [
+export const countryOptions: OptionType[] = [
   { value: "us", label: "United States" },
   { value: "pr", label: "Puerto Rico" },
   { value: "uk", label: "United Kingdom" },
@@ -114,7 +184,6 @@ export const countryOptions = [
   { value: "bt", label: "Bhutan" },
   { value: "mv", label: "Maldives" },
   { value: "mn", label: "Mongolia" },
-  { value: "np", label: "Nepal" },
   { value: "af", label: "Afghanistan" },
   { value: "ir", label: "Iran" },
   { value: "iq", label: "Iraq" },
@@ -145,31 +214,18 @@ export const countryOptions = [
   { value: "ne", label: "Niger" },
   { value: "ml", label: "Mali" },
   { value: "sn", label: "Senegal" },
-  { value: "gh", label: "Ghana" },
-  { value: "ke", label: "Kenya" },
   { value: "dj", label: "Djibouti" },
   { value: "so", label: "Somalia" },
   { value: "et", label: "Ethiopia" },
   { value: "cm", label: "Cameroon" },
-  { value: "ng", label: "Nigeria" },
-  { value: "gh", label: "Ghana" },
   { value: "tg", label: "Togo" },
-  { value: "bw", label: "Botswana" },
-  { value: "na", label: "Namibia" },
-  { value: "ls", label: "Lesotho" },
-  { value: "sz", label: "Eswatini" },
-  { value: "cv", label: "Cape Verde" },
   { value: "gq", label: "Equatorial Guinea" },
   { value: "st", label: "Sao Tome and Principe" },
   { value: "ao", label: "Angola" },
   { value: "mz", label: "Mozambique" },
   { value: "bi", label: "Burundi" },
   { value: "rw", label: "Rwanda" },
-  { value: "tz", label: "Tanzania" },
-  { value: "ug", label: "Uganda" },
-  { value: "zm", label: "Zambia" },
-  { value: "zw", label: "Zimbabwe" },
-  { value: "other", label: "Other" }, // Fallback option
+  { value: "other", label: "Other" },
 ];
 
 export const referralOptions = [
