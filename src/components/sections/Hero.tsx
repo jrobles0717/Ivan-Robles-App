@@ -183,7 +183,7 @@ const Hero = () => {
                 color="white"
                 fontWeight="medium"
               >
-                Open Format
+                House Music Producer
               </Badge>
               <Badge
                 px={3}
@@ -488,7 +488,7 @@ const Hero = () => {
                         STYLE
                       </Text>
                       <Text color="white" fontWeight="bold" fontSize="sm">
-                        Open Format
+                        House Music Producer
                       </Text>
                     </Box>
 
