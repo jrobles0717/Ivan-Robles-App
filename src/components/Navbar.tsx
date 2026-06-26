@@ -309,7 +309,7 @@ const Navbar: React.FC = () => {
                   letterSpacing="0.1em"
                   mt={1}
                 >
-                  DJ • Producer
+                  House Music DJ & Producer
                 </Text>
               </Box>
             </ChakraRouterLink>

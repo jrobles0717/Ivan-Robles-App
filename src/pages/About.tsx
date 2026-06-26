@@ -14,30 +14,30 @@ import {
 const About = () => {
   const milestones = [
     {
-      year: "2009",
-      title: "The Beginning",
+      year: "The Beginning",
+      title: "Roots in the Booth",
       description:
-        "Ivan Robles began shaping his identity in the local scene, developing a sound rooted in groove, movement, and crowd connection.",
+        "Ivan Robles started his DJ career in Puerto Rico, building his craft set by set — developing a deep connection with house music and the culture around it.",
     },
     {
-      year: "2015",
-      title: "Growing Presence",
+      year: "The Growth",
+      title: "Expanding the Brand",
       description:
-        "From clubs and radio to larger venues, his performances earned recognition for their consistency, energy, and atmosphere.",
+        "From club residencies and radio appearances to branded events like Fiesta en la Playa, his presence grew into one of Puerto Rico's most recognized house music experiences.",
     },
     {
       year: "Today",
-      title: "Signature Experience",
+      title: "DJ, Producer & Live Performer",
       description:
-        "Known for high-impact sets, house-driven rhythm, and unforgettable nights that connect music, emotion, and live performance.",
+        "Now operating across multiple formats — live events, original productions, and The Ivan Robles Show — his work continues to push the house music scene forward.",
     },
   ];
 
   const stats = [
     { label: "Experience", value: "15+ Years" },
     { label: "Base", value: "Puerto Rico" },
-    { label: "Focus", value: "House Music" },
-    { label: "Energy", value: "Live Experience" },
+    { label: "Genre", value: "House Music" },
+    { label: "Role", value: "DJ & Producer" },
   ];
 
   return (
@@ -147,9 +147,9 @@ const About = () => {
             data-aos="fade-up"
             data-aos-delay="180"
           >
-            DJ, producer, and live performer from Puerto Rico, recognized for
-            high-energy sets, a strong connection with the crowd, and a sound
-            that transforms every night into a memorable experience.
+            House Music DJ, producer, and live performer from Puerto Rico —
+            known for high-energy sets, signature events like Fiesta en la Playa,
+            and a sound that transforms every night into an unforgettable experience.
           </Text>
         </Stack>
 

@@ -24,7 +24,7 @@ const News = () => {
     {
       title: "Iván Robles: la evolución del DJ desde la cabina hasta el escenario",
       summary:
-        "Un artículo que documenta el recorrido de Iván Robles — desde sus inicios en la cabina hasta convertirse en una de las figuras más reconocidas de la escena house en Puerto Rico.",
+        "A feature article documenting Iván Robles' journey — from his early days behind the booth to becoming one of the most recognized figures in Puerto Rico's house music scene.",
       url: "https://wp.me/pewIOG-sHz",
       category: "Press",
       date: "2026",
