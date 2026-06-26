@@ -8,51 +8,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { partyHighlights } from "../../data/highlights";
 import { useState } from "react";
 
 const PartyHighlights = () => {
-  const videos = [
-    {
-      src: "/assets/Fiesta-en-la-playa-2026.mp4",
-      title: "Fiesta en la Playa 2026",
-      thumbnail: "/assets/Fiesta-en-la-playa-2026-thumbnail.jpeg",
-    },
-    {
-      src: "/assets/April-18-2026-party-video.MOV",
-      title: "The Return 2026",
-      thumbnail: "/assets/April-18-2026-party.JPG",
-    },
-    {
-      src: "/assets/Love-beats-trailer-2026.mp4",
-      title: "Love Beats 2026",
-      thumbnail: "/assets/Love-beats-trailer-2026-thumbnail.jpeg",
-    },
-    // {
-    //   src: "/assets/Recap-2025.MOV",
-    //   title: "Recap 2025",
-    //   thumbnail: "/assets/Recap-2025-thumbnail.png",
-    // },
-    // {
-    //   src: "/assets/Fiesta-en-la-playa-II-2025.mp4",
-    //   title: "Fiesta En La Playa II",
-    //   thumbnail: "/assets/irob-playa-2-thumbnail.jpeg",
-    // },
-    // {
-    //   src: "/assets/irob-caribe-hilton-video.mp4",
-    //   title: "Fiesta En La Playa I",
-    //   thumbnail: "/assets/irob-playa-1-thumbnail.jpeg",
-    // },
-    // {
-    //   src: "/assets/irob-home-video.mp4",
-    //   title: "La Vida Es Bonita",
-    //   thumbnail: "/assets/La-Vida-Es-Bonita-thumbnail.jpeg",
-    // },
-    // {
-    //   src: "/assets/irob-moonlight-video.mp4",
-    //   title: "Moonlight Mirage",
-    //   thumbnail: "/assets/Moonlight-Mirage-thumbnail.jpeg",
-    // },
-  ];
+  const videos = partyHighlights;
 
   const [visibleVideos, setVisibleVideos] = useState(4);
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);

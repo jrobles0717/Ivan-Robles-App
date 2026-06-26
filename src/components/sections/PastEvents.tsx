@@ -8,41 +8,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { pastEvents } from "../../data/highlights";
 import { useState } from "react";
 
 const PastEvents = () => {
-  const events = [
-    {
-      src: "/assets/Recap-2025.MOV",
-      title: "Recap 2025",
-      date: "December 2025",
-      thumbnail: "/assets/Recap-2025-thumbnail.png",
-    },
-    {
-      src: "/assets/Fiesta-en-la-playa-II-2025.mp4",
-      title: "Fiesta En La Playa II",
-      date: "Summer 2025",
-      thumbnail: "/assets/irob-playa-2-thumbnail.jpeg",
-    },
-    {
-      src: "/assets/irob-caribe-hilton-video.mp4",
-      title: "Fiesta En La Playa I",
-      date: "2025",
-      thumbnail: "/assets/irob-playa-1-thumbnail.jpeg",
-    },
-    {
-      src: "/assets/irob-home-video.mp4",
-      title: "La Vida Es Bonita",
-      date: "2025",
-      thumbnail: "/assets/La-Vida-Es-Bonita-thumbnail.jpeg",
-    },
-    {
-      src: "/assets/irob-moonlight-video.mp4",
-      title: "Moonlight Mirage",
-      date: "2025",
-      thumbnail: "/assets/Moonlight-Mirage-thumbnail.jpeg",
-    },
-  ];
+  const events = pastEvents;
 
   const [visibleEvents, setVisibleEvents] = useState(3);
   const [playingVideo, setPlayingVideo] = useState<string | null>(null);

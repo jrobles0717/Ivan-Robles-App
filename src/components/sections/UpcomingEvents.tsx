@@ -16,41 +16,12 @@ import {
   FaTicketAlt,
 } from "react-icons/fa";
 
+import { type EventItem, upcomingEvents } from "../../data/events";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useState } from "react";
 
-type EventItem = {
-  date: string;
-  location: string;
-  description: string;
-  time: string;
-  status?: string;
-  ticketUrl?: string;
-  mapUrl?: string;
-};
-
 const UpcomingEvents = () => {
-  const events: EventItem[] = [
-    {
-      date: "April 18, 2026",
-      location:
-        "Fifty Eight @ La Concha Renaissance by Marriott San Juan Resort",
-      description: "Tickets available at Ticket Center",
-      time: "Doors Open @ 8 PM",
-      status: "Tickets Available",
-      ticketUrl:
-        "https://tcpr.com/es-PR/shows/the%20return%20ivan%20robles/events",
-      mapUrl: "https://maps.app.goo.gl/3MsLPnfPww6Mv6a59",
-    },
-    // {
-    //   date: "Every Friday 2026",
-    //   location: "Beach Party @ Vivo Beach Club",
-    //   description: "Members Only",
-    //   time: "12 PM - 5 PM",
-    //   status: "Weekly Event",
-    //   // ticketUrl: "https://your-ticket-link.com",
-    // },
-  ];
+  const events: EventItem[] = upcomingEvents;
 
   const [visibleEvents, setVisibleEvents] = useState(6);
 
