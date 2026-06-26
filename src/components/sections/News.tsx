@@ -22,9 +22,9 @@ type NewsItem = {
 const News = () => {
   const newsItems: NewsItem[] = [
     {
-      title: "Ivan Robles in the Media",
+      title: "Iván Robles: la evolución del DJ desde la cabina hasta el escenario",
       summary:
-        "Read the latest coverage featuring Ivan Robles — his music, events, and impact on the house music scene.",
+        "Un artículo que documenta el recorrido de Iván Robles — desde sus inicios en la cabina hasta convertirse en una de las figuras más reconocidas de la escena house en Puerto Rico.",
       url: "https://wp.me/pewIOG-sHz",
       category: "Press",
       date: "2026",
