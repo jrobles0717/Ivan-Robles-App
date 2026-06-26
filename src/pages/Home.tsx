@@ -3,6 +3,7 @@ import FeaturedMusic from "../components/sections/FeaturedMusic";
 import Hero from "../components/sections/Hero";
 import IvanRoblesShow from "../components/sections/IvanRoblesShow";
 // import NewSongs from "../components/sections/newSongs";
+import News from "../components/sections/News";
 import PartyHighlights from "../components/sections/PartyHighlights";
 import PastEvents from "../components/sections/PastEvents";
 import PremiereSection from "../components/sections/PremiereSection";
@@ -35,6 +36,9 @@ const Home = () => {
 
       {/* Upcoming Events Section */}
       <UpcomingEvents />
+
+      {/* News Section */}
+      <News />
 
       {/* Sponsor Section */}
       <Sponsor />
