@@ -9,27 +9,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { type NewsItem, newsItems } from "../../data/news";
 import { FaExternalLinkAlt, FaNewspaper } from "react-icons/fa";
 
-type NewsItem = {
-  title: string;
-  summary: string;
-  url: string;
-  category: string;
-  date: string;
-};
-
 const News = () => {
-  const newsItems: NewsItem[] = [
-    {
-      title: "Iván Robles: la evolución del DJ desde la cabina hasta el escenario",
-      summary:
-        "A feature article documenting Iván Robles' journey — from his early days behind the booth to becoming one of the most recognized figures in Puerto Rico's house music scene.",
-      url: "https://wp.me/pewIOG-sHz",
-      category: "Press",
-      date: "2026",
-    },
-  ];
 
   return (
     <Box

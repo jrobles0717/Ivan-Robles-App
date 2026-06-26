@@ -9,19 +9,10 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { sponsors } from "../../data/sponsors";
 import { FaExternalLinkAlt } from "react-icons/fa";
 
 const Sponsor = () => {
-  const sponsors = [
-    {
-      name: "Pioneer DJ",
-      logo: "/assets/PioneerDJ.jpeg",
-      category: "Official Sponsor",
-      description:
-        "Supporting the sound, energy, and experience behind the Ivan Robles brand.",
-      url: "https://www.pioneerdj.com/",
-    },
-  ];
 
   return (
     <Box
