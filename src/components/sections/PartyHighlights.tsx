@@ -13,6 +13,11 @@ import { useState } from "react";
 const PartyHighlights = () => {
   const videos = [
     {
+      src: "/assets/Fiesta-en-la-playa-2026.mp4",
+      title: "Fiesta en la Playa 2026",
+      thumbnail: "/assets/Fiesta-en-la-playa-2026-thumbnail.jpeg",
+    },
+    {
       src: "/assets/April-18-2026-party-video.MOV",
       title: "The Return 2026",
       thumbnail: "/assets/April-18-2026-party.JPG",
