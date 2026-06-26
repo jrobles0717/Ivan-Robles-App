@@ -40,6 +40,7 @@ const Subscribe = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const [windowSize, setWindowSize] = useState({
     width: typeof window !== "undefined" ? window.innerWidth : 1200,
     height: typeof window !== "undefined" ? window.innerHeight : 800,
@@ -108,6 +109,8 @@ const Subscribe = () => {
       });
 
       setSubmitted(true);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 6000);
       setFormData({
         name: "",
         email: "",
@@ -176,11 +179,11 @@ const Subscribe = () => {
       />
 
       {/* Confetti */}
-      {submitted && (
+      {showConfetti && (
         <Confetti
           width={windowSize.width}
           height={windowSize.height}
-          recycle={true}
+          recycle={false}
           style={{
             position: "fixed",
             top: 0,

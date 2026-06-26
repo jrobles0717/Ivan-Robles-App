@@ -145,7 +145,7 @@ const Footer = () => {
                 fontWeight="bold"
                 mb={3}
               >
-                DJ • Producer • Live Experience
+                House Music DJ & Producer
               </Text>
               <Text color="gray.400" maxW="360px" lineHeight="1.8">
                 Bringing music, energy, and unforgettable nightlife experiences
@@ -241,6 +241,14 @@ const Footer = () => {
             >
               Subscribe
             </ChakraRouterLink>
+
+            <Link
+              href="/#news"
+              color="gray.300"
+              _hover={{ textDecoration: "none", color: "#66d9ff" }}
+            >
+              News
+            </Link>
 
             <Link
               href="https://open.spotify.com/artist/08J3Z1fG0FL98AkVqiRBMn"
