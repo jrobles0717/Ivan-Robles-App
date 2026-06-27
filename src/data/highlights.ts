@@ -11,7 +11,7 @@ export const partyHighlights: VideoItem[] = [
     thumbnail: "/assets/Fiesta-en-la-playa-2026-thumbnail.jpeg",
   },
   {
-    src: "/assets/April-18-2026-party-video.MOV",
+    src: "/assets/April-18-2026-party-video.mp4",
     title: "The Return 2026",
     thumbnail: "/assets/April-18-2026-party.JPG",
   },
@@ -31,10 +31,10 @@ export type PastEventItem = {
 
 export const pastEvents: PastEventItem[] = [
   {
-    src: "/assets/Recap-2025.MOV",
+    src: "/assets/Recap-2025.mp4",
     title: "Recap 2025",
     date: "December 2025",
-    thumbnail: "/assets/Recap-2025-thumbnail.png",
+    thumbnail: "/assets/Recap-2025-thumbnail.jpeg",
   },
   {
     src: "/assets/Fiesta-en-la-playa-II-2025.mp4",

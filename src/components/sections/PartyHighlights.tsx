@@ -155,6 +155,7 @@ const PartyHighlights = () => {
                     width="100%"
                     height="100%"
                     objectFit="cover"
+                    loading="lazy"
                     transition="transform 0.45s ease, filter 0.35s ease"
                     _groupHover={{
                       transform: "scale(1.06)",
