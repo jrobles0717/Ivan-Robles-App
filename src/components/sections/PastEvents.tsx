@@ -125,6 +125,7 @@ const PastEvents = () => {
                     width="100%"
                     height="100%"
                     objectFit="cover"
+                    loading="lazy"
                     filter="grayscale(35%)"
                     transition="all 0.35s ease"
                     _groupHover={{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface IntroVideoProps {
   onVideoEnd: () => void;
@@ -6,6 +6,15 @@ interface IntroVideoProps {
 }
 
 const IntroVideo: React.FC<IntroVideoProps> = ({ onVideoEnd, videoSrc }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [canPlay, setCanPlay] = useState(false);
+
+  useEffect(() => {
+    // Auto-skip after 8s max so a slow mobile connection never gets stuck
+    const timeout = setTimeout(onVideoEnd, 8000);
+    return () => clearTimeout(timeout);
+  }, [onVideoEnd]);
+
   return (
     <div
       style={{
@@ -23,21 +32,24 @@ const IntroVideo: React.FC<IntroVideoProps> = ({ onVideoEnd, videoSrc }) => {
       }}
     >
       <video
+        ref={videoRef}
         autoPlay
         muted
         playsInline
+        preload="auto"
+        onCanPlay={() => setCanPlay(true)}
         onEnded={onVideoEnd}
         style={{
           width: "100%",
           height: "100%",
           objectFit: "contain",
+          opacity: canPlay ? 1 : 0,
+          transition: "opacity 0.4s ease",
         }}
       >
         <source src={videoSrc} type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
-      {/* Skip button with responsive positioning */}
       <button
         onClick={onVideoEnd}
         style={{

@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { type NewsItem, newsItems } from "../../data/news";
+import { newsItems } from "../../data/news";
 import { FaExternalLinkAlt, FaNewspaper } from "react-icons/fa";
 
 const News = () => {

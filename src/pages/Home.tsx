@@ -1,47 +1,58 @@
-import { Box } from "@chakra-ui/react";
-import FeaturedMusic from "../components/sections/FeaturedMusic";
+import { Box, Spinner, Center } from "@chakra-ui/react";
+import { lazy, Suspense } from "react";
 import Hero from "../components/sections/Hero";
-import IvanRoblesShow from "../components/sections/IvanRoblesShow";
-// import NewSongs from "../components/sections/newSongs";
-import News from "../components/sections/News";
-import PartyHighlights from "../components/sections/PartyHighlights";
-import PastEvents from "../components/sections/PastEvents";
-import PremiereSection from "../components/sections/PremiereSection";
-import Sponsor from "../components/sections/Sponsor";
-import UpcomingEvents from "../components/sections/UpcomingEvents";
+
+const PartyHighlights = lazy(() => import("../components/sections/PartyHighlights"));
+const PastEvents = lazy(() => import("../components/sections/PastEvents"));
+const PremiereSection = lazy(() => import("../components/sections/PremiereSection"));
+const IvanRoblesShow = lazy(() => import("../components/sections/IvanRoblesShow"));
+const FeaturedMusic = lazy(() => import("../components/sections/FeaturedMusic"));
+const UpcomingEvents = lazy(() => import("../components/sections/UpcomingEvents"));
+const News = lazy(() => import("../components/sections/News"));
+const Sponsor = lazy(() => import("../components/sections/Sponsor"));
+
+const SectionFallback = () => (
+  <Center py={20}>
+    <Spinner color="#00aaff" size="lg" />
+  </Center>
+);
 
 const Home = () => {
   return (
     <Box>
-      {/* Hero Section with Background Image */}
       <Hero />
 
-      {/* New Songs Section */}
-      {/* <NewSongs /> */}
+      <Suspense fallback={<SectionFallback />}>
+        <PartyHighlights />
+      </Suspense>
 
-      {/* Event Videos Section */}
-      <PartyHighlights />
+      <Suspense fallback={<SectionFallback />}>
+        <PastEvents />
+      </Suspense>
 
-      {/* Past Events Videos Section */}
-      <PastEvents />
+      <Suspense fallback={<SectionFallback />}>
+        <PremiereSection />
+      </Suspense>
 
-      {/* Premiere Video Section */}
-      <PremiereSection />
+      <Suspense fallback={<SectionFallback />}>
+        <IvanRoblesShow />
+      </Suspense>
 
-      {/* The Ivan Robles Show Section */}
-      <IvanRoblesShow />
+      <Suspense fallback={<SectionFallback />}>
+        <FeaturedMusic />
+      </Suspense>
 
-      {/* Featured Music Section */}
-      <FeaturedMusic />
+      <Suspense fallback={<SectionFallback />}>
+        <UpcomingEvents />
+      </Suspense>
 
-      {/* Upcoming Events Section */}
-      <UpcomingEvents />
+      <Suspense fallback={<SectionFallback />}>
+        <News />
+      </Suspense>
 
-      {/* News Section */}
-      <News />
-
-      {/* Sponsor Section */}
-      <Sponsor />
+      <Suspense fallback={<SectionFallback />}>
+        <Sponsor />
+      </Suspense>
     </Box>
   );
 };
