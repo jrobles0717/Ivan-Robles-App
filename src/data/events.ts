@@ -15,8 +15,10 @@ export const upcomingEvents: EventItem[] = [
     description: "Fiesta en la Playa 2026 — Closing Summer. Tickets available at Ticket Center",
     time: "Sunday, Domingo 23 Agosto",
     status: "Tickets Available",
-    ticketUrl: "https://www.tcpr.com/",
-    mapUrl: "https://maps.app.goo.gl/uJ4jrBhMLGhRK2SbA",
+    ticketUrl:
+      "https://tcpr.com/es-PR/shows/fiesta%20en%20la%20playa%20closing%20summer/events",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Caribe+Hilton+San+Juan+Puerto+Rico",
   },
 ];
 
@@ -29,6 +31,7 @@ export type FeaturedEvent = {
   video: string;
   videoPoster: string;
   ticketUrl: string;
+  mapUrl: string;
 };
 
 export const featuredEvent: FeaturedEvent = {
@@ -39,5 +42,8 @@ export const featuredEvent: FeaturedEvent = {
   flyer: "/assets/Fiesta-en-la-playa-2026-closing-summer.jpeg",
   video: "/assets/Fiesta-en-la-playa-2026-closing-summer.mp4",
   videoPoster: "/assets/Fiesta-en-la-playa-2026-closing-summer-video-thumb.jpeg",
-  ticketUrl: "https://www.tcpr.com/",
+  ticketUrl:
+    "https://tcpr.com/es-PR/shows/fiesta%20en%20la%20playa%20closing%20summer/events",
+  mapUrl:
+    "https://www.google.com/maps/search/?api=1&query=Caribe+Hilton+San+Juan+Puerto+Rico",
 };

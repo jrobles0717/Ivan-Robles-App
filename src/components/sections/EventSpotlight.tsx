@@ -330,7 +330,7 @@ const EventSpotlight = () => {
                 transition="all 0.3s ease"
                 onClick={() =>
                   window.open(
-                    "https://maps.app.goo.gl/uJ4jrBhMLGhRK2SbA",
+                    featuredEvent.mapUrl,
                     "_blank",
                     "noopener,noreferrer"
                   )
