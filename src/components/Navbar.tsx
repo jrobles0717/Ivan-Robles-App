@@ -42,8 +42,7 @@ const MenuToggleButton = ({ isOpen, onToggle }: MenuToggleButtonProps) => {
       borderRadius="full"
       border="1px solid"
       borderColor={isOpen ? "rgba(102,217,255,0.24)" : "rgba(255,255,255,0.10)"}
-      bg={isOpen ? "rgba(0,170,255,0.10)" : "rgba(255,255,255,0.05)"}
-      backdropFilter="blur(14px)"
+      bg={isOpen ? "rgba(0,170,255,0.14)" : "rgba(255,255,255,0.08)"}
       boxShadow={
         isOpen
           ? "0 0 0 1px rgba(102,217,255,0.08), 0 14px 32px rgba(0,170,255,0.18)"
@@ -245,7 +244,9 @@ const Navbar: React.FC = () => {
           mx="auto"
           borderRadius={{ base: "20px", md: "24px" }}
           bg={
-            showGlassNavbar ? "rgba(8, 14, 24, 0.82)" : "rgba(8, 14, 24, 0.08)"
+            showGlassNavbar
+              ? { base: "rgba(8, 14, 24, 0.96)", md: "rgba(8, 14, 24, 0.82)" }
+              : { base: "rgba(8, 14, 24, 0.35)", md: "rgba(8, 14, 24, 0.08)" }
           }
           border="1px solid"
           borderColor={
@@ -253,7 +254,10 @@ const Navbar: React.FC = () => {
               ? "rgba(102, 217, 255, 0.16)"
               : "rgba(255, 255, 255, 0.08)"
           }
-          backdropFilter={showGlassNavbar ? "blur(16px)" : "blur(6px)"}
+          backdropFilter={{
+            base: "none",
+            md: showGlassNavbar ? "blur(16px)" : "blur(6px)",
+          }}
           boxShadow={
             showGlassNavbar ? "0 14px 40px rgba(0, 0, 0, 0.28)" : "none"
           }

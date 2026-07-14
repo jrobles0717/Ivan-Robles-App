@@ -26,7 +26,7 @@ const App = () => {
   if (showIntro) {
     return (
       <IntroVideo
-        videoSrc="/assets/IROB-Intro.MP4"
+        videoSrc="/assets/IROB-Intro.mp4"
         onVideoEnd={handleVideoEnd}
       />
     );
