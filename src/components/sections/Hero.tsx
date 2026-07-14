@@ -40,7 +40,7 @@ const Hero = () => {
       <Box
         position="absolute"
         inset={0}
-        backgroundImage="url('/assets/hero-background.jpg')"
+        backgroundImage="url('/assets/hero-background.webp')"
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"

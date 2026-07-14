@@ -137,7 +137,7 @@ const Subscribe = () => {
       <Box
         position="absolute"
         inset={0}
-        backgroundImage="url('/assets/dj-background-2.jpeg')"
+        backgroundImage="url('/assets/dj-background-2.webp')"
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"

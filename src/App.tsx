@@ -15,7 +15,14 @@ const AOSInitializer = lazy(() => import("./components/AOSInitializer"));
 
 const App = () => {
   const [showIntro, setShowIntro] = useState(() => {
-    return !sessionStorage.getItem("intro-seen");
+    // Skip the intro on mobile — it delays first paint too much on
+    // slow connections. Desktop keeps the full intro experience.
+    const width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      window.screen.width;
+    const isMobile = width > 0 && width < 768;
+    return !isMobile && !sessionStorage.getItem("intro-seen");
   });
 
   const handleVideoEnd = () => {

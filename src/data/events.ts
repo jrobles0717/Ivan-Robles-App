@@ -39,7 +39,7 @@ export const featuredEvent: FeaturedEvent = {
   edition: "Closing Summer",
   date: "Domingo 23 Agosto 2026",
   location: "Caribe Hilton Beach",
-  flyer: "/assets/Fiesta-en-la-playa-2026-closing-summer.jpeg",
+  flyer: "/assets/Fiesta-en-la-playa-2026-closing-summer.webp",
   video: "/assets/Fiesta-en-la-playa-2026-closing-summer.mp4",
   videoPoster: "/assets/Fiesta-en-la-playa-2026-closing-summer-video-thumb.jpeg",
   ticketUrl:

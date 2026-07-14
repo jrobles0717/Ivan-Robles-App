@@ -54,7 +54,7 @@ const About = () => {
       <Box
         position="absolute"
         inset={0}
-        backgroundImage="url('/assets/dj-background.jpg')"
+        backgroundImage="url('/assets/dj-background.webp')"
         backgroundSize="cover"
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
@@ -295,7 +295,7 @@ const About = () => {
 
               <Box p={{ base: 4, md: 5 }}>
                 <Image
-                  src="/assets/ivan-robles-about-1.jpg"
+                  src="/assets/ivan-robles-about-1.webp"
                   alt="Ivan Robles performing live"
                   borderRadius="24px"
                   width="100%"
@@ -518,7 +518,7 @@ const About = () => {
                 }}
               >
                 <Image
-                  src="/assets/ivan-robles-about-2.jpg"
+                  src="/assets/ivan-robles-about-2.webp"
                   alt="Ivan at radio show"
                   objectFit="cover"
                   height="320px"
