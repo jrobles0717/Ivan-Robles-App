@@ -2,7 +2,6 @@ import { Box, Spinner, Center } from "@chakra-ui/react";
 import { lazy, Suspense } from "react";
 import Hero from "../components/sections/Hero";
 
-const EventSpotlight = lazy(() => import("../components/sections/EventSpotlight"));
 const PartyHighlights = lazy(() => import("../components/sections/PartyHighlights"));
 const PastEvents = lazy(() => import("../components/sections/PastEvents"));
 const PremiereSection = lazy(() => import("../components/sections/PremiereSection"));
@@ -22,10 +21,6 @@ const Home = () => {
   return (
     <Box>
       <Hero />
-
-      <Suspense fallback={<SectionFallback />}>
-        <EventSpotlight />
-      </Suspense>
 
       <Suspense fallback={<SectionFallback />}>
         <PartyHighlights />
