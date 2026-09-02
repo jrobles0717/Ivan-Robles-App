@@ -6,6 +6,11 @@ export type VideoItem = {
 
 export const partyHighlights: VideoItem[] = [
   {
+    src: "/assets/Fiesta-en-la-playa-2026-closing-summer-aftermovie.mp4",
+    title: "Fiesta en la Playa 2026 — Closing Summer Aftermovie",
+    thumbnail: "/assets/Fiesta-en-la-playa-2026-closing-summer.webp",
+  },
+  {
     src: "/assets/Fiesta-en-la-playa-2026.mp4",
     title: "Fiesta en la Playa 2026",
     thumbnail: "/assets/Fiesta-en-la-playa-2026-thumbnail.jpeg",
