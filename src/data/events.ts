@@ -8,19 +8,7 @@ export type EventItem = {
   mapUrl?: string;
 };
 
-export const upcomingEvents: EventItem[] = [
-  {
-    date: "August 23, 2026",
-    location: "Caribe Hilton Beach",
-    description: "Fiesta en la Playa 2026 — Closing Summer. Tickets available at Ticket Center",
-    time: "Sunday, Domingo 23 Agosto",
-    status: "Tickets Available",
-    ticketUrl:
-      "https://tcpr.com/es-PR/shows/fiesta%20en%20la%20playa%20closing%20summer/events",
-    mapUrl:
-      "https://www.google.com/maps/search/?api=1&query=Caribe+Hilton+San+Juan+Puerto+Rico",
-  },
-];
+export const upcomingEvents: EventItem[] = [];
 
 export type FeaturedEvent = {
   title: string;
