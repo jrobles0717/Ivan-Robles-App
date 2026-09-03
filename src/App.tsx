@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import IntroVideo from "./components/IntroVideo";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/common/ScrollToTop";
+import Shop from "./pages/Shop";
 import Subscribe from "./pages/Subscribe";
 import { Suspense, lazy, useState } from "react";
 
@@ -51,6 +52,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/subscribe" element={<Subscribe />} />
           </Routes>
         </main>

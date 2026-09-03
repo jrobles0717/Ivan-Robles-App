@@ -217,6 +217,7 @@ const Navbar: React.FC = () => {
     () => [
       { label: "Home", to: "/" },
       { label: "About Me", to: "/about" },
+      { label: "Shop", to: "/shop" },
     ],
     []
   );
