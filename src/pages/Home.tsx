@@ -1,6 +1,7 @@
 import { Box, Spinner, Center } from "@chakra-ui/react";
 import { lazy, Suspense } from "react";
 import Hero from "../components/sections/Hero";
+import LazySection from "../components/common/LazySection";
 
 const PartyHighlights = lazy(() => import("../components/sections/PartyHighlights"));
 const PastEvents = lazy(() => import("../components/sections/PastEvents"));
@@ -22,37 +23,53 @@ const Home = () => {
     <Box>
       <Hero />
 
-      <Suspense fallback={<SectionFallback />}>
-        <PartyHighlights />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <PartyHighlights />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <PastEvents />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <PastEvents />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <PremiereSection />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <PremiereSection />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <IvanRoblesShow />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <IvanRoblesShow />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <FeaturedMusic />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <FeaturedMusic />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <UpcomingEvents />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <UpcomingEvents />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <News />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <News />
+        </Suspense>
+      </LazySection>
 
-      <Suspense fallback={<SectionFallback />}>
-        <Sponsor />
-      </Suspense>
+      <LazySection>
+        <Suspense fallback={<SectionFallback />}>
+          <Sponsor />
+        </Suspense>
+      </LazySection>
     </Box>
   );
 };
