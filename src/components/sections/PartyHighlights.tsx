@@ -38,7 +38,7 @@ const PartyHighlights = () => {
         height="280px"
         borderRadius="full"
         bg="rgba(0, 170, 255, 0.12)"
-        filter="blur(90px)"
+        filter={{ base: "none", md: "blur(90px)" }}
         pointerEvents="none"
       />
       <Box
@@ -49,7 +49,7 @@ const PartyHighlights = () => {
         height="320px"
         borderRadius="full"
         bg="rgba(0, 170, 255, 0.08)"
-        filter="blur(100px)"
+        filter={{ base: "none", md: "blur(100px)" }}
         pointerEvents="none"
       />
 
