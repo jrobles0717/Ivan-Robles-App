@@ -502,6 +502,7 @@ const Subscribe = () => {
           </Box>
         </SimpleGrid>
       </Box>
+      </Box>
     </>
   );
 };
