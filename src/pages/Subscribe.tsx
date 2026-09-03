@@ -15,6 +15,7 @@ import {
   FormErrorMessage,
   FormLabel,
 } from "@chakra-ui/form-control";
+import Seo from "../components/common/Seo";
 import type { FormData, FormErrors, OptionType } from "../util/types";
 import {
   countryOptions,
@@ -124,15 +125,21 @@ const Subscribe = () => {
   };
 
   return (
-    <Box
-      position="relative"
-      overflow="hidden"
-      bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f1012 100%)"
-      color="white"
-      py={{ base: 16, md: 20 }}
-      px={{ base: 5, md: 8 }}
-      minH="100vh"
-    >
+    <>
+      <Seo
+        title="Join the Guest List | Iván Robles"
+        description="Subscribe to get event updates, guest list access, and new music releases from Iván Robles straight to your inbox."
+        path="/subscribe"
+      />
+      <Box
+        position="relative"
+        overflow="hidden"
+        bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f1012 100%)"
+        color="white"
+        py={{ base: 16, md: 20 }}
+        px={{ base: 5, md: 8 }}
+        minH="100vh"
+      >
       {/* Background image */}
       <Box
         position="absolute"
@@ -495,7 +502,7 @@ const Subscribe = () => {
           </Box>
         </SimpleGrid>
       </Box>
-    </Box>
+    </>
   );
 };
 

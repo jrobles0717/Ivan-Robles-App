@@ -2,6 +2,7 @@ import { Box, Spinner, Center } from "@chakra-ui/react";
 import { lazy, Suspense } from "react";
 import Hero from "../components/sections/Hero";
 import LazySection from "../components/common/LazySection";
+import Seo from "../components/common/Seo";
 
 const PartyHighlights = lazy(() => import("../components/sections/PartyHighlights"));
 const PastEvents = lazy(() => import("../components/sections/PastEvents"));
@@ -21,6 +22,11 @@ const SectionFallback = () => (
 const Home = () => {
   return (
     <Box>
+      <Seo
+        title="Iván Robles | House Music DJ & Producer"
+        description="Iván Robles — House Music DJ & Producer from Puerto Rico. Events, mixes, and more."
+        path="/"
+      />
       <Hero />
 
       <LazySection>

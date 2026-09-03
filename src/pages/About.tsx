@@ -11,6 +11,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import Seo from "../components/common/Seo";
+
 const About = () => {
   const milestones = [
     {
@@ -41,15 +43,21 @@ const About = () => {
   ];
 
   return (
-    <Box
-      as="section"
-      position="relative"
-      overflow="hidden"
-      bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f1012 100%)"
-      color="white"
-      py={{ base: 16, md: 20 }}
-      px={{ base: 5, md: 8 }}
-    >
+    <>
+      <Seo
+        title="About Iván Robles | House Music DJ & Producer"
+        description="Get to know Iván Robles — his roots, his sound, and the journey from local sets in Puerto Rico to house music stages beyond the island."
+        path="/about"
+      />
+      <Box
+        as="section"
+        position="relative"
+        overflow="hidden"
+        bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f1012 100%)"
+        color="white"
+        py={{ base: 16, md: 20 }}
+        px={{ base: 5, md: 8 }}
+      >
       {/* Background image */}
       <Box
         position="absolute"
@@ -651,7 +659,8 @@ const About = () => {
           </Text>
         </Box>
       </Box>
-    </Box>
+      </Box>
+    </>
   );
 };
 
