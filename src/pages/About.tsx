@@ -204,7 +204,7 @@ const About = () => {
               borderRadius="28px"
               bg="rgba(255,255,255,0.05)"
               border="1px solid rgba(255,255,255,0.10)"
-              backdropFilter="blur(14px)"
+              backdropFilter={{ base: "none", md: "blur(14px)" }}
               boxShadow="0 20px 60px rgba(0,0,0,0.30)"
               data-aos="fade-up"
               data-aos-delay="120"
@@ -248,7 +248,7 @@ const About = () => {
               overflow="hidden"
               bg="rgba(255,255,255,0.05)"
               border="1px solid rgba(255,255,255,0.10)"
-              backdropFilter="blur(14px)"
+              backdropFilter={{ base: "none", md: "blur(14px)" }}
               boxShadow="0 20px 60px rgba(0,0,0,0.35)"
             >
               <Box
@@ -320,7 +320,7 @@ const About = () => {
                 bg="rgba(255,255,255,0.05)"
                 border="1px solid rgba(255,255,255,0.08)"
                 textAlign="center"
-                backdropFilter="blur(12px)"
+                backdropFilter={{ base: "none", md: "blur(12px)" }}
                 boxShadow="0 18px 40px rgba(0,0,0,0.20)"
                 data-aos="fade-up"
                 data-aos-delay={`${index * 80}`}
@@ -382,7 +382,7 @@ const About = () => {
                   borderRadius="28px"
                   bg="rgba(255,255,255,0.05)"
                   border="1px solid rgba(255,255,255,0.10)"
-                  backdropFilter="blur(14px)"
+                  backdropFilter={{ base: "none", md: "blur(14px)" }}
                   boxShadow="0 20px 60px rgba(0,0,0,0.28)"
                   transition="all 0.3s ease"
                   _hover={{
@@ -422,7 +422,7 @@ const About = () => {
             borderRadius="30px"
             bg="rgba(255,255,255,0.05)"
             border="1px solid rgba(255,255,255,0.10)"
-            backdropFilter="blur(14px)"
+            backdropFilter={{ base: "none", md: "blur(14px)" }}
             boxShadow="0 20px 60px rgba(0,0,0,0.30)"
             h="100%"
             data-aos="fade-left"
@@ -563,7 +563,7 @@ const About = () => {
                 borderRadius="28px"
                 bg="rgba(255,255,255,0.05)"
                 border="1px solid rgba(255,255,255,0.10)"
-                backdropFilter="blur(14px)"
+                backdropFilter={{ base: "none", md: "blur(14px)" }}
                 boxShadow="0 20px 60px rgba(0,0,0,0.30)"
                 display="flex"
                 flexDirection="column"
@@ -624,7 +624,7 @@ const About = () => {
           borderRadius="30px"
           bg="rgba(255,255,255,0.05)"
           border="1px solid rgba(255,255,255,0.10)"
-          backdropFilter="blur(14px)"
+          backdropFilter={{ base: "none", md: "blur(14px)" }}
           boxShadow="0 20px 60px rgba(0,0,0,0.30)"
           textAlign="center"
           data-aos="fade-up"

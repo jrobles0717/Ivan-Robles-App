@@ -109,7 +109,7 @@ const Hero = () => {
               bg="rgba(255,255,255,0.06)"
               color="#66d9ff"
               border="1px solid rgba(102, 217, 255, 0.22)"
-              backdropFilter="blur(8px)"
+              backdropFilter={{ base: "none", md: "blur(8px)" }}
               fontSize="0.75rem"
               letterSpacing="0.08em"
               textTransform="uppercase"
@@ -365,7 +365,7 @@ const Hero = () => {
                 overflow="hidden"
                 bg="rgba(255,255,255,0.05)"
                 border="1px solid rgba(255,255,255,0.10)"
-                backdropFilter="blur(12px)"
+                backdropFilter={{ base: "none", md: "blur(12px)" }}
                 boxShadow="0 20px 60px rgba(0,0,0,0.35)"
               >
                 {/* IMAGE AREA */}

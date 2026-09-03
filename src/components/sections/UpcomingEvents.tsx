@@ -80,7 +80,7 @@ const UpcomingEvents = () => {
             bg="rgba(255,255,255,0.06)"
             color="#66d9ff"
             border="1px solid rgba(102, 217, 255, 0.24)"
-            backdropFilter="blur(8px)"
+            backdropFilter={{ base: "none", md: "blur(8px)" }}
             fontSize="0.78rem"
             letterSpacing="0.08em"
             textTransform="uppercase"
@@ -137,7 +137,7 @@ const UpcomingEvents = () => {
               overflow="hidden"
               bg="rgba(255,255,255,0.05)"
               border="1px solid rgba(255,255,255,0.10)"
-              backdropFilter="blur(14px)"
+              backdropFilter={{ base: "none", md: "blur(14px)" }}
               boxShadow="0 20px 60px rgba(0,0,0,0.35)"
             >
               <SimpleGrid columns={{ base: 1, lg: 2 }} gap={0}>
@@ -337,7 +337,7 @@ const UpcomingEvents = () => {
                   overflow="hidden"
                   bg="rgba(255,255,255,0.05)"
                   border="1px solid rgba(255,255,255,0.10)"
-                  backdropFilter="blur(14px)"
+                  backdropFilter={{ base: "none", md: "blur(14px)" }}
                   boxShadow="0 20px 60px rgba(0,0,0,0.35)"
                   transition="all 0.3s ease"
                   _hover={{
@@ -457,7 +457,7 @@ const UpcomingEvents = () => {
             borderRadius="28px"
             bg="rgba(255,255,255,0.05)"
             border="1px solid rgba(255,255,255,0.10)"
-            backdropFilter="blur(14px)"
+            backdropFilter={{ base: "none", md: "blur(14px)" }}
             boxShadow="0 20px 60px rgba(0,0,0,0.35)"
             p={{ base: 8, md: 10 }}
             textAlign="center"

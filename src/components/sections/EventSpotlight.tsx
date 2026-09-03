@@ -60,7 +60,7 @@ const EventSpotlight = () => {
           bg="rgba(255,255,255,0.06)"
           color="#66d9ff"
           border="1px solid rgba(102, 217, 255, 0.22)"
-          backdropFilter="blur(8px)"
+          backdropFilter={{ base: "none", md: "blur(8px)" }}
           fontSize="0.75rem"
           letterSpacing="0.08em"
           textTransform="uppercase"
@@ -237,7 +237,7 @@ const EventSpotlight = () => {
                   borderRadius="full"
                   bg="rgba(0, 170, 255, 0.18)"
                   border="1px solid rgba(255,255,255,0.28)"
-                  backdropFilter="blur(8px)"
+                  backdropFilter={{ base: "none", md: "blur(8px)" }}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
@@ -269,7 +269,7 @@ const EventSpotlight = () => {
             borderRadius="20px"
             bg="rgba(255,255,255,0.05)"
             border="1px solid rgba(255,255,255,0.10)"
-            backdropFilter="blur(14px)"
+            backdropFilter={{ base: "none", md: "blur(14px)" }}
           >
             <Text
               fontSize="xs"
