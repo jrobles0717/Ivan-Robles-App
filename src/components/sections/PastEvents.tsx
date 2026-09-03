@@ -168,7 +168,7 @@ const PastEvents = () => {
                     height={{ base: "56px", md: "64px" }}
                     borderRadius="full"
                     bg="rgba(255,255,255,0.14)"
-                    backdropFilter="blur(6px)"
+                    backdropFilter={{ base: "none", md: "blur(6px)" }}
                     border="1px solid rgba(255,255,255,0.25)"
                     display="flex"
                     alignItems="center"

@@ -298,7 +298,7 @@ const Subscribe = () => {
               borderRadius="28px"
               bg="rgba(255,255,255,0.05)"
               border="1px solid rgba(255,255,255,0.10)"
-              backdropFilter="blur(14px)"
+              backdropFilter={{ base: "none", md: "blur(14px)" }}
               boxShadow="0 20px 60px rgba(0,0,0,0.30)"
               data-aos="fade-up"
               data-aos-delay="340"
@@ -334,7 +334,7 @@ const Subscribe = () => {
             borderRadius="30px"
             bg="rgba(255,255,255,0.05)"
             border="1px solid rgba(255,255,255,0.10)"
-            backdropFilter="blur(14px)"
+            backdropFilter={{ base: "none", md: "blur(14px)" }}
             boxShadow="0 20px 60px rgba(0,0,0,0.35)"
             overflow="hidden"
           >

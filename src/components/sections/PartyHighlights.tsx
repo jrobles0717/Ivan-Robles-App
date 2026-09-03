@@ -198,7 +198,7 @@ const PartyHighlights = () => {
                     borderRadius="full"
                     bg="rgba(0, 170, 255, 0.18)"
                     border="1px solid rgba(255,255,255,0.28)"
-                    backdropFilter="blur(8px)"
+                    backdropFilter={{ base: "none", md: "blur(8px)" }}
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
