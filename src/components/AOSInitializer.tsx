@@ -11,6 +11,7 @@ const AOSInitializer = () => {
       easing: "ease-in-out", // Smooth easing
       once: true, // Animate only once
       offset: 120, // Offset from the trigger point
+      disable: "mobile", // Skip scroll-triggered style recalculation on phones
     });
 
     // Refresh AOS to ensure animations are recalculated
