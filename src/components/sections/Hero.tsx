@@ -380,7 +380,7 @@ const Hero = () => {
                   overflow="hidden"
                 >
                   <Image
-                    src="/assets/ivan-robles-hero-pic.jpg"
+                    src="/assets/ivan-robles-hero-pic.webp"
                     alt="Ivan Robles"
                     width="100%"
                     height="100%"
