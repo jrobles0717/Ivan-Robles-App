@@ -78,7 +78,7 @@ const About = () => {
         height={{ base: "220px", md: "320px" }}
         borderRadius="full"
         bg="rgba(0, 170, 255, 0.12)"
-        filter="blur(90px)"
+        filter={{ base: "none", md: "blur(90px)" }}
         zIndex={1}
         pointerEvents="none"
       />
@@ -90,7 +90,7 @@ const About = () => {
         height={{ base: "240px", md: "360px" }}
         borderRadius="full"
         bg="rgba(0, 38, 185, 0.12)"
-        filter="blur(100px)"
+        filter={{ base: "none", md: "blur(100px)" }}
         zIndex={1}
         pointerEvents="none"
       />

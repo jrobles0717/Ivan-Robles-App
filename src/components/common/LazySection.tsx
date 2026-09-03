@@ -14,7 +14,7 @@ interface LazySectionProps {
 const LazySection = ({ children }: LazySectionProps) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "600px 0px",
+    rootMargin: "900px 0px",
   });
 
   return (
@@ -22,7 +22,11 @@ const LazySection = ({ children }: LazySectionProps) => {
       {inView ? (
         children
       ) : (
-        <Center py={20}>
+        <Center
+          py={20}
+          minH="320px"
+          bg="linear-gradient(180deg, #08111b 0%, #0b1420 45%, #0f0f10 100%)"
+        >
           <Spinner color="#00aaff" size="lg" />
         </Center>
       )}

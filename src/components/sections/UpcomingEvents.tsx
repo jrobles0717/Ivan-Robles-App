@@ -50,7 +50,7 @@ const UpcomingEvents = () => {
         height={{ base: "220px", md: "320px" }}
         borderRadius="full"
         bg="rgba(0, 170, 255, 0.12)"
-        filter="blur(90px)"
+        filter={{ base: "none", md: "blur(90px)" }}
         pointerEvents="none"
       />
       <Box
@@ -61,7 +61,7 @@ const UpcomingEvents = () => {
         height={{ base: "250px", md: "360px" }}
         borderRadius="full"
         bg="rgba(0, 38, 185, 0.10)"
-        filter="blur(100px)"
+        filter={{ base: "none", md: "blur(100px)" }}
         pointerEvents="none"
       />
 

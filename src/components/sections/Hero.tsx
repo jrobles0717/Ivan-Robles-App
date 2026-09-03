@@ -63,7 +63,7 @@ const Hero = () => {
         height={{ base: "240px", md: "320px" }}
         borderRadius="full"
         bg="rgba(0, 170, 255, 0.14)"
-        filter="blur(100px)"
+        filter={{ base: "none", md: "blur(100px)" }}
         pointerEvents="none"
       />
       <Box
@@ -74,7 +74,7 @@ const Hero = () => {
         height={{ base: "260px", md: "360px" }}
         borderRadius="full"
         bg="rgba(0, 38, 185, 0.16)"
-        filter="blur(110px)"
+        filter={{ base: "none", md: "blur(110px)" }}
         pointerEvents="none"
       />
 

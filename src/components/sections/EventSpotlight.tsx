@@ -36,7 +36,7 @@ const EventSpotlight = () => {
         height="300px"
         borderRadius="full"
         bg="rgba(255, 122, 0, 0.10)"
-        filter="blur(100px)"
+        filter={{ base: "none", md: "blur(100px)" }}
         pointerEvents="none"
       />
       <Box
@@ -47,7 +47,7 @@ const EventSpotlight = () => {
         height="320px"
         borderRadius="full"
         bg="rgba(0, 170, 255, 0.12)"
-        filter="blur(100px)"
+        filter={{ base: "none", md: "blur(100px)" }}
         pointerEvents="none"
       />
 
