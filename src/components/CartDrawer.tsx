@@ -120,7 +120,18 @@ const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
                   </Text>
                   <Text color="#66d9ff" fontSize="sm" mt={1}>
                     {money(item.price)}
+                    {item.quantity > 1 && (
+                      <Text as="span" color="gray.500">
+                        {" "}
+                        c/u
+                      </Text>
+                    )}
                   </Text>
+                  {item.quantity > 1 && (
+                    <Text color="white" fontWeight="bold" fontSize="sm">
+                      {money(item.price * item.quantity)}
+                    </Text>
+                  )}
                 </Box>
 
                 <Stack align="end" gap={2}>
