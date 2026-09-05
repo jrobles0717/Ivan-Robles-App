@@ -1,8 +1,10 @@
 import {
+  Badge,
   Box,
   Button,
   Flex,
   HStack,
+  IconButton,
   Image,
   Stack,
   Text,
@@ -10,8 +12,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 
+import CartDrawer from "./CartDrawer";
 import { ChakraRouterLink } from "../components/common/ChakraRouterLink";
+import { FaShoppingBag } from "react-icons/fa";
 import { HiOutlineBell } from "react-icons/hi";
+import { useCart } from "../context/CartContext";
 import { useLocation } from "react-router-dom";
 
 const NAVBAR_HEIGHT = {
@@ -191,6 +196,44 @@ const MenuToggleButton = ({ isOpen, onToggle }: MenuToggleButtonProps) => {
   );
 };
 
+const CartButton = () => {
+  const { totalQuantity } = useCart();
+  const [isCartOpen, setCartOpen] = useState(false);
+
+  return (
+    <>
+      <Box position="relative">
+        <IconButton
+          aria-label="Open cart"
+          variant="ghost"
+          color="white"
+          _hover={{ bg: "rgba(255,255,255,0.08)" }}
+          onClick={() => setCartOpen(true)}
+        >
+          <FaShoppingBag />
+        </IconButton>
+        {totalQuantity > 0 && (
+          <Badge
+            position="absolute"
+            top="-2px"
+            right="-2px"
+            borderRadius="full"
+            bg="#00aaff"
+            color="white"
+            fontSize="0.65rem"
+            px={1.5}
+            minW="18px"
+            textAlign="center"
+          >
+            {totalQuantity}
+          </Badge>
+        )}
+      </Box>
+      <CartDrawer isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
+    </>
+  );
+};
+
 const Navbar: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -353,6 +396,8 @@ const Navbar: React.FC = () => {
                 );
               })}
 
+              <CartButton />
+
               <ChakraRouterLink
                 to="/subscribe"
                 _hover={{ textDecoration: "none" }}
@@ -379,11 +424,14 @@ const Navbar: React.FC = () => {
               </ChakraRouterLink>
             </HStack>
 
-            {/* Mobile Menu Toggle */}
-            <MenuToggleButton
-              isOpen={isOpen}
-              onToggle={() => setOpen((prev) => !prev)}
-            />
+            {/* Mobile Cart + Menu Toggle */}
+            <HStack gap={2} display={{ base: "flex", md: "none" }}>
+              <CartButton />
+              <MenuToggleButton
+                isOpen={isOpen}
+                onToggle={() => setOpen((prev) => !prev)}
+              />
+            </HStack>
           </Flex>
 
           {/* Mobile Menu */}

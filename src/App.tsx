@@ -3,6 +3,7 @@ import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import About from "./pages/About";
+import { CartProvider } from "./context/CartContext";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import IntroVideo from "./components/IntroVideo";
@@ -42,22 +43,24 @@ const App = () => {
 
   return (
     <Router>
-      <ScrollToTop />
-      <Suspense fallback={null}>
-        <AOSInitializer />
-      </Suspense>
-      <div className="app-shell">
-        <Navbar />
-        <main className="app-main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/subscribe" element={<Subscribe />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <CartProvider>
+        <ScrollToTop />
+        <Suspense fallback={null}>
+          <AOSInitializer />
+        </Suspense>
+        <div className="app-shell">
+          <Navbar />
+          <main className="app-main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/shop" element={<Shop />} />
+              <Route path="/subscribe" element={<Subscribe />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </CartProvider>
     </Router>
   );
 };

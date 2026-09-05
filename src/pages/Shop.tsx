@@ -12,15 +12,231 @@ import { useEffect, useState } from "react";
 
 import { FaShoppingBag, FaTshirt } from "react-icons/fa";
 import Seo from "../components/common/Seo";
-import { sampleProducts } from "../data/shopSampleProducts";
+import { useCart } from "../context/CartContext";
+import { sampleProducts, type SampleProduct } from "../data/shopSampleProducts";
 import { getProducts, isShopifyConfigured } from "../lib/shopify";
-import type { ShopifyProduct } from "../types/shopify";
+import type { ShopifyProduct, ShopifyVariant } from "../types/shopify";
 
 const money = (amount: string | number, currency = "USD") =>
   new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
   }).format(Number(amount));
+
+const cardStyle = {
+  position: "relative" as const,
+  borderRadius: "24px",
+  overflow: "hidden" as const,
+  bg: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(255,255,255,0.10)",
+  boxShadow: "0 16px 40px rgba(0,0,0,0.30)",
+};
+
+const SizePicker = ({
+  sizes,
+  selected,
+  onSelect,
+}: {
+  sizes: string[];
+  selected: string;
+  onSelect: (size: string) => void;
+}) => (
+  <Stack direction="row" gap={1.5} flexWrap="wrap">
+    {sizes.map((size) => (
+      <Box
+        key={size}
+        as="button"
+        onClick={() => onSelect(size)}
+        px={2.5}
+        py={1}
+        borderRadius="md"
+        fontSize="0.72rem"
+        fontWeight="bold"
+        border="1px solid"
+        borderColor={
+          size === selected ? "#66d9ff" : "rgba(255,255,255,0.18)"
+        }
+        color={size === selected ? "#66d9ff" : "gray.400"}
+        bg={size === selected ? "rgba(0,170,255,0.14)" : "transparent"}
+        transition="all 0.2s ease"
+      >
+        {size}
+      </Box>
+    ))}
+  </Stack>
+);
+
+const SampleProductCard = ({ product }: { product: SampleProduct }) => {
+  const { addItem } = useCart();
+  const [size, setSize] = useState(product.sizes[0]);
+  const [added, setAdded] = useState(false);
+
+  const handleAdd = () => {
+    addItem({
+      key: `${product.id}-${size}`,
+      productId: product.id,
+      title: product.title,
+      size,
+      price: product.price,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  };
+
+  return (
+    <Box {...cardStyle}>
+      <Badge
+        position="absolute"
+        top="12px"
+        left="12px"
+        zIndex={1}
+        px={2.5}
+        py={1}
+        borderRadius="full"
+        bg="rgba(0,0,0,0.55)"
+        color="#66d9ff"
+        border="1px solid rgba(102,217,255,0.3)"
+        fontSize="0.65rem"
+        letterSpacing="0.06em"
+        textTransform="uppercase"
+      >
+        Muestra
+      </Badge>
+
+      <Box
+        h="220px"
+        bg="linear-gradient(135deg, rgba(0,170,255,0.14), rgba(255,255,255,0.02))"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <FaTshirt size={40} color="#66d9ff" />
+      </Box>
+
+      <Stack gap={2.5} p={5}>
+        <Heading as="h3" size="sm" color="white">
+          {product.title}
+        </Heading>
+        <Text color="#66d9ff" fontWeight="bold">
+          {money(product.price)}
+        </Text>
+
+        <SizePicker sizes={product.sizes} selected={size} onSelect={setSize} />
+
+        <Button
+          size="sm"
+          bg={added ? "#1f8a5f" : "#00aaff"}
+          color="white"
+          _hover={{ bg: added ? "#1f8a5f" : "#008ecc" }}
+          onClick={handleAdd}
+        >
+          {added ? "Agregado ✓" : "Add to Cart"}
+        </Button>
+      </Stack>
+    </Box>
+  );
+};
+
+const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
+  const { addItem } = useCart();
+  const availableVariants = product.variants.filter((v) => v.availableForSale);
+  const variants = availableVariants.length ? availableVariants : product.variants;
+
+  const [variant, setVariant] = useState<ShopifyVariant | undefined>(
+    variants[0]
+  );
+  const [added, setAdded] = useState(false);
+
+  if (!variant) return null;
+
+  const sizeOption = variant.selectedOptions.find(
+    (opt) => opt.name.toLowerCase() === "size"
+  );
+  const sizes = Array.from(
+    new Set(
+      product.variants
+        .map((v) => v.selectedOptions.find((o) => o.name.toLowerCase() === "size")?.value)
+        .filter((v): v is string => Boolean(v))
+    )
+  );
+
+  const handleSelectSize = (size: string) => {
+    const match = product.variants.find((v) =>
+      v.selectedOptions.some(
+        (o) => o.name.toLowerCase() === "size" && o.value === size
+      )
+    );
+    if (match) setVariant(match);
+  };
+
+  const handleAdd = () => {
+    addItem({
+      key: variant.id,
+      productId: product.id,
+      title: product.title,
+      size: sizeOption?.value ?? variant.title,
+      price: Number(variant.price.amount),
+      shopifyVariantId: variant.id,
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  };
+
+  return (
+    <Box {...cardStyle}>
+      <Box
+        h="220px"
+        bg="rgba(255,255,255,0.03)"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        overflow="hidden"
+      >
+        {product.featuredImage ? (
+          <img
+            src={product.featuredImage.url}
+            alt={product.featuredImage.altText ?? product.title}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        ) : (
+          <FaShoppingBag size={32} color="#66d9ff" />
+        )}
+      </Box>
+
+      <Stack gap={2.5} p={5}>
+        <Heading as="h3" size="sm" color="white">
+          {product.title}
+        </Heading>
+        <Text color="#66d9ff" fontWeight="bold">
+          {money(variant.price.amount, variant.price.currencyCode)}
+        </Text>
+
+        {sizes.length > 0 && (
+          <SizePicker
+            sizes={sizes}
+            selected={sizeOption?.value ?? ""}
+            onSelect={handleSelectSize}
+          />
+        )}
+
+        <Button
+          size="sm"
+          bg={added ? "#1f8a5f" : "#00aaff"}
+          color="white"
+          _hover={{ bg: added ? "#1f8a5f" : "#008ecc" }}
+          disabled={!variant.availableForSale}
+          onClick={handleAdd}
+        >
+          {!variant.availableForSale
+            ? "Sold out"
+            : added
+              ? "Agregado ✓"
+              : "Add to Cart"}
+        </Button>
+      </Stack>
+    </Box>
+  );
+};
 
 const Shop = () => {
   const configured = isShopifyConfigured();
@@ -116,9 +332,9 @@ const Shop = () => {
               textAlign="center"
             >
               <Text color="#66d9ff" fontSize="sm">
-                Estás viendo productos de muestra. Se reemplazan
-                automáticamente por el catálogo real en cuanto se conecte la
-                tienda de Shopify.
+                Estás viendo productos de muestra. Puedes agregarlos al
+                carrito para probar el flujo, pero el pago se activa cuando
+                se conecte la tienda real de Shopify.
               </Text>
             </Box>
           )}
@@ -168,48 +384,7 @@ const Shop = () => {
           {configured && !loading && !error && products.length > 0 && (
             <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
               {products.map((product) => (
-                <Box
-                  key={product.id}
-                  borderRadius="24px"
-                  overflow="hidden"
-                  bg="rgba(255,255,255,0.05)"
-                  border="1px solid rgba(255,255,255,0.10)"
-                  boxShadow="0 16px 40px rgba(0,0,0,0.30)"
-                >
-                  <Box
-                    h="220px"
-                    bg="rgba(255,255,255,0.03)"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                    overflow="hidden"
-                  >
-                    {product.featuredImage ? (
-                      <img
-                        src={product.featuredImage.url}
-                        alt={product.featuredImage.altText ?? product.title}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    ) : (
-                      <FaShoppingBag size={32} color="#66d9ff" />
-                    )}
-                  </Box>
-                  <Stack gap={2} p={5}>
-                    <Heading as="h3" size="sm" color="white">
-                      {product.title}
-                    </Heading>
-                    <Text color="#66d9ff" fontWeight="bold">
-                      {money(
-                        product.priceRange.minVariantPrice.amount,
-                        product.priceRange.minVariantPrice.currencyCode
-                      )}
-                    </Text>
-                  </Stack>
-                </Box>
+                <RealProductCard key={product.id} product={product} />
               ))}
             </SimpleGrid>
           )}
@@ -217,66 +392,7 @@ const Shop = () => {
           {!configured && (
             <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
               {sampleProducts.map((product) => (
-                <Box
-                  key={product.id}
-                  position="relative"
-                  borderRadius="24px"
-                  overflow="hidden"
-                  bg="rgba(255,255,255,0.05)"
-                  border="1px solid rgba(255,255,255,0.10)"
-                  boxShadow="0 16px 40px rgba(0,0,0,0.30)"
-                >
-                  <Badge
-                    position="absolute"
-                    top="12px"
-                    left="12px"
-                    zIndex={1}
-                    px={2.5}
-                    py={1}
-                    borderRadius="full"
-                    bg="rgba(0,0,0,0.55)"
-                    color="#66d9ff"
-                    border="1px solid rgba(102,217,255,0.3)"
-                    fontSize="0.65rem"
-                    letterSpacing="0.06em"
-                    textTransform="uppercase"
-                  >
-                    Muestra
-                  </Badge>
-
-                  <Box
-                    h="220px"
-                    bg="linear-gradient(135deg, rgba(0,170,255,0.14), rgba(255,255,255,0.02))"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <FaTshirt size={40} color="#66d9ff" />
-                  </Box>
-
-                  <Stack gap={2} p={5}>
-                    <Heading as="h3" size="sm" color="white">
-                      {product.title}
-                    </Heading>
-                    <Text color="#66d9ff" fontWeight="bold">
-                      {money(product.price)}
-                    </Text>
-                    <Text color="gray.500" fontSize="xs">
-                      Tallas: {product.sizes.join(", ")}
-                    </Text>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      borderColor="rgba(255,255,255,0.24)"
-                      color="gray.400"
-                      disabled
-                      _hover={{}}
-                      cursor="not-allowed"
-                    >
-                      Conecta Shopify para vender
-                    </Button>
-                  </Stack>
-                </Box>
+                <SampleProductCard key={product.id} product={product} />
               ))}
             </SimpleGrid>
           )}
