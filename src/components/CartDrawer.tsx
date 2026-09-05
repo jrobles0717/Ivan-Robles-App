@@ -1,7 +1,9 @@
 import { Box, Button, HStack, Heading, IconButton, Stack, Text } from "@chakra-ui/react";
 import { FaMinus, FaPlus, FaShoppingBag, FaTimes, FaTrash } from "react-icons/fa";
 
+import { createCart } from "../lib/shopify";
 import { useCart } from "../context/CartContext";
+import { useState } from "react";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -16,6 +18,27 @@ const money = (amount: number) =>
 const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
   const { items, updateQuantity, removeItem, subtotal, isCheckoutEligible } =
     useCart();
+  const [checkingOut, setCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  const handleCheckout = async () => {
+    setCheckingOut(true);
+    setCheckoutError(null);
+
+    try {
+      const lines = items.map((item) => ({
+        merchandiseId: item.shopifyVariantId as string,
+        quantity: item.quantity,
+      }));
+      const cart = await createCart(lines);
+      window.location.href = cart.checkoutUrl;
+    } catch (err) {
+      setCheckoutError(
+        err instanceof Error ? err.message : "No se pudo iniciar el pago"
+      );
+      setCheckingOut(false);
+    }
+  };
 
   return (
     <>
@@ -162,13 +185,24 @@ const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
               color="white"
               size="lg"
               borderRadius="full"
-              disabled={!isCheckoutEligible}
+              disabled={!isCheckoutEligible || checkingOut}
               opacity={isCheckoutEligible ? 1 : 0.6}
               cursor={isCheckoutEligible ? "pointer" : "not-allowed"}
               _hover={isCheckoutEligible ? { bg: "#008ecc" } : {}}
+              onClick={handleCheckout}
             >
-              {isCheckoutEligible ? "Checkout" : "Conecta Shopify para pagar"}
+              {!isCheckoutEligible
+                ? "Conecta Shopify para pagar"
+                : checkingOut
+                  ? "Redirigiendo..."
+                  : "Checkout"}
             </Button>
+
+            {checkoutError && (
+              <Text color="red.300" fontSize="xs" mt={2} textAlign="center">
+                {checkoutError}
+              </Text>
+            )}
           </Box>
         )}
       </Box>

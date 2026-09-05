@@ -172,10 +172,12 @@ function normalizeCart(node: RawShopifyCart): ShopifyCart {
   };
 }
 
-export async function createCart(
-  merchandiseId: string,
-  quantity = 1
-): Promise<ShopifyCart> {
+export interface CartLineInput {
+  merchandiseId: string;
+  quantity: number;
+}
+
+export async function createCart(lines: CartLineInput[]): Promise<ShopifyCart> {
   const query = /* GraphQL */ `
     mutation CartCreate($lines: [CartLineInput!]!) {
       cartCreate(input: { lines: $lines }) {
@@ -189,7 +191,7 @@ export async function createCart(
 
   const data = await shopifyFetch<{
     cartCreate: { cart: RawShopifyCart; userErrors: { message: string }[] };
-  }>(query, { lines: [{ merchandiseId, quantity }] });
+  }>(query, { lines });
 
   if (data.cartCreate.userErrors.length) {
     throw new Error(data.cartCreate.userErrors.map((e) => e.message).join("; "));
