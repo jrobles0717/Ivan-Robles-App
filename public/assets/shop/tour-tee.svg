@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="bg-tee" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1622"/>
+      <stop offset="100%" stop-color="#080f18"/>
+    </linearGradient>
+    <linearGradient id="fabric-tee" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c242e"/>
+      <stop offset="100%" stop-color="#12181f"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg-tee)"/>
+  <polygon points="150,150 138,116 96,146 62,214 108,192 108,392 292,392 292,192 338,214 304,146 262,116 250,150"
+    fill="url(#fabric-tee)" stroke="#2a3542" stroke-width="2"/>
+  <ellipse cx="200" cy="150" rx="34" ry="9" fill="#0d1622"/>
+  <text x="200" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800"
+    font-size="40" letter-spacing="4" fill="#66d9ff">IROB</text>
+  <text x="200" y="298" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600"
+    font-size="13" letter-spacing="3" fill="#4c5866">TOUR TEE</text>
+</svg>

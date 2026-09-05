@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import { FaShoppingBag, FaTshirt } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa";
 import Seo from "../components/common/Seo";
 import { useCart } from "../context/CartContext";
 import { sampleProducts, type SampleProduct } from "../data/shopSampleProducts";
@@ -133,14 +133,13 @@ const SampleProductCard = ({ product }: { product: SampleProduct }) => {
     <Box {...cardStyle}>
       <Ribbon label="Muestra" />
 
-      <Box
-        style={{ aspectRatio: "4 / 5" }}
-        bg="linear-gradient(135deg, rgba(0,170,255,0.14), rgba(255,255,255,0.02))"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <FaTshirt size={40} color="#66d9ff" />
+      <Box style={{ aspectRatio: "4 / 5" }} overflow="hidden">
+        <img
+          src={product.image}
+          alt={product.title}
+          loading="lazy"
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+        />
       </Box>
 
       <Stack gap={2} p={{ base: 3.5, md: 5 }} flex="1">
