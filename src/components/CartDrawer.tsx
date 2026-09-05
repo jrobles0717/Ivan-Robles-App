@@ -2,6 +2,7 @@ import { Box, Button, HStack, Heading, IconButton, Stack, Text } from "@chakra-u
 import { FaMinus, FaPlus, FaShoppingBag, FaTimes, FaTrash } from "react-icons/fa";
 
 import { createCart } from "../lib/shopify";
+import { createPortal } from "react-dom";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
 
@@ -40,7 +41,7 @@ const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
     }
   };
 
-  return (
+  return createPortal(
     <>
       <Box
         position="fixed"
@@ -206,7 +207,8 @@ const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
           </Box>
         )}
       </Box>
-    </>
+    </>,
+    document.body
   );
 };
 
