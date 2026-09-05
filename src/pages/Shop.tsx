@@ -24,6 +24,9 @@ const money = (amount: string | number, currency = "USD") =>
 
 const cardStyle = {
   position: "relative" as const,
+  display: "flex" as const,
+  flexDirection: "column" as const,
+  height: "100%",
   borderRadius: "20px",
   overflow: "hidden" as const,
   bg: "rgba(255,255,255,0.05)",
@@ -140,7 +143,7 @@ const SampleProductCard = ({ product }: { product: SampleProduct }) => {
         <FaTshirt size={40} color="#66d9ff" />
       </Box>
 
-      <Stack gap={2} p={{ base: 3.5, md: 5 }}>
+      <Stack gap={2} p={{ base: 3.5, md: 5 }} flex="1">
         <CardTitle>{product.title}</CardTitle>
         <Text color="#66d9ff" fontWeight="bold">
           {money(product.price)}
@@ -150,6 +153,7 @@ const SampleProductCard = ({ product }: { product: SampleProduct }) => {
 
         <Button
           size="sm"
+          mt="auto"
           bg={added ? "#1f8a5f" : "#00aaff"}
           color="white"
           _hover={{ bg: added ? "#1f8a5f" : "#008ecc" }}
@@ -236,7 +240,7 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
         )}
       </Box>
 
-      <Stack gap={2} p={{ base: 3.5, md: 5 }}>
+      <Stack gap={2} p={{ base: 3.5, md: 5 }} flex="1">
         <CardTitle>{product.title}</CardTitle>
         <Text color="#66d9ff" fontWeight="bold">
           {money(variant.price.amount, variant.price.currencyCode)}
@@ -252,6 +256,7 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
 
         <Button
           size="sm"
+          mt="auto"
           bg={added ? "#1f8a5f" : "#00aaff"}
           color="white"
           _hover={{ bg: added ? "#1f8a5f" : "#008ecc" }}
