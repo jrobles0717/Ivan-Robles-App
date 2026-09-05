@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 
-import CartDrawer from "./CartDrawer";
 import { ChakraRouterLink } from "../components/common/ChakraRouterLink";
 import { FaShoppingBag } from "react-icons/fa";
 import { HiOutlineBell } from "react-icons/hi";
@@ -197,40 +196,36 @@ const MenuToggleButton = ({ isOpen, onToggle }: MenuToggleButtonProps) => {
 };
 
 const CartButton = () => {
-  const { totalQuantity } = useCart();
-  const [isCartOpen, setCartOpen] = useState(false);
+  const { totalQuantity, openCart } = useCart();
 
   return (
-    <>
-      <Box position="relative">
-        <IconButton
-          aria-label="Open cart"
-          variant="ghost"
+    <Box position="relative">
+      <IconButton
+        aria-label="Open cart"
+        variant="ghost"
+        color="white"
+        _hover={{ bg: "rgba(255,255,255,0.08)" }}
+        onClick={openCart}
+      >
+        <FaShoppingBag />
+      </IconButton>
+      {totalQuantity > 0 && (
+        <Badge
+          position="absolute"
+          top="-2px"
+          right="-2px"
+          borderRadius="full"
+          bg="#00aaff"
           color="white"
-          _hover={{ bg: "rgba(255,255,255,0.08)" }}
-          onClick={() => setCartOpen(true)}
+          fontSize="0.65rem"
+          px={1.5}
+          minW="18px"
+          textAlign="center"
         >
-          <FaShoppingBag />
-        </IconButton>
-        {totalQuantity > 0 && (
-          <Badge
-            position="absolute"
-            top="-2px"
-            right="-2px"
-            borderRadius="full"
-            bg="#00aaff"
-            color="white"
-            fontSize="0.65rem"
-            px={1.5}
-            minW="18px"
-            textAlign="center"
-          >
-            {totalQuantity}
-          </Badge>
-        )}
-      </Box>
-      <CartDrawer isOpen={isCartOpen} onClose={() => setCartOpen(false)} />
-    </>
+          {totalQuantity}
+        </Badge>
+      )}
+    </Box>
   );
 };
 

@@ -6,19 +6,21 @@ import { createPortal } from "react-dom";
 import { useCart } from "../context/CartContext";
 import { useState } from "react";
 
-interface CartDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
 const money = (amount: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
     amount
   );
 
-const CartDrawer = ({ isOpen, onClose }: CartDrawerProps) => {
-  const { items, updateQuantity, removeItem, subtotal, isCheckoutEligible } =
-    useCart();
+const CartDrawer = () => {
+  const {
+    items,
+    updateQuantity,
+    removeItem,
+    subtotal,
+    isCheckoutEligible,
+    isDrawerOpen: isOpen,
+    closeCart: onClose,
+  } = useCart();
   const [checkingOut, setCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
 

@@ -4,7 +4,6 @@ import {
   Button,
   Heading,
   SimpleGrid,
-  Spinner,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -25,12 +24,44 @@ const money = (amount: string | number, currency = "USD") =>
 
 const cardStyle = {
   position: "relative" as const,
-  borderRadius: "24px",
+  borderRadius: "20px",
   overflow: "hidden" as const,
   bg: "rgba(255,255,255,0.05)",
   border: "1px solid rgba(255,255,255,0.10)",
   boxShadow: "0 16px 40px rgba(0,0,0,0.30)",
+  transition: "transform 0.25s ease, border-color 0.25s ease",
+  _hover: {
+    transform: "translateY(-6px)",
+    borderColor: "rgba(102, 217, 255, 0.35)",
+  },
 };
+
+const Ribbon = ({
+  label,
+  tone = "accent",
+}: {
+  label: string;
+  tone?: "accent" | "muted";
+}) => (
+  <Box
+    position="absolute"
+    top="14px"
+    left="-34px"
+    zIndex={2}
+    transform="rotate(-45deg)"
+    bg={tone === "accent" ? "#00aaff" : "rgba(20,26,34,0.92)"}
+    color={tone === "accent" ? "#04121b" : "gray.400"}
+    fontSize="0.62rem"
+    fontWeight="800"
+    letterSpacing="0.08em"
+    textTransform="uppercase"
+    px="38px"
+    py="3px"
+    boxShadow="0 4px 10px rgba(0,0,0,0.35)"
+  >
+    {label}
+  </Box>
+);
 
 const SizePicker = ({
   sizes,
@@ -48,14 +79,12 @@ const SizePicker = ({
         as="button"
         onClick={() => onSelect(size)}
         px={2.5}
-        py={1}
+        py={1.5}
         borderRadius="md"
         fontSize="0.72rem"
         fontWeight="bold"
         border="1px solid"
-        borderColor={
-          size === selected ? "#66d9ff" : "rgba(255,255,255,0.18)"
-        }
+        borderColor={size === selected ? "#66d9ff" : "rgba(255,255,255,0.18)"}
         color={size === selected ? "#66d9ff" : "gray.400"}
         bg={size === selected ? "rgba(0,170,255,0.14)" : "transparent"}
         transition="all 0.2s ease"
@@ -64,6 +93,20 @@ const SizePicker = ({
       </Box>
     ))}
   </Stack>
+);
+
+const CardTitle = ({ children }: { children: string }) => (
+  <Heading
+    as="h3"
+    fontSize="0.92rem"
+    fontWeight="extrabold"
+    letterSpacing="0.02em"
+    textTransform="uppercase"
+    color="white"
+    lineHeight="1.25"
+  >
+    {children}
+  </Heading>
 );
 
 const SampleProductCard = ({ product }: { product: SampleProduct }) => {
@@ -85,26 +128,10 @@ const SampleProductCard = ({ product }: { product: SampleProduct }) => {
 
   return (
     <Box {...cardStyle}>
-      <Badge
-        position="absolute"
-        top="12px"
-        left="12px"
-        zIndex={1}
-        px={2.5}
-        py={1}
-        borderRadius="full"
-        bg="rgba(0,0,0,0.55)"
-        color="#66d9ff"
-        border="1px solid rgba(102,217,255,0.3)"
-        fontSize="0.65rem"
-        letterSpacing="0.06em"
-        textTransform="uppercase"
-      >
-        Muestra
-      </Badge>
+      <Ribbon label="Muestra" />
 
       <Box
-        h="220px"
+        style={{ aspectRatio: "4 / 5" }}
         bg="linear-gradient(135deg, rgba(0,170,255,0.14), rgba(255,255,255,0.02))"
         display="flex"
         alignItems="center"
@@ -113,10 +140,8 @@ const SampleProductCard = ({ product }: { product: SampleProduct }) => {
         <FaTshirt size={40} color="#66d9ff" />
       </Box>
 
-      <Stack gap={2.5} p={5}>
-        <Heading as="h3" size="sm" color="white">
-          {product.title}
-        </Heading>
+      <Stack gap={2} p={{ base: 3.5, md: 5 }}>
+        <CardTitle>{product.title}</CardTitle>
         <Text color="#66d9ff" fontWeight="bold">
           {money(product.price)}
         </Text>
@@ -155,7 +180,11 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
   const sizes = Array.from(
     new Set(
       product.variants
-        .map((v) => v.selectedOptions.find((o) => o.name.toLowerCase() === "size")?.value)
+        .map(
+          (v) =>
+            v.selectedOptions.find((o) => o.name.toLowerCase() === "size")
+              ?.value
+        )
         .filter((v): v is string => Boolean(v))
     )
   );
@@ -184,8 +213,10 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
 
   return (
     <Box {...cardStyle}>
+      {!variant.availableForSale && <Ribbon label="Sold Out" tone="muted" />}
+
       <Box
-        h="220px"
+        style={{ aspectRatio: "4 / 5" }}
         bg="rgba(255,255,255,0.03)"
         display="flex"
         alignItems="center"
@@ -196,6 +227,7 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
           <img
             src={product.featuredImage.url}
             alt={product.featuredImage.altText ?? product.title}
+            loading="lazy"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         ) : (
@@ -203,10 +235,8 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
         )}
       </Box>
 
-      <Stack gap={2.5} p={5}>
-        <Heading as="h3" size="sm" color="white">
-          {product.title}
-        </Heading>
+      <Stack gap={2} p={{ base: 3.5, md: 5 }}>
+        <CardTitle>{product.title}</CardTitle>
         <Text color="#66d9ff" fontWeight="bold">
           {money(variant.price.amount, variant.price.currencyCode)}
         </Text>
@@ -237,6 +267,21 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
     </Box>
   );
 };
+
+const SkeletonCard = () => (
+  <Box borderRadius="20px" overflow="hidden" bg="rgba(255,255,255,0.04)">
+    <Box
+      className="shop-skeleton"
+      style={{ aspectRatio: "4 / 5" }}
+      bg="rgba(255,255,255,0.06)"
+    />
+    <Stack gap={2} p={{ base: 3.5, md: 5 }}>
+      <Box className="shop-skeleton" h="14px" w="70%" borderRadius="full" bg="rgba(255,255,255,0.08)" />
+      <Box className="shop-skeleton" h="14px" w="35%" borderRadius="full" bg="rgba(255,255,255,0.08)" />
+      <Box className="shop-skeleton" h="32px" w="100%" borderRadius="md" bg="rgba(255,255,255,0.06)" />
+    </Stack>
+  </Box>
+);
 
 const Shop = () => {
   const configured = isShopifyConfigured();
@@ -340,9 +385,11 @@ const Shop = () => {
           )}
 
           {configured && loading && (
-            <Box textAlign="center" py={16}>
-              <Spinner color="#00aaff" size="lg" />
-            </Box>
+            <SimpleGrid columns={{ base: 2, lg: 4 }} gap={{ base: 4, md: 6 }}>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <SkeletonCard key={i} />
+              ))}
+            </SimpleGrid>
           )}
 
           {configured && !loading && error && (
@@ -382,7 +429,7 @@ const Shop = () => {
           )}
 
           {configured && !loading && !error && products.length > 0 && (
-            <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
+            <SimpleGrid columns={{ base: 2, lg: 4 }} gap={{ base: 4, md: 6 }}>
               {products.map((product) => (
                 <RealProductCard key={product.id} product={product} />
               ))}
@@ -390,7 +437,7 @@ const Shop = () => {
           )}
 
           {!configured && (
-            <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
+            <SimpleGrid columns={{ base: 2, lg: 4 }} gap={{ base: 4, md: 6 }}>
               {sampleProducts.map((product) => (
                 <SampleProductCard key={product.id} product={product} />
               ))}

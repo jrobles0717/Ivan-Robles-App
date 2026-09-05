@@ -29,6 +29,10 @@ interface CartContextValue {
   subtotal: number;
   /** True only if every line item came from the real Shopify catalog */
   isCheckoutEligible: boolean;
+  /** Drawer open state lives here so any component (nav icon, mobile bar) can trigger it */
+  isDrawerOpen: boolean;
+  openCart: () => void;
+  closeCart: () => void;
 }
 
 const STORAGE_KEY = "irob-cart";
@@ -46,6 +50,9 @@ function loadInitialItems(): CartLineItem[] {
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartLineItem[]>(loadInitialItems);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const openCart = () => setDrawerOpen(true);
+  const closeCart = () => setDrawerOpen(false);
 
   useEffect(() => {
     try {
@@ -101,8 +108,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       totalQuantity,
       subtotal,
       isCheckoutEligible,
+      isDrawerOpen,
+      openCart,
+      closeCart,
     }),
-    [items, totalQuantity, subtotal, isCheckoutEligible]
+    [items, totalQuantity, subtotal, isCheckoutEligible, isDrawerOpen]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

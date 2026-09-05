@@ -3,10 +3,12 @@ import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import About from "./pages/About";
+import CartDrawer from "./components/CartDrawer";
 import { CartProvider } from "./context/CartContext";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import IntroVideo from "./components/IntroVideo";
+import MobileCartBar from "./components/MobileCartBar";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/common/ScrollToTop";
 import Shop from "./pages/Shop";
@@ -60,6 +62,8 @@ const App = () => {
           </main>
           <Footer />
         </div>
+        <MobileCartBar />
+        <CartDrawer />
       </CartProvider>
     </Router>
   );

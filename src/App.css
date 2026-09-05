@@ -29,3 +29,17 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+@keyframes shop-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.shop-skeleton {
+  animation: shop-skeleton-pulse 1.4s ease-in-out infinite;
+}
