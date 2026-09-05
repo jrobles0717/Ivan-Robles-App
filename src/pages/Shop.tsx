@@ -1,17 +1,62 @@
-import { Badge, Box, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Button,
+  Heading,
+  SimpleGrid,
+  Spinner,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
-import { FaTshirt } from "react-icons/fa";
+import { FaShoppingBag, FaTshirt } from "react-icons/fa";
 import Seo from "../components/common/Seo";
-import { isShopifyConfigured } from "../lib/shopify";
+import { sampleProducts } from "../data/shopSampleProducts";
+import { getProducts, isShopifyConfigured } from "../lib/shopify";
+import type { ShopifyProduct } from "../types/shopify";
+
+const money = (amount: string | number, currency = "USD") =>
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+  }).format(Number(amount));
 
 const Shop = () => {
   const configured = isShopifyConfigured();
+
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(configured);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!configured) return;
+
+    let cancelled = false;
+
+    getProducts()
+      .then((result) => {
+        if (!cancelled) setProducts(result);
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Unknown error");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [configured]);
 
   return (
     <>
       <Seo
         title="Shop | Iván Robles"
-        description="Ropa y mercancía oficial de Iván Robles — próximamente."
+        description="Ropa y mercancía oficial de Iván Robles."
         path="/shop"
       />
       <Box
@@ -58,49 +103,182 @@ const Shop = () => {
             />
           </Stack>
 
-          {!configured ? (
+          {!configured && (
+            <Box
+              maxW="720px"
+              mx="auto"
+              mb={10}
+              borderRadius="16px"
+              bg="rgba(0,170,255,0.08)"
+              border="1px dashed rgba(102,217,255,0.32)"
+              px={5}
+              py={3.5}
+              textAlign="center"
+            >
+              <Text color="#66d9ff" fontSize="sm">
+                Estás viendo productos de muestra. Se reemplazan
+                automáticamente por el catálogo real en cuanto se conecte la
+                tienda de Shopify.
+              </Text>
+            </Box>
+          )}
+
+          {configured && loading && (
+            <Box textAlign="center" py={16}>
+              <Spinner color="#00aaff" size="lg" />
+            </Box>
+          )}
+
+          {configured && !loading && error && (
             <Box
               maxW="640px"
               mx="auto"
               borderRadius="28px"
               bg="rgba(255,255,255,0.05)"
               border="1px solid rgba(255,255,255,0.10)"
-              boxShadow="0 20px 60px rgba(0,0,0,0.35)"
               p={{ base: 8, md: 10 }}
               textAlign="center"
             >
-              <Box
-                mx="auto"
-                mb={5}
-                w="64px"
-                h="64px"
-                borderRadius="full"
-                bg="rgba(0,170,255,0.14)"
-                border="1px solid rgba(102,217,255,0.24)"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <FaTshirt size={26} color="#66d9ff" />
-              </Box>
-
-              <Text
-                color="white"
-                fontSize={{ base: "xl", md: "2xl" }}
-                fontWeight="bold"
-                mb={3}
-              >
-                La tienda está en construcción
+              <Text color="white" fontSize="xl" fontWeight="bold" mb={3}>
+                No pudimos cargar el catálogo
               </Text>
-              <Text color="gray.400" maxW="460px" mx="auto" lineHeight="1.8">
-                Muy pronto vas a poder comprar camisas y mercancía oficial de
-                Iván Robles directo desde aquí. Vuelve pronto.
+              <Text color="gray.400">{error}</Text>
+            </Box>
+          )}
+
+          {configured && !loading && !error && products.length === 0 && (
+            <Box
+              maxW="640px"
+              mx="auto"
+              borderRadius="28px"
+              bg="rgba(255,255,255,0.05)"
+              border="1px solid rgba(255,255,255,0.10)"
+              p={{ base: 8, md: 10 }}
+              textAlign="center"
+            >
+              <Text color="white" fontSize="xl" fontWeight="bold" mb={3}>
+                Aún no hay productos publicados
+              </Text>
+              <Text color="gray.400">
+                Agrega productos en Shopify para que aparezcan aquí.
               </Text>
             </Box>
-          ) : (
-            <Text color="gray.400" textAlign="center">
-              Catálogo próximamente.
-            </Text>
+          )}
+
+          {configured && !loading && !error && products.length > 0 && (
+            <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
+              {products.map((product) => (
+                <Box
+                  key={product.id}
+                  borderRadius="24px"
+                  overflow="hidden"
+                  bg="rgba(255,255,255,0.05)"
+                  border="1px solid rgba(255,255,255,0.10)"
+                  boxShadow="0 16px 40px rgba(0,0,0,0.30)"
+                >
+                  <Box
+                    h="220px"
+                    bg="rgba(255,255,255,0.03)"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    overflow="hidden"
+                  >
+                    {product.featuredImage ? (
+                      <img
+                        src={product.featuredImage.url}
+                        alt={product.featuredImage.altText ?? product.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <FaShoppingBag size={32} color="#66d9ff" />
+                    )}
+                  </Box>
+                  <Stack gap={2} p={5}>
+                    <Heading as="h3" size="sm" color="white">
+                      {product.title}
+                    </Heading>
+                    <Text color="#66d9ff" fontWeight="bold">
+                      {money(
+                        product.priceRange.minVariantPrice.amount,
+                        product.priceRange.minVariantPrice.currencyCode
+                      )}
+                    </Text>
+                  </Stack>
+                </Box>
+              ))}
+            </SimpleGrid>
+          )}
+
+          {!configured && (
+            <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} gap={6}>
+              {sampleProducts.map((product) => (
+                <Box
+                  key={product.id}
+                  position="relative"
+                  borderRadius="24px"
+                  overflow="hidden"
+                  bg="rgba(255,255,255,0.05)"
+                  border="1px solid rgba(255,255,255,0.10)"
+                  boxShadow="0 16px 40px rgba(0,0,0,0.30)"
+                >
+                  <Badge
+                    position="absolute"
+                    top="12px"
+                    left="12px"
+                    zIndex={1}
+                    px={2.5}
+                    py={1}
+                    borderRadius="full"
+                    bg="rgba(0,0,0,0.55)"
+                    color="#66d9ff"
+                    border="1px solid rgba(102,217,255,0.3)"
+                    fontSize="0.65rem"
+                    letterSpacing="0.06em"
+                    textTransform="uppercase"
+                  >
+                    Muestra
+                  </Badge>
+
+                  <Box
+                    h="220px"
+                    bg="linear-gradient(135deg, rgba(0,170,255,0.14), rgba(255,255,255,0.02))"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <FaTshirt size={40} color="#66d9ff" />
+                  </Box>
+
+                  <Stack gap={2} p={5}>
+                    <Heading as="h3" size="sm" color="white">
+                      {product.title}
+                    </Heading>
+                    <Text color="#66d9ff" fontWeight="bold">
+                      {money(product.price)}
+                    </Text>
+                    <Text color="gray.500" fontSize="xs">
+                      Tallas: {product.sizes.join(", ")}
+                    </Text>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      borderColor="rgba(255,255,255,0.24)"
+                      color="gray.400"
+                      disabled
+                      _hover={{}}
+                      cursor="not-allowed"
+                    >
+                      Conecta Shopify para vender
+                    </Button>
+                  </Stack>
+                </Box>
+              ))}
+            </SimpleGrid>
           )}
         </Box>
       </Box>
