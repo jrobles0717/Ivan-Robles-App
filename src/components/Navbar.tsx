@@ -10,7 +10,7 @@ import {
   Text,
   chakra,
 } from "@chakra-ui/react";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { ChakraRouterLink } from "../components/common/ChakraRouterLink";
 import { FaShoppingBag } from "react-icons/fa";
@@ -197,6 +197,18 @@ const MenuToggleButton = ({ isOpen, onToggle }: MenuToggleButtonProps) => {
 
 const CartButton = () => {
   const { totalQuantity, openCart } = useCart();
+  const prevQuantity = useRef(totalQuantity);
+  const [bump, setBump] = useState(false);
+
+  useEffect(() => {
+    if (totalQuantity > prevQuantity.current) {
+      setBump(true);
+      const timeout = setTimeout(() => setBump(false), 350);
+      prevQuantity.current = totalQuantity;
+      return () => clearTimeout(timeout);
+    }
+    prevQuantity.current = totalQuantity;
+  }, [totalQuantity]);
 
   return (
     <Box position="relative">
@@ -211,6 +223,7 @@ const CartButton = () => {
       </IconButton>
       {totalQuantity > 0 && (
         <Badge
+          className={bump ? "cart-badge-bump" : undefined}
           position="absolute"
           top="-2px"
           right="-2px"

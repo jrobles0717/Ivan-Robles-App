@@ -1,15 +1,23 @@
 import { Box, Button, HStack, Heading, IconButton, Stack, Text } from "@chakra-ui/react";
 import { FaMinus, FaPlus, FaShoppingBag, FaTimes, FaTrash } from "react-icons/fa";
+import { useMemo, useState } from "react";
 
+import type { CartLineItem } from "../context/CartContext";
 import { createCart } from "../lib/shopify";
 import { createPortal } from "react-dom";
 import { useCart } from "../context/CartContext";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const money = (amount: number) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
     amount
   );
+
+interface ProductGroup {
+  productId: string;
+  title: string;
+  lines: CartLineItem[];
+}
 
 const CartDrawer = () => {
   const {
@@ -23,6 +31,24 @@ const CartDrawer = () => {
   } = useCart();
   const [checkingOut, setCheckingOut] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const groups = useMemo(() => {
+    const map = new Map<string, ProductGroup>();
+    for (const item of items) {
+      const existing = map.get(item.productId);
+      if (existing) {
+        existing.lines.push(item);
+      } else {
+        map.set(item.productId, {
+          productId: item.productId,
+          title: item.title,
+          lines: [item],
+        });
+      }
+    }
+    return Array.from(map.values());
+  }, [items]);
 
   const handleCheckout = async () => {
     setCheckingOut(true);
@@ -41,6 +67,11 @@ const CartDrawer = () => {
       );
       setCheckingOut(false);
     }
+  };
+
+  const handleContinueShopping = () => {
+    onClose();
+    navigate("/shop");
   };
 
   return createPortal(
@@ -91,102 +122,120 @@ const CartDrawer = () => {
           </IconButton>
         </HStack>
 
-        <Stack flex={1} overflowY="auto" px={5} py={4} gap={4}>
-          {items.length === 0 ? (
+        <Stack flex={1} overflowY="auto" px={5} py={4} gap={5}>
+          {groups.length === 0 ? (
             <Stack
               align="center"
               justify="center"
               flex={1}
               color="gray.500"
               py={16}
-              gap={3}
+              gap={4}
             >
               <FaShoppingBag size={28} />
               <Text>Your cart is empty</Text>
+              <Button
+                size="sm"
+                variant="outline"
+                borderColor="rgba(102,217,255,0.3)"
+                color="#66d9ff"
+                borderRadius="full"
+                _hover={{ bg: "rgba(0,170,255,0.1)" }}
+                onClick={handleContinueShopping}
+              >
+                Seguir comprando
+              </Button>
             </Stack>
           ) : (
-            items.map((item) => (
-              <HStack
-                key={item.key}
-                align="start"
-                justify="space-between"
+            groups.map((group) => (
+              <Box
+                key={group.productId}
                 borderBottom="1px solid rgba(255,255,255,0.06)"
                 pb={4}
               >
-                <Box>
-                  <Text color="white" fontWeight="bold" fontSize="sm">
-                    {item.title}
-                  </Text>
-                  <Text color="gray.400" fontSize="xs">
-                    Size: {item.size}
-                  </Text>
-                  <Text color="#66d9ff" fontSize="sm" mt={1}>
-                    {money(item.price)}
-                    {item.quantity > 1 && (
-                      <Text as="span" color="gray.500">
-                        {" "}
-                        c/u
-                      </Text>
-                    )}
-                  </Text>
-                  {item.quantity > 1 && (
-                    <Text color="white" fontWeight="bold" fontSize="sm">
-                      {money(item.price * item.quantity)}
-                    </Text>
-                  )}
-                </Box>
+                <Text color="white" fontWeight="bold" fontSize="sm" mb={3}>
+                  {group.title}
+                </Text>
 
-                <Stack align="end" gap={2}>
-                  <HStack gap={2}>
-                    <IconButton
-                      aria-label="Decrease quantity"
-                      size="xs"
-                      variant="outline"
-                      borderColor="rgba(255,255,255,0.2)"
-                      color="white"
-                      onClick={() =>
-                        updateQuantity(item.key, item.quantity - 1)
-                      }
+                <Stack gap={3}>
+                  {group.lines.map((item) => (
+                    <HStack
+                      key={item.key}
+                      align="start"
+                      justify="space-between"
+                      pl={3}
+                      borderLeft="2px solid rgba(102,217,255,0.25)"
                     >
-                      <FaMinus />
-                    </IconButton>
-                    <Text color="white" minW="18px" textAlign="center">
-                      {item.quantity}
-                    </Text>
-                    <IconButton
-                      aria-label="Increase quantity"
-                      size="xs"
-                      variant="outline"
-                      borderColor="rgba(255,255,255,0.2)"
-                      color="white"
-                      onClick={() =>
-                        updateQuantity(item.key, item.quantity + 1)
-                      }
-                    >
-                      <FaPlus />
-                    </IconButton>
-                  </HStack>
-                  <IconButton
-                    aria-label="Remove item"
-                    size="xs"
-                    variant="ghost"
-                    color="red.300"
-                    onClick={() => removeItem(item.key)}
-                  >
-                    <FaTrash />
-                  </IconButton>
+                      <Box>
+                        <Text color="gray.400" fontSize="xs">
+                          Size: {item.size}
+                        </Text>
+                        <Text color="#66d9ff" fontSize="sm" mt={1}>
+                          {money(item.price)}
+                          {item.quantity > 1 && (
+                            <Text as="span" color="gray.500">
+                              {" "}
+                              c/u
+                            </Text>
+                          )}
+                        </Text>
+                        {item.quantity > 1 && (
+                          <Text color="white" fontWeight="bold" fontSize="sm">
+                            {money(item.price * item.quantity)}
+                          </Text>
+                        )}
+                      </Box>
+
+                      <Stack align="end" gap={2}>
+                        <HStack gap={2}>
+                          <IconButton
+                            aria-label="Decrease quantity"
+                            size="xs"
+                            variant="outline"
+                            borderColor="rgba(255,255,255,0.2)"
+                            color="white"
+                            onClick={() =>
+                              updateQuantity(item.key, item.quantity - 1)
+                            }
+                          >
+                            <FaMinus />
+                          </IconButton>
+                          <Text color="white" minW="18px" textAlign="center">
+                            {item.quantity}
+                          </Text>
+                          <IconButton
+                            aria-label="Increase quantity"
+                            size="xs"
+                            variant="outline"
+                            borderColor="rgba(255,255,255,0.2)"
+                            color="white"
+                            onClick={() =>
+                              updateQuantity(item.key, item.quantity + 1)
+                            }
+                          >
+                            <FaPlus />
+                          </IconButton>
+                        </HStack>
+                        <IconButton
+                          aria-label="Remove item"
+                          size="xs"
+                          variant="ghost"
+                          color="red.300"
+                          onClick={() => removeItem(item.key)}
+                        >
+                          <FaTrash />
+                        </IconButton>
+                      </Stack>
+                    </HStack>
+                  ))}
                 </Stack>
-              </HStack>
+              </Box>
             ))
           )}
         </Stack>
 
         {items.length > 0 && (
-          <Box
-            px={5}
-            py={4}
-            borderTop="1px solid rgba(255,255,255,0.08)"
-          >
+          <Box px={5} py={4} borderTop="1px solid rgba(255,255,255,0.08)">
             <HStack justify="space-between" mb={4}>
               <Text color="gray.300">Subtotal</Text>
               <Text color="white" fontWeight="bold">

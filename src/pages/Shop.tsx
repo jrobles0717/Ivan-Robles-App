@@ -153,6 +153,7 @@ const SampleProductCard = ({ product }: { product: SampleProduct }) => {
           bg={added ? "#1f8a5f" : "#00aaff"}
           color="white"
           _hover={{ bg: added ? "#1f8a5f" : "#008ecc" }}
+          disabled={added}
           onClick={handleAdd}
         >
           {added ? "Agregado ✓" : "Add to Cart"}
@@ -254,7 +255,7 @@ const RealProductCard = ({ product }: { product: ShopifyProduct }) => {
           bg={added ? "#1f8a5f" : "#00aaff"}
           color="white"
           _hover={{ bg: added ? "#1f8a5f" : "#008ecc" }}
-          disabled={!variant.availableForSale}
+          disabled={!variant.availableForSale || added}
           onClick={handleAdd}
         >
           {!variant.availableForSale

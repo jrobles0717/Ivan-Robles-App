@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import About from "./pages/About";
 import CartDrawer from "./components/CartDrawer";
 import { CartProvider } from "./context/CartContext";
+import CartToast from "./components/CartToast";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import IntroVideo from "./components/IntroVideo";
@@ -63,6 +64,7 @@ const App = () => {
           <Footer />
         </div>
         <MobileCartBar />
+        <CartToast />
         <CartDrawer />
       </CartProvider>
     </Router>

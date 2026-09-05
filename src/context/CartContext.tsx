@@ -1,9 +1,11 @@
 import {
   type ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -33,6 +35,9 @@ interface CartContextValue {
   isDrawerOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
+  /** Title of the most recently added product, for the confirmation toast; null when dismissed */
+  notification: string | null;
+  dismissNotification: () => void;
 }
 
 const STORAGE_KEY = "irob-cart";
@@ -51,8 +56,27 @@ function loadInitialItems(): CartLineItem[] {
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<CartLineItem[]>(loadInitialItems);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const openCart = () => setDrawerOpen(true);
-  const closeCart = () => setDrawerOpen(false);
+  const openCart = useCallback(() => setDrawerOpen(true), []);
+  const closeCart = useCallback(() => setDrawerOpen(false), []);
+
+  const [notification, setNotification] = useState<string | null>(null);
+  const notificationTimeout = useRef<number | undefined>(undefined);
+
+  const dismissNotification = useCallback(() => {
+    window.clearTimeout(notificationTimeout.current);
+    setNotification(null);
+  }, []);
+
+  const notify = useCallback((title: string) => {
+    window.clearTimeout(notificationTimeout.current);
+    setNotification(title);
+    notificationTimeout.current = window.setTimeout(
+      () => setNotification(null),
+      3000
+    );
+  }, []);
+
+  useEffect(() => () => window.clearTimeout(notificationTimeout.current), []);
 
   useEffect(() => {
     try {
@@ -62,33 +86,37 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [items]);
 
-  const addItem: CartContextValue["addItem"] = (item, quantity = 1) => {
-    setItems((prev) => {
-      const existing = prev.find((line) => line.key === item.key);
-      if (existing) {
-        return prev.map((line) =>
-          line.key === item.key
-            ? { ...line, quantity: line.quantity + quantity }
-            : line
-        );
-      }
-      return [...prev, { ...item, quantity }];
-    });
-  };
+  const addItem: CartContextValue["addItem"] = useCallback(
+    (item, quantity = 1) => {
+      setItems((prev) => {
+        const existing = prev.find((line) => line.key === item.key);
+        if (existing) {
+          return prev.map((line) =>
+            line.key === item.key
+              ? { ...line, quantity: line.quantity + quantity }
+              : line
+          );
+        }
+        return [...prev, { ...item, quantity }];
+      });
+      notify(item.title);
+    },
+    [notify]
+  );
 
-  const updateQuantity = (key: string, quantity: number) => {
+  const updateQuantity = useCallback((key: string, quantity: number) => {
     setItems((prev) =>
       quantity <= 0
         ? prev.filter((line) => line.key !== key)
         : prev.map((line) => (line.key === key ? { ...line, quantity } : line))
     );
-  };
+  }, []);
 
-  const removeItem = (key: string) => {
+  const removeItem = useCallback((key: string) => {
     setItems((prev) => prev.filter((line) => line.key !== key));
-  };
+  }, []);
 
-  const clear = () => setItems([]);
+  const clear = useCallback(() => setItems([]), []);
 
   const totalQuantity = items.reduce((sum, line) => sum + line.quantity, 0);
   const subtotal = items.reduce(
@@ -111,8 +139,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       isDrawerOpen,
       openCart,
       closeCart,
+      notification,
+      dismissNotification,
     }),
-    [items, totalQuantity, subtotal, isCheckoutEligible, isDrawerOpen]
+    [
+      items,
+      addItem,
+      updateQuantity,
+      removeItem,
+      clear,
+      totalQuantity,
+      subtotal,
+      isCheckoutEligible,
+      isDrawerOpen,
+      openCart,
+      closeCart,
+      notification,
+      dismissNotification,
+    ]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
