@@ -22,7 +22,7 @@ export const upcomingEvents: EventItem[] = [
     location: "Caribe Hilton",
     description:
       "Dancegiving — Thanksgiving Eve with Pablo Flores and Iván Robles. The first party of the holiday season.",
-    time: "Time TBA",
+    time: "8:00 PM",
     status: "Free Entry",
     freeEntry: true,
     mapUrl:
