@@ -16,12 +16,16 @@ import {
   FaTicketAlt,
 } from "react-icons/fa";
 
-import { type EventItem, upcomingEvents } from "../../data/events";
+import {
+  type EventItem,
+  isEventActive,
+  upcomingEvents,
+} from "../../data/events";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useState } from "react";
 
 const UpcomingEvents = () => {
-  const events: EventItem[] = upcomingEvents;
+  const events: EventItem[] = upcomingEvents.filter(isEventActive);
 
   const [visibleEvents, setVisibleEvents] = useState(6);
 
@@ -223,9 +227,14 @@ const UpcomingEvents = () => {
                         }
                       }}
                       disabled={!nextEvent.ticketUrl}
+                      _disabled={
+                        nextEvent.freeEntry
+                          ? { opacity: 1, cursor: "default" }
+                          : undefined
+                      }
                     >
                       <FaTicketAlt />
-                      Get Tickets
+                      {nextEvent.freeEntry ? "Free Entry" : "Get Tickets"}
                     </Button>
 
                     <Button
@@ -441,9 +450,14 @@ const UpcomingEvents = () => {
                         }
                       }}
                       disabled={!event.ticketUrl}
+                      _disabled={
+                        event.freeEntry
+                          ? { opacity: 1, cursor: "default" }
+                          : undefined
+                      }
                     >
                       <FaTicketAlt />
-                      Get Tickets
+                      {event.freeEntry ? "Free Entry" : "Get Tickets"}
                     </Button>
                   </Stack>
                 </Box>

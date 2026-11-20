@@ -126,7 +126,8 @@ const EventSpotlight = () => {
         position="relative"
         zIndex={1}
       >
-        {/* Flyer */}
+        {/* Flyer (optional) */}
+        {featuredEvent.flyer && (
         <Box data-aos="fade-right" data-aos-duration="500">
           <Box
             position="relative"
@@ -149,9 +150,15 @@ const EventSpotlight = () => {
             />
           </Box>
         </Box>
+        )}
 
-        {/* Video + CTA */}
-        <Stack gap={6} data-aos="fade-left" data-aos-duration="500">
+        {/* Video + CTA (without a flyer, the video and card sit side by side) */}
+        <Stack
+          gap={6}
+          data-aos="fade-left"
+          data-aos-duration="500"
+          display={featuredEvent.flyer ? "flex" : "contents"}
+        >
           <Box
             position="relative"
             pb="56.25%"
@@ -279,39 +286,86 @@ const EventSpotlight = () => {
               fontWeight="bold"
               mb={2}
             >
-              Get Ready for the Summer Closing
+              {featuredEvent.tagline}
             </Text>
 
             <Text color="gray.200" fontSize={{ base: "sm", md: "md" }} mb={5}>
-              The beach, the music, and the energy — one last party to close
-              the summer at {featuredEvent.location}.
+              {featuredEvent.blurb}
             </Text>
 
+            {featuredEvent.lineup && featuredEvent.lineup.length > 0 && (
+              <Box mb={5}>
+                <Text
+                  fontSize="xs"
+                  color="gray.400"
+                  textTransform="uppercase"
+                  letterSpacing="0.08em"
+                  mb={2}
+                >
+                  Line-up
+                </Text>
+                <HStack gap={2} flexWrap="wrap">
+                  {featuredEvent.lineup.map((artist) => (
+                    <Badge
+                      key={artist}
+                      px={3}
+                      py={1.5}
+                      borderRadius="full"
+                      bg="whiteAlpha.100"
+                      color="white"
+                      fontWeight="semibold"
+                    >
+                      {artist}
+                    </Badge>
+                  ))}
+                </HStack>
+              </Box>
+            )}
+
             <HStack gap={4} flexWrap="wrap">
-              <Button
-                bg="#00aaff"
-                color="white"
-                size="lg"
-                px={8}
-                borderRadius="full"
-                boxShadow="0 10px 30px rgba(0, 170, 255, 0.28)"
-                _hover={{
-                  bg: "#008ecc",
-                  transform: "translateY(-2px)",
-                  boxShadow: "0 14px 34px rgba(0, 170, 255, 0.38)",
-                }}
-                transition="all 0.3s ease"
-                onClick={() =>
-                  window.open(
-                    featuredEvent.ticketUrl,
-                    "_blank",
-                    "noopener,noreferrer"
-                  )
-                }
-              >
-                <FaTicketAlt />
-                Get Tickets
-              </Button>
+              {featuredEvent.ticketUrl ? (
+                <Button
+                  bg="#00aaff"
+                  color="white"
+                  size="lg"
+                  px={8}
+                  borderRadius="full"
+                  boxShadow="0 10px 30px rgba(0, 170, 255, 0.28)"
+                  _hover={{
+                    bg: "#008ecc",
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 14px 34px rgba(0, 170, 255, 0.38)",
+                  }}
+                  transition="all 0.3s ease"
+                  onClick={() =>
+                    window.open(
+                      featuredEvent.ticketUrl!,
+                      "_blank",
+                      "noopener,noreferrer"
+                    )
+                  }
+                >
+                  <FaTicketAlt />
+                  Get Tickets
+                </Button>
+              ) : featuredEvent.freeEntry ? (
+                <Badge
+                  display="inline-flex"
+                  alignItems="center"
+                  gap={2}
+                  px={6}
+                  py={3}
+                  borderRadius="full"
+                  bg="#00aaff"
+                  color="white"
+                  fontSize="md"
+                  fontWeight="bold"
+                  boxShadow="0 10px 30px rgba(0, 170, 255, 0.28)"
+                >
+                  <FaTicketAlt />
+                  Free Entry
+                </Badge>
+              ) : null}
 
               <Button
                 variant="outline"
