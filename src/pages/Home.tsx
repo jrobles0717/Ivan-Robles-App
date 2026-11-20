@@ -3,7 +3,9 @@ import { lazy, Suspense } from "react";
 import Hero from "../components/sections/Hero";
 import LazySection from "../components/common/LazySection";
 import Seo from "../components/common/Seo";
+import { featuredEvent, isEventActive } from "../data/events";
 
+const EventSpotlight = lazy(() => import("../components/sections/EventSpotlight"));
 const PartyHighlights = lazy(() => import("../components/sections/PartyHighlights"));
 const PastEvents = lazy(() => import("../components/sections/PastEvents"));
 const PremiereSection = lazy(() => import("../components/sections/PremiereSection"));
@@ -28,6 +30,15 @@ const Home = () => {
         path="/"
       />
       <Hero />
+
+      {/* Next-event spotlight hides itself once featuredEvent.expiresAt passes */}
+      {isEventActive(featuredEvent) && (
+        <LazySection>
+          <Suspense fallback={<SectionFallback />}>
+            <EventSpotlight />
+          </Suspense>
+        </LazySection>
+      )}
 
       <LazySection>
         <Suspense fallback={<SectionFallback />}>
